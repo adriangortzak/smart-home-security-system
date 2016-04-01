@@ -1,8 +1,9 @@
 package org.gortz.larm;
-
-public class Main {
+public class Startup {
 
     public static void main(String[] args) {
-	// write your code here
+        new View();
     }
 }
+
+
