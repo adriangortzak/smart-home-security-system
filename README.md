@@ -1,5 +1,11 @@
 # Smart Home Larm System
 
+[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+
 Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av att en person går förbi en trådlös sensor. Om larmet går av registreras det på ett webgränssnitt, och med ljud och ljus på den lokala enheten. Sensor, ljud och lampor kopplas till en styrdator via Tellstick Duo.
 
 ## Requirements
