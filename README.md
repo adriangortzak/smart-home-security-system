@@ -1,16 +1,14 @@
 # Smart Home Larm System
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
 [![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
 [![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
 Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av att en person går förbi en trådlös sensor. Om larmet går av registreras det på ett webgränssnitt, och med ljud och ljus på den lokala enheten. Sensor, ljud och lampor kopplas till en styrdator via Tellstick Duo.
 
 ## Requirements
+##### Following the install guide will give you all Requirements
 
--  Java v.??
+-  Java >= v.8
 -  PHP >= 5.5.9
 - OpenSSL PHP Extension
 -  PDO PHP Extension
@@ -22,6 +20,8 @@ Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av at
 2. Set static IP-adress
 3. Install web server
 4. Set Mod-Rewrite
+5. Install databse
+6. run install.sh
 
 ## Usage
 
@@ -45,4 +45,16 @@ TODO: Write credits
 
 ## License
 
-TODO: Write license
+Copyright 2016 Grupp 13
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
