@@ -23,7 +23,7 @@ Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av at
 5. [Install database](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/MySQL-setup)
 6. run install.sh
 7. go to your-ip/smartlarm/
-[Absolute README link](https://github.com/username/repo/blob/branch/docs/more_words.md)
+
 
 ## Usage
 
