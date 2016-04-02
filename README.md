@@ -2,10 +2,10 @@
 
 Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av att en person går förbi en trådlös sensor. Om larmet går av registreras det på ett webgränssnitt, och med ljud och ljus på den lokala enheten. Sensor, ljud och lampor kopplas till en styrdator via Tellstick Duo.
 
+## Requirements
+Java v. ??
 
 ## Installation
-### Requirements
-Java v. ??
 
 
 TODO: Describe the installation process
