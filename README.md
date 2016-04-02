@@ -17,11 +17,13 @@ Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av at
 
 ## Installation
 1. Install Rasbian
-2. Set static IP-adress
-3. Install web server
-4. Set Mod-Rewrite
-5. Install databse
+2. [Set static IP-adress](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
+3. [Install web server](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
+4. [Set Mod-Rewrite](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Mod-Rewrite)
+5. [Install database](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/MySQL-setup)
 6. run install.sh
+7. go to your-ip/smartlarm/
+[Absolute README link](https://github.com/username/repo/blob/branch/docs/more_words.md)
 
 ## Usage
 
