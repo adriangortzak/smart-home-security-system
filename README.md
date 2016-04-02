@@ -18,9 +18,10 @@ Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av at
 -  Tokenizer PHP Extension
 
 ## Installation
-
-
-TODO: Describe the installation process
+1. Install Rasbian
+2. Set static IP-adress
+3. Install web server
+4. Set Mod-Rewrite
 
 ## Usage
 
