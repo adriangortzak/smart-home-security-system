@@ -6,13 +6,15 @@ import org.gortz.larm.model.TellstickManager;
  * Created by adrian on 02/04/16.
  */
 public class Controller {
-    PhpManager phpManager = new PhpManager();
-    TellstickManager tellstick = new TellstickManager();
+    Thread website;
+    Thread Sensor;
+    Controller() {
+        //Create thread to handle web request
+        website = new Thread(new WebController());
+        website.start();
 
-    //websiteController
-    Thread website = new Thread();
-
-
-    //phpmanager.listenForConnections();
-    //tellstick.listenForUnits();
+        //Create thread to handle Sensors
+        Sensor = new Thread(new SensorController());
+        Sensor.start();
+    }
 }
