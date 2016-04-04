@@ -14,14 +14,24 @@ Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av at
 -  PDO PHP Extension
 -  Mbstring PHP Extension
 -  Tokenizer PHP Extension
+-  git
 
 ## Installation
+##### Installing requirements (If not allready installed)
+
 1. Install Rasbian
 2. [Set static IP-adress](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
 3. [Install web server](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
 4. [Set Mod-Rewrite](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Mod-Rewrite)
 5. [Install database](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/MySQL-setup)
-6. run install.sh
+6. [Install git]()
+
+###
+
+1. `cd /srv/`
+2. `git clone https://github.com/Adddrian/SmartHomeLarmSystem.git`
+3. `cd SmartHomeLarmSystem `
+6. `./install.sh `
 7. go to your-ip/smartlarm/
 
 
