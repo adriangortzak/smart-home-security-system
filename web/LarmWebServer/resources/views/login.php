@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/login-style.css">
     </head>
     <body>
 <form method="post" action="index.html" class="login">
