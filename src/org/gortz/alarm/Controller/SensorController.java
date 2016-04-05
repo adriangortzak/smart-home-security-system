@@ -1,4 +1,4 @@
-package org.gortz.larm.Controller;
+package org.gortz.alarm.Controller;
 
 /**
  * Created by adrian on 04/04/16.

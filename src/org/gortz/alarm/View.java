@@ -1,5 +1,5 @@
-package org.gortz.larm;
-import org.gortz.larm.Controller.Controller;
+package org.gortz.alarm;
+import org.gortz.alarm.Controller.Controller;
 
 import java.util.Scanner;
 /**

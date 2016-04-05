@@ -1,6 +1,4 @@
-package org.gortz.larm.Controller;
-import org.gortz.larm.model.PhpManager;
-import org.gortz.larm.model.TellstickManager;
+package org.gortz.alarm.Controller;
 
 /**
  * Created by adrian on 02/04/16.
@@ -8,7 +6,7 @@ import org.gortz.larm.model.TellstickManager;
 public class Controller {
     Thread website;
     Thread Sensor;
-    Controller() {
+    public Controller() {
         //Create thread to handle web request
         website = new Thread(new WebController());
         website.start();

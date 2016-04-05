@@ -1,4 +1,4 @@
-package org.gortz.larm;
+package org.gortz.alarm;
 public class Startup {
 
     public static void main(String[] args) {
