@@ -17,7 +17,7 @@ public class WebController implements Runnable {
     Logger webLogger = new Logger("websiteConnectionServer");
 
     protected ServerSocket socket;
-    protected final int port = 9005;
+    protected final int port = 5690;
     protected Socket connection;
     protected String command = new String();
     protected String responseString = new String();
