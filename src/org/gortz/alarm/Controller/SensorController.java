@@ -11,6 +11,3 @@ public class SensorController implements Runnable {
         Tellstick ts = new Tellstick(true);
     }
 }
-{
-
-    }
