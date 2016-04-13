@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('login');
 });
+
+
+Route::get('start', function () {
+    return view('start');
+});
+
