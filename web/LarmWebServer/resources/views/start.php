@@ -15,7 +15,7 @@
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
 		    $.ajax({
-                url: 'alarm/ON',
+                url: 'alarm',
                 type: 'POST',
                 data: {_token: "<?php echo csrf_token(); ?>",
                 dataType: 'JSON',
