@@ -63,7 +63,9 @@ footer {
   <li><a href="#contact">Admin</a></li>
   <li><a href="#news">Settings</a></li>
   <li><a href="#contact">About</a></li>
+  <li style="float:right"><a href="#news"><i>Logout</i></a></li>
   <li Style="float:right"><p style="color:white; padding-right:20px;"><b>Adddrian</b></p></li>
+
 </ul>
 </nav>
 
