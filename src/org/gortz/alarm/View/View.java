@@ -9,10 +9,15 @@ public class View {
 
     Controller myController;
     Boolean testing = true;
-
+    Thread socket;
     //Constructor
-    View(){
+    public View(){
         myController = new Controller();
+        myController.startSensor();
+
+        //Create socket thread to read input from website
+        socket = new Thread(new JavaSocket());
+        socket.start();
         start();
     }
 
@@ -42,10 +47,6 @@ public class View {
 
 
     }
-
-
-
-
 
     // An Easier way to print
     void print(String message) {
