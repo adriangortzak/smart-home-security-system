@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SmartHomeLarm.iml" filepath="$PROJECT_DIR$/SmartHomeLarm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartHomeAlarm.iml" filepath="$PROJECT_DIR$/SmartHomeAlarm.iml" />
     </modules>
   </component>
 </project>

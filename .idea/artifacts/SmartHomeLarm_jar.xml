@@ -5,7 +5,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/Server/META-INF/MANIFEST.MF" />
       </element>
-      <element id="module-output" name="SmartHomeLarm" />
+      <element id="module-output" name="SmartHomeAlarm" />
       <element id="extracted-dir" path="$PROJECT_DIR$/API/jna-4.1.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/API/jstick-api-1.7.jar" path-in-jar="/" />
     </root>

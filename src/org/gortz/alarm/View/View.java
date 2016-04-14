@@ -116,6 +116,10 @@ public class View {
             }
         }
         private String InterpretMessage(String input){
+            if("turn on alarm".equals(input)){
+                System.out.print("de ser lika ut");
+            }
+            else System.out.print("shit...");
             switch(input) {
                 case "turn on alarm":
                     if(myController.changeAlarmStatus(Alarm.Status.ON) == true) return "succeeded";
