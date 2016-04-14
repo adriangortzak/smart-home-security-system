@@ -13,6 +13,10 @@
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
+		<meta name="csrf-token" content="{{ csrf_token() }}" />
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
 		    $.ajax({
                 url: 'test',
                 type: 'POST',
