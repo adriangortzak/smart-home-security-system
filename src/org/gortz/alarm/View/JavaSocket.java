@@ -56,8 +56,8 @@ public class JavaSocket implements Runnable {
                 responseString = InterpretMessage(command);
                 System.out.println(responseString);
                 response.writeBytes(responseString);
-              //  response.flush();
-               // response.close();
+                response.flush();
+                response.close();
             } catch (IOException e) {
                 //Logger
                 //e.printStackTrace();
