@@ -14,7 +14,6 @@
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
-alert(document.getElementsByName('_token').value);
 		    $.ajax({
                 url: 'alarm/ON',
                 type: 'POST',
