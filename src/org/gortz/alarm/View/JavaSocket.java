@@ -1,4 +1,4 @@
-package org.gortz.alarm.Controller;
+package org.gortz.alarm.View;
 
 import org.gortz.alarm.model.Logger;
 
@@ -14,18 +14,18 @@ import java.net.Socket;
 /**
  * Created by adrian on 04/04/16.
  */
-public class WebController implements Runnable {
+public class JavaSocket implements Runnable {
     Logger webLogger = new Logger("websiteConnectionServer");
 
-    protected ServerSocket socket;
+    protected java.net.ServerSocket socket;
     protected final int port = 1967;
-    protected Socket connection;
+    protected java.net.Socket connection;
     protected String command = new String();
     protected String responseString = new String();
 
     @Override
     public void run() {
-        webLogger.write("WebController is up and running");
+        webLogger.write("s is up and running");
 
         webLogger.write("Waiting for signal");
         try {
@@ -36,12 +36,14 @@ public class WebController implements Runnable {
     }
 
     public void waitForMessage() throws IOException {
-        socket = new ServerSocket(port,0, InetAddress.getByName(null));
+        socket = new java.net.ServerSocket(port,0, InetAddress.getByName(null));
 
         while(true)
         {
             // open socket
             try {
+
+                webLogger.write("Waiting for connection");
                 connection = socket.accept();
 
                 // get output handler
@@ -54,7 +56,7 @@ public class WebController implements Runnable {
                 command = input.readLine();
 
                 // process input
-                //Logger.log("Command: " + command);
+                webLogger.write("Command: " + command);
                 responseString = command + " MC2 It Works!";
 
                 response.writeBytes(responseString);

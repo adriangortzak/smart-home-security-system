@@ -1,4 +1,4 @@
-package org.gortz.alarm;
+package org.gortz.alarm.View;
 import org.gortz.alarm.Controller.Controller;
 
 import java.util.Scanner;
@@ -42,6 +42,10 @@ public class View {
 
 
     }
+
+
+
+
 
     // An Easier way to print
     void print(String message) {
