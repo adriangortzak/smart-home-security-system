@@ -9,6 +9,6 @@ public class Logger {
         this.fileName = fileName;
     }
    public void write(String message){
-
+        System.out.println(message);
     }
 }

@@ -1,21 +1,20 @@
 package org.gortz.alarm.View;
 
+import org.gortz.alarm.Controller.Controller;
 import org.gortz.alarm.model.Logger;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 
 /**
  * Created by adrian on 04/04/16.
  */
 public class JavaSocket implements Runnable {
-    Logger webLogger = new Logger("websiteConnectionServer");
+    Logger socketLogger = new Logger("websiteConnectionServer");
+    Controller controller = new Controller();
 
     protected java.net.ServerSocket socket;
     protected final int port = 1967;
@@ -25,9 +24,7 @@ public class JavaSocket implements Runnable {
 
     @Override
     public void run() {
-        webLogger.write("s is up and running");
-
-        webLogger.write("Waiting for signal");
+        socketLogger.write("socket is up and running");
         try {
             waitForMessage();
         } catch (IOException e) {
@@ -42,8 +39,7 @@ public class JavaSocket implements Runnable {
         {
             // open socket
             try {
-
-                webLogger.write("Waiting for connection");
+                socketLogger.write("Waiting for new connection");
                 connection = socket.accept();
 
                 // get output handler
@@ -55,17 +51,26 @@ public class JavaSocket implements Runnable {
                 //Get input
                 command = input.readLine();
 
-                // process input
-                webLogger.write("Command: " + command);
-                responseString = command + " MC2 It Works!";
-
+                // print message
+                socketLogger.write("Command: " + command);
+                responseString = InterpretMessage(command);
+                System.out.println(responseString);
                 response.writeBytes(responseString);
-                response.flush();
-                response.close();
+              //  response.flush();
+               // response.close();
             } catch (IOException e) {
                 //Logger
                 //e.printStackTrace();
             }
+        }
+    }
+    private String InterpretMessage(String input){
+        switch(input) {
+            case "test":
+                return "testar";
+
+            default:
+                return "Error invalid input";
         }
     }
 }
