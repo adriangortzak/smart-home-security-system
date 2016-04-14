@@ -1,12 +1,25 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/login-style.css">
+        <link rel="stylesheet" type="text/css" href="css/alarm-status.css">
+	<link rel="stylesheet" type="text/css" href="css/login-style.css">
     </head>
     <body>
- <p class="login-submit">
+ <p>
 
-      <button type="submit" class="login-button">Login</button>
-
+      <button id="alarm_status" onclick="changeAlarmStatus()" class="alarm_off">turn on Alarm</button>
+	<script>
+		function changeAlarmStatus(){
+		var button = document.getElementById('alarm_status');
+		if(button.className == "alarm_off"){
+			button.className ="alarm_on";
+			button.textContent="Turn off Alarm";
+		}else{
+			button.className = "alarm_off"
+			button.textContent = "Turn on Alarm";
+		}	
+			
+		}
+	</script>
     </p>
 </body>
 </html>
