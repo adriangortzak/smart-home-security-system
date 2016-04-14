@@ -1,7 +1,7 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" type="text/css" href="css/alarm-status.css">
     	<link rel="stylesheet" type="text/css" href="css/login-style.css">
     </head>
@@ -13,7 +13,7 @@
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
-		<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
