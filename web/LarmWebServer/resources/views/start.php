@@ -18,7 +18,7 @@
 		    $.ajax({
                 url: 'test',
                 type: 'POST',
-                data: {_token: "{{<?php csrf_token(); ?>}}"},
+                data: {_token: document.getElementByName('_token').value,
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
