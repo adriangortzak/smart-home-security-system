@@ -5,6 +5,8 @@
     	<link rel="stylesheet" type="text/css" href="css/login-style.css">
     </head>
     <body>
+    <?php echo csrf_field(); ?>
+
  <p>
 
       <button id="alarm_status" onclick="changeAlarmStatus()" class="alarm_off">turn on Alarm</button>
@@ -12,11 +14,11 @@
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
-<?php echo csrf_field(); ?>
+
 		    $.ajax({
                 url: 'test',
                 type: 'POST',
-                data: {_token: "{{<?php csrf_token() ?>}}"},
+                data: {_token: "{{<?php csrf_token(); ?>}}"},
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
