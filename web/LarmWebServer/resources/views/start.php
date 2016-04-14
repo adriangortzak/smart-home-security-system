@@ -1,7 +1,9 @@
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
         <link rel="stylesheet" type="text/css" href="css/alarm-status.css">
-	<link rel="stylesheet" type="text/css" href="css/login-style.css">
+    	<link rel="stylesheet" type="text/css" href="css/login-style.css">
     </head>
     <body>
  <p>
@@ -11,6 +13,7 @@
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
+		    $.post( "test" );
 			button.className ="alarm_on";
 			button.textContent="Turn off Alarm";
 		}else{
