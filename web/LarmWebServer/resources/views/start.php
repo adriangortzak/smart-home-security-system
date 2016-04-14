@@ -20,7 +20,7 @@
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
-                }
+                }});
 			button.className ="alarm_on";
 			button.textContent="Turn off Alarm";
 		}else{
