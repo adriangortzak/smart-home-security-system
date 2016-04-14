@@ -12,7 +12,7 @@
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
-
+<?php echo csrf_field(); ?>
 		    $.ajax({
                 url: 'test',
                 type: 'POST',
