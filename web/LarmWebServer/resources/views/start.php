@@ -18,7 +18,7 @@
 		    $.ajax({
                 url: 'test',
                 type: 'POST',
-                data: {_token: document.getElementByName('_token').value,
+                data: {_token: document.getElementsByName("_token").value,
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
