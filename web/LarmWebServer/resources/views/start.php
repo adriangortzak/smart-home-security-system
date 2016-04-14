@@ -13,7 +13,14 @@
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
-		    $.post( "test" );
+		    $.ajax({
+                url: 'test',
+                type: 'POST',
+                data: {_token: CSRF_TOKEN},
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                }
 			button.className ="alarm_on";
 			button.textContent="Turn off Alarm";
 		}else{
