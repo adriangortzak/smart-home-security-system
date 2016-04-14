@@ -1,7 +1,6 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" type="text/css" href="css/alarm-status.css">
     	<link rel="stylesheet" type="text/css" href="css/login-style.css">
     </head>
@@ -14,13 +13,10 @@
 		var button = document.getElementById('alarm_status');
 		if(button.className == "alarm_off"){
 
-
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
 		    $.ajax({
                 url: 'test',
                 type: 'POST',
-                data: {_token: CSRF_TOKEN},
+                data: {_token: "{{ csrf_token() }}"},
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
