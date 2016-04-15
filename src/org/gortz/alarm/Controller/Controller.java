@@ -23,7 +23,7 @@ public class Controller {
     public String checkAlarmStatus(){
         Alarm.Status res = alarm.getStatus();
         if(res == Alarm.Status.ON) return "ON";
-        else if(res == Alarm.Status.ON)return "OFF";
+        else if(res == Alarm.Status.OFF)return "OFF";
         else if(res == Alarm.Status.PENDING)return "PENDING";
         else return "Error";
     }
