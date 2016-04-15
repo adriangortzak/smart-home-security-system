@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('home', function () {
-$alarmStatus = HomeController@checkAlarmStatus;
+$alarmStatus = 'HomeController@checkAlarmStatus';
    return view('home');
 });
 
