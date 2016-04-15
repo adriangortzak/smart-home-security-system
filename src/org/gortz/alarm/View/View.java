@@ -105,7 +105,7 @@ public class View {
                     socketLogger.write("Command: " + command);
                     responseString = InterpretMessage(command);
 
-                    response.writeBytes(responseString);
+                    response.writeBytes(responseString+"\n");
                     response.flush();
                     response.close();
                 } catch (IOException e) {
@@ -122,6 +122,8 @@ public class View {
                 case "turn off alarm":
                     if(myController.changeAlarmStatus(Alarm.Status.OFF) == true) return "succeeded";
                     else return "failed";
+                case "check alarm status":
+                    return myController.checkAlarmStatus();
                 default:
                     return "Error invalid input";
             }

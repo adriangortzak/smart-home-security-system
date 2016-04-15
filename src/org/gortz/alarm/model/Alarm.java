@@ -1,5 +1,7 @@
 package org.gortz.alarm.model;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by adrian on 14/04/16.
  */
@@ -20,6 +22,15 @@ public class Alarm {
             return instance = new Alarm();
         }
         else return instance;
+    }
+
+    public Status getStatus() {
+        if (alarmStatus == Status.ON){return Status.ON;}
+            else if(alarmStatus == Status.OFF){return Status.OFF;}
+            else if(alarmStatus == Status.PENDING){return Status.PENDING;}
+        else{
+            throw new NoSuchElementException();
+        }
     }
 
     public enum Status {

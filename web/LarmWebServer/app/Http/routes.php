@@ -20,4 +20,5 @@ Route::get('home', function () {
 });
 
 Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
+Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
 

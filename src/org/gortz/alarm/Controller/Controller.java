@@ -20,5 +20,11 @@ public class Controller {
     public boolean changeAlarmStatus(Alarm.Status newAlarmStatus){
         return alarm.changeStatus(newAlarmStatus);
     }
-
+    public String checkAlarmStatus(){
+        Alarm.Status res = alarm.getStatus();
+        if(res == Alarm.Status.ON) return "ON";
+        else if(res == Alarm.Status.ON)return "OFF";
+        else if(res == Alarm.Status.PENDING)return "PENDING";
+        else return "Error";
+    }
 }

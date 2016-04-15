@@ -8,7 +8,43 @@ use App\Http\Requests;
 
 class HomeController extends Controller
 {
-    //
+ public function checkAlarmStatus(){
+if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
+{
+	$errorcode = socket_last_error();
+	$errormsg = socket_strerror($errorcode);
+
+	die("Couldn't create socket: [$errorcode] $errormsg \n");
+}
+//Connect socket to remote server
+if(!socket_connect($sock, '127.0.0.1', 1967))
+{
+	$errorcode = socet_last_error();
+	$errormsg = socket_strerror($errorcode);
+
+	die("Could not connect: [$errorcode] $errormsg \n");
+}
+$message = "check alarm status\n";
+
+$status = socket_sendto($sock, $message, strlen($message), MSG_EOF, '127.0.0.1', '1967');
+if($status !== FALSE)
+{
+    $message = '';
+    $next = '';
+    while ($next = socket_read($sock, 4096))
+    {
+        $message .= $next;
+    }
+
+    echo $message;
+}
+else
+{
+    echo "Failed";
+}
+
+socket_close($sock);
+ }
 	public function changeAlarmStatus($state){
 	if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
 	{
