@@ -162,21 +162,24 @@
                       			</div>
 								<div class="row">
 									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-database"></i> ON</p>
+										<p><i id="alarm_text_status" class="fa fa-database"></i> ON</p>
 									</div>
 	                      		</div>
 								<button id="alarm_status" onclick="changeAlarmStatus()" type="button" style="width:80%; height:60%" class="btn btn-round btn-success"  >Turn off Alarm</button>
 								<script>
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
+		var textStatus = document.getElementById('alarm_text_status');
 		if(button.className == "btn btn-round btn-success"){
-			$.get("alarm/ON");
-			button.className ="btn btn-round btn-danger";
-			button.textContent="Turn off Alarm";
+		$.get("alarm/ON");
+		button.className ="btn btn-round btn-danger";
+		button.textContent="Turn off Alarm";
+		textStatis.innerHTML ="ON";
 		}else{
-			$.get("alarm/OFF");
-			button.className = "btn btn-round btn-success";
-			button.textContent = "Turn on Alarm";
+		$.get("alarm/OFF");
+		button.className = "btn btn-round btn-success";
+		button.textContent = "Turn on Alarm";
+		textStatus.innerHTML ="OFF";
 		}
 		}
 
@@ -185,10 +188,12 @@
                        $.get( "alarmStatus", function( data ) {
                         if(data === "ON\n"){
 	                        button.className ="btn btn-round btn-danger";
-        	                button.textContent="Turn off Alarm";
+        	button.textContent="Turn off Alarm";
+		textStatis.innerHTML ="ON";
                         }else if(data === "OFF\n"){
         	                button.className = "btn btn-round btn-success";
-	                        button.textContent = "Turn on Alarm";
+	        button.textContent = "Turn on Alarm";
+		textStatis.innerHTML ="OFF";
                         }
                         });
                 }
