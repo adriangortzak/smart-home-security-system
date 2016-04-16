@@ -184,7 +184,8 @@
 		}
 
 		   function setStartAlarmStatus(){
-		    var button = document.getElementById('alarm_status');
+		var button = document.getElementById('alarm_status');
+		var textStatus = document.getElementById('alarm_text_status');
                        $.get( "alarmStatus", function( data ) {
                         if(data === "ON\n"){
 	                        button.className ="btn btn-round btn-danger";
