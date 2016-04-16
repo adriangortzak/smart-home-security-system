@@ -4,7 +4,7 @@
         <link rel="stylesheet" type="text/css" href="css/alarm-status.css">
     	<link rel="stylesheet" type="text/css" href="css/login-style.css">
     </head>
-    <body>
+    <body >
     <?php echo csrf_field(); ?>
 <style>
 body {margin:0;}
@@ -72,7 +72,7 @@ footer {
 <section  align="center">
 <h1 style="color:white;">Alarm Status</h1>
  <p>
-      <button id="alarm_status" onclick="changeAlarmStatus()" class="alarm_off">turn on Alarm</button>
+      <button id="alarm_status" onclick="changeAlarmStatus()" class="alarm_off">Turn on Alarm</button>
 	<script>
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
@@ -84,9 +84,24 @@ footer {
 			$.get("alarm/OFF");
 			button.className = "alarm_off"
 			button.textContent = "Turn on Alarm";
-		}	
-			
 		}
+		}
+
+		   function setStartAlarmStatus(){
+		    var button = document.getElementById('alarm_status');
+                       $.get( "alarmStatus", function( data ) {
+                        if(data === "ON\n"){
+	                        button.className ="alarm_on";
+        	                button.textContent="Turn off Alarm";
+                        }else if(data === "OFF\n"){
+        	                button.className = "alarm_off"
+	                        button.textContent = "Turn on Alarm";
+                        }
+                        });
+                }
+
+		setStartAlarmStatus();
+
 	</script>
     </p>
 </section>
@@ -96,3 +111,4 @@ Copyright ©  Grupp13
 </footer>
 </body>
 </html>
+
