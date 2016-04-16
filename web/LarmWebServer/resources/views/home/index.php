@@ -117,7 +117,20 @@
                   		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                   			<div class="box1">
 					  			<span class="li_world"></span>
-					  			<h3>OK!</h3>
+					  			<h3>OK!
+								  
+								  <?php
+								     $connected = @fsockopen("www.google.com", 80); 
+								     //website, port  (try 80 or 443)
+								     if ($connected){
+								     echo "ON!"; //action when connected
+								     fclose($connected);
+								     }else{
+								     echo "OFF"; //action in connection failure
+								     }    
+								    ?>
+
+								</h3>
                   			</div>
 					  			<p>933 People liked your page the last 24hs. Whoohoo!</p>
                   		</div>
