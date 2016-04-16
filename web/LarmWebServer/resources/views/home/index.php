@@ -193,7 +193,7 @@
                         }else if(data === "OFF\n"){
         	                button.className = "btn btn-round btn-success";
 	        button.textContent = "Turn on Alarm";
-		textStatis.innerHTML ="OFF";
+		textStatus.innerHTML ="OFF";
                         }
                         });
                 }
