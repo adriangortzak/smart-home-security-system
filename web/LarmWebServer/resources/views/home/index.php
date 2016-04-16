@@ -165,7 +165,7 @@
 										<p><i class="fa fa-database"></i> ON</p>
 									</div>
 	                      		</div>
-								<button id="alarm_status" type="button" style="width:80%; height:60%" class="btn btn-round btn-success">Turn alarm off</button>
+								<button id="alarm_status" type="button" style="width:80%; height:60%" class="btn btn-round btn-success" onclick="changeAlarmStatus()" >Turn alarm off</button>
 								<script>
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
