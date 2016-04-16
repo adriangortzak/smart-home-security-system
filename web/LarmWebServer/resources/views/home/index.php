@@ -162,7 +162,7 @@
                       			</div>
 								<div class="row">
 									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i id="alarm_text_status" class="fa fa-database"></i> ON</p>
+										<p  id="alarm_text_status" ><i class="fa fa-database"></i> ON</p>
 									</div>
 	                      		</div>
 								<button id="alarm_status" onclick="changeAlarmStatus()" type="button" style="width:80%; height:60%" class="btn btn-round btn-success"  >Turn off Alarm</button>
@@ -174,7 +174,7 @@
 		$.get("alarm/ON");
 		button.className ="btn btn-round btn-danger";
 		button.textContent="Turn off Alarm";
-		textStatis.innerHTML ="ON";
+		textStatus.innerHTML ="ON";
 		}else{
 		$.get("alarm/OFF");
 		button.className = "btn btn-round btn-success";
