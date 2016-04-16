@@ -132,35 +132,35 @@
 
 								</h3>
                   			</div>
-					  			<p>933 People liked your page the last 24hs. Whoohoo!</p>
+					  			<p>Check if you're able to connect to the Internet</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_megaphone"></span>
 					  			<h3>OFF</h3>
                   			</div>
-					  			<p>48 New files were added in your cloud storage.</p>
+					  			<p>Siren is turned OFF.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_eye"></span>
 					  			<h3>7</h3>
                   			</div>
-					  			<p>You have 23 unread messages in your inbox.</p>
+					  			<p>You have 7 sensors active.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_user"></span>
 					  			<h3>10</h3>
                   			</div>
-					  			<p>More than 10 news were added in your reader.</p>
+					  			<p>There are 10 users on this system</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_data"></span>
 					  			<h3>OK!</h3>
                   			</div>
-					  			<p>Your server is working perfectly. Relax & enjoy.</p>
+					  			<p>Your database connection is OK!</p>
                   		</div>
                   	
                   	</div><!-- /row mt -->	
