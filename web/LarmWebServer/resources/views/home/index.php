@@ -165,7 +165,37 @@
 										<p><i class="fa fa-database"></i> ON</p>
 									</div>
 	                      		</div>
-								<button type="button" style="width:80%; height:60%" class="btn btn-round btn-success">Turn alarm off</button>
+								<button id="alarm_status" type="button" style="width:80%; height:60%" class="btn btn-round btn-success">Turn alarm off</button>
+								<script>
+		function changeAlarmStatus(){
+		var button = document.getElementById('alarm_status');
+		if(button.className == "alarm_off"){
+			$.get("alarm/ON");
+			button.className ="btn btn-round btn-danger";
+			button.textContent="Turn off Alarm";
+		}else{
+			$.get("alarm/OFF");
+			button.className = "btn btn-round btn-success";
+			button.textContent = "Turn on Alarm";
+		}
+		}
+
+		   function setStartAlarmStatus(){
+		    var button = document.getElementById('alarm_status');
+                       $.get( "alarmStatus", function( data ) {
+                        if(data === "ON\n"){
+	                        button.className ="btn btn-round btn-danger";
+        	                button.textContent="Turn off Alarm";
+                        }else if(data === "OFF\n"){
+        	                button.className = "btn btn-round btn-success";
+	                        button.textContent = "Turn on Alarm";
+                        }
+                        });
+                }
+
+		setStartAlarmStatus();
+
+	</script>
 								
 	                      	</div><! --/grey-panel -->
                       	</div><!-- /col-md-4-->
@@ -175,9 +205,9 @@
 							<div class="weather pn">
 								<i class="fa fa-cloud fa-4x"></i>
 								<h2>11º C</h2>
-								<h4>BUDAPEST</h4>
+								<h4>Stockholm</h4>
 							</div>
-						</div><!-- /col-md-4-->
+						</div><!-- /col-md-4-->
                   <div class="col-md-4 col-sm-4 mb">
 					  		<div class="green-panel pn">
 					  			<div class="green-header">
