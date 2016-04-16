@@ -165,11 +165,11 @@
 										<p><i class="fa fa-database"></i> ON</p>
 									</div>
 	                      		</div>
-								<button id="alarm_status" onclick="changeAlarmStatus()" type="button" style="width:80%; height:60%" class="btn btn-round btn-success"  >Turn alarm off</button>
+								<button id="alarm_status" onclick="changeAlarmStatus()" type="button" style="width:80%; height:60%" class="btn btn-round btn-success"  >Turn off Alarm</button>
 								<script>
 		function changeAlarmStatus(){
 		var button = document.getElementById('alarm_status');
-		if(button.className == "alarm_off"){
+		if(button.className == "btn btn-round btn-success"){
 			$.get("alarm/ON");
 			button.className ="btn btn-round btn-danger";
 			button.textContent="Turn off Alarm";
