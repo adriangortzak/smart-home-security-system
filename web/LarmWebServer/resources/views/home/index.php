@@ -162,7 +162,7 @@
                       			</div>
 								<div class="row">
 									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-database"></i><p id="alarm_text_status">ON</p></p>
+										<p><i class="fa fa-database"></i><i id="alarm_text_status">ON</i></p>
 									</div>
 	                      		</div>
 								<button id="alarm_status" onclick="changeAlarmStatus()" type="button" style="width:80%; height:60%" class="btn btn-round btn-success"  >Turn off Alarm</button>
