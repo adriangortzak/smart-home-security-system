@@ -15,6 +15,11 @@ Route::get('/', function () {
    return view('login');
 });
 
+Route::get('sa', function () {
+   return view('home/index');
+});
+
+
 Route::get('home', function () {
 $alarmStatus = 'HomeController@checkAlarmStatus';
    return view('home');
