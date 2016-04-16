@@ -117,16 +117,16 @@
                   		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                   			<div class="box1">
 					  			<span class="li_world"></span>
-					  			<h3>OK!
+					  			<h3>
 								  
 								  <?php
 								     $connected = @fsockopen("www.google.com", 80); 
 								     //website, port  (try 80 or 443)
 								     if ($connected){
-								     echo "ON!"; //action when connected
+								     echo "OK!"; //action when connected
 								     fclose($connected);
 								     }else{
-								     echo "OFF"; //action in connection failure
+								     echo "FAILED"; //action in connection failure
 								     }    
 								    ?>
 
