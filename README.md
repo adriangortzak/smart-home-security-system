@@ -1,6 +1,16 @@
 # Smart Home Security System
 
-Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av att en person går förbi en trådlös sensor. Om larmet går av registreras det på ett webgränssnitt, och med ljud och ljus på den lokala enheten. Sensor, ljud och lampor kopplas till en styrdator via Tellstick Duo.
+This solution makes it possible for a user to control and check the status of various
+security peripherals through a web based interface. The interface may be accessed via
+a computer inside the user’s home (e.g. a touchscreen) or a remotely connected client
+(smartphone, laptop or otherwise), which would allow the user to control and monitor
+the security system from any device (with a browser and an Internet connection) .
+The system is a framework for intelligent security applications and may be
+implemented in an almost infinite number of ways. In our implementation, which
+serves as a proof of concept, it should be possible for the user to e.g. be notified via
+mail and/or smartphone notification whenever any of the sensors are triggered and the
+security system is active. It should also be possible to activate and deactivate the
+system via the web interface.
 
 ## Requirements
 ##### Following the install guide will give you all Requirements
@@ -46,7 +56,18 @@ TODO: Write usage instructions
 
 ## History
 
-TODO: Write history
+The possibilities to remotely control and configure electrical appliances and other
+devices in the home have increased with modern ICT technology . There is a market
+for easily operated and intuitive solutions for appliance surveillance, comfort­ and
+security accommodation as well as energy saving. Much of this is exists in the
+concept known as Internet of Things (IoT).
+
+Students invest in this project to learn about modern project methods for ICT­projects,
+but also to develop their technical capabilities.
+
+Sweden receives modern ICT­engineers that cater to the future competence need and
+increase the country's competitiveness, internal market and export.
+
 
 ## Credits
 
