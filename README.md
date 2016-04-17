@@ -28,7 +28,7 @@ system via the web interface.
 
 1. Install Rasbian
 2. [Set static IP-adress](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
-3. [Install web server](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
+3. [Install web server](https://github.com/Adddrian/SmartHomeSecuritySystem/wiki/Setting-up-an-Apache-web-server-on-a-Raspberry-Pi)
 4. [Set Mod-Rewrite](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Mod-Rewrite)
 5. [Install database](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/MySQL-setup)
 6. [Install git]()
