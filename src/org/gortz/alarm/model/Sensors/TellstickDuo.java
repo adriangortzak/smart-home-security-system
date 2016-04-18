@@ -1,10 +1,10 @@
-package org.gortz.alarm.model;
-import net.jstick.api.*;
+package org.gortz.alarm.model.Sensors;
+import net.jstick.api.Tellstick;
 
 /**
  * Created by jimmy on 4/13/16.
  */
-public class TellstickDuo implements Sensor {
+public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     Tellstick ts;
 
     public TellstickDuo(){

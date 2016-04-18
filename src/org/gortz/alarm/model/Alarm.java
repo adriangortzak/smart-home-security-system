@@ -45,7 +45,7 @@ public class Alarm {
             return false;
         }
         this.alarmStatus = newStatus;
-        alarmLogger.write("changening alarm status to " + newStatus, 2);
+        alarmLogger.write("Changing alarm status to " + newStatus, 2);
         //Fast check
         if(this.alarmStatus == newStatus){
             updateStatusToDb();

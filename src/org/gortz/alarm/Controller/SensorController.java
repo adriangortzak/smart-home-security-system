@@ -1,8 +1,7 @@
 package org.gortz.alarm.Controller;
 
-import net.jstick.api.Tellstick;
 import org.gortz.alarm.model.Sensor;
-import org.gortz.alarm.model.TellstickDuo;
+import org.gortz.alarm.model.Sensors.TellstickDuo;
 
 /**
  * Created by adrian on 04/04/16.

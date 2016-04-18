@@ -34,7 +34,7 @@ public class ControllerTest {
         }
 
         if(!myController.changeAlarmStatus(Alarm.Status.PENDING) == false){
-            fail("Pending is not a state that the Controller can set. So the Alarm should'nt let it.");
+            fail("Pending is not a state that the Controller can set. So the Alarm shouldn't let it.");
         }
 
     }
