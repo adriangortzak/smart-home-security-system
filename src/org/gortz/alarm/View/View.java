@@ -2,6 +2,7 @@ package org.gortz.alarm.View;
 import org.gortz.alarm.Controller.Controller;
 import org.gortz.alarm.model.Alarm;
 import org.gortz.alarm.model.Logger;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,43 +13,45 @@ import java.util.Scanner;
  * Created by adrian on 01/04/16.
  */
 public class View {
-
     Controller myController;
-    Boolean testing = true;
+    boolean started = false;
     Thread socket;
     //Constructor
     public View(){
-        myController = new Controller();
-
-        //Create socket thread to read input from website
-        socket = new Thread(new JavaSocket());
-        socket.start();
         start();
     }
 
     //Called by the constructor to start View
     void start() {
-        print("Booting up system");
 
-        //If testing is set to true, we will be given a prompt to enter action manually.
-        if(testing){
-            boolean exit = false;
+
             String input;
             Scanner in = new Scanner(System.in);
-            while (!exit) {
-                print("Enter Input");
+            while (true){
+
                 input = in.next();
                 input.toLowerCase();
 
                 switch(input){
+                    case "start":
+                        if(!started) {
+                            print("Booting up system");
+                            started = true;
+                            myController = new Controller();
+                            //Create socket thread to read input from website
+                            socket = new Thread(new JavaSocket());
+                            socket.start();
+
+                        }else print("System is already running");
+                        break;
                     case "exit" :
                         return;
 
                     default:
                         print("Invalid input");
                 }
-            }
-        } // End of testing part
+
+        }
 
 
     }
@@ -75,7 +78,7 @@ public class View {
 
         @Override
         public void run() {
-            socketLogger.write("socket is up and running");
+            socketLogger.write("socket is up and running",2);
             try {
                 waitForMessage();
             } catch (IOException e) {
@@ -102,7 +105,7 @@ public class View {
                     command = input.readLine();
 
                     // print message
-                    socketLogger.write("Command: " + command);
+                    socketLogger.write("Command: " + command,3);
                     responseString = InterpretMessage(command);
 
                     response.writeBytes(responseString+"\n");

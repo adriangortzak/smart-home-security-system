@@ -40,8 +40,12 @@ public class Alarm {
     }
 
     public boolean changeStatus(Status newStatus){
+        //Public methods cant change status to to pending.
+        if(newStatus == Status.PENDING){
+            return false;
+        }
         this.alarmStatus = newStatus;
-        alarmLogger.write("changening alarm status to " + newStatus);
+        alarmLogger.write("changening alarm status to " + newStatus, 2);
         //Fast check
         if(this.alarmStatus == newStatus){
             updateStatusToDb();
