@@ -1,5 +1,7 @@
 package org.gortz.alarm.model;
 
+import org.gortz.alarm.model.Databases.mysql;
+
 import java.util.NoSuchElementException;
 
 /**
@@ -9,11 +11,12 @@ public class Alarm {
     Logger alarmLogger = new Logger("alarm");
     int pendingTime = 5;
     Status alarmStatus;
+    Database myDatabase;
 
 
     private static Alarm instance = null;
     private Alarm(){
-
+        myDatabase = new mysql("shss", "qwerty");
         alarmStatus = getStatusFromDb();
     }
 
@@ -58,7 +61,9 @@ public class Alarm {
 
     private void updateStatusToDb(){}
     //TODO get real alarm from DB
-    private Status getStatusFromDb(){return Status.ON;}
+    private Status getStatusFromDb(){
+        return myDatabase.getAlarmStatus();
+    }
 
 
 }
