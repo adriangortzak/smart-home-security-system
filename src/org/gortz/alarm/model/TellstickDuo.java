@@ -1,5 +1,5 @@
 package org.gortz.alarm.model;
-import net.jstick.api.Tellstick;
+import net.jstick.api.*;
 
 /**
  * Created by jimmy on 4/13/16.

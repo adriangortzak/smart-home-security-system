@@ -13,8 +13,6 @@ public class SensorController implements Runnable  {
     @Override
     public void run() {
         s = new TellstickDuo();
-        s.turnOn(1);
-        s.close();
     }
 
 }
