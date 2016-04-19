@@ -56,6 +56,8 @@ public class View {
 
     }
 
+
+
     // An Easier way to print
     void print(String message) {
         System.out.println(message);

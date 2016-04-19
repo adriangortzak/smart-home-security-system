@@ -15,11 +15,20 @@ public class Alarm {
 
 
     private static Alarm instance = null;
+
+    /**
+     * Private constructor to follow the Singleton.
+     * Creates connections to the database and gets old status.
+     */
     private Alarm(){
-        myDatabase = new mysql("shss", "qwerty");
+        myDatabase = new mysql("shss", "APJ4A5M6sXTPBH74");
         alarmStatus = getStatusFromDb();
     }
 
+    /**
+     *Singleton constructor for the alarm.
+     * @return
+     */
     public static Alarm getInstance(){
         if(instance == null){
             return instance = new Alarm();
@@ -27,6 +36,10 @@ public class Alarm {
         else return instance;
     }
 
+    /**
+     * Get the actual status from the server.
+     * @return status
+     */
     public Status getStatus() {
         if (alarmStatus == Status.ON){return Status.ON;}
             else if(alarmStatus == Status.OFF){return Status.OFF;}
@@ -42,6 +55,11 @@ public class Alarm {
         PENDING
     }
 
+    /**
+     * Changed the Status on the alarm by the new status and does a fast check and return if it changed.
+     * @param newStatus
+     * @return Succeed
+     */
     public boolean changeStatus(Status newStatus){
         //Public methods cant change status to to pending.
         if(newStatus == Status.PENDING){
@@ -51,7 +69,7 @@ public class Alarm {
         alarmLogger.write("Changing alarm status to " + newStatus, 2);
         //Fast check
         if(this.alarmStatus == newStatus){
-            updateStatusToDb();
+            updateStatusToDb(newStatus);
             return true;
         }
         else{
@@ -59,10 +77,22 @@ public class Alarm {
         }
     }
 
-    private void updateStatusToDb(){}
-    //TODO get real alarm from DB
+    /**
+     * Updates the saved status in database.
+     * @param newStatus
+     */
+    private void updateStatusToDb(Alarm.Status newStatus){
+    myDatabase.updateAlarmStatus(newStatus);
+    }
+
+    /**
+     * Retrieves last set alarm status from the database
+     * @return Alarm.Status from database
+     */
     private Status getStatusFromDb(){
-        return myDatabase.getAlarmStatus();
+        Status oldStatus = myDatabase.getAlarmStatus();
+        alarmLogger.write("Old status saved in Database is "+ oldStatus,2);
+        return oldStatus;
     }
 
 

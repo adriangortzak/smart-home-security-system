@@ -1,15 +1,15 @@
 package org.gortz.alarm.Test.Model;
 
-import org.gortz.alarm.model.TellstickDuo;
+import org.gortz.alarm.model.Sensors.TellstickDuo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.fail;
 
-/**
+/**qwerty
  * Created by adrian on 18/04/16.
  */
-public class TellstickDuoTest {
+public class sensorTest {
     TellstickDuo ts;
     @Before
     public void setUp() throws Exception {

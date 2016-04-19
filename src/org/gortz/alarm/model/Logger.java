@@ -21,28 +21,45 @@ public class Logger {
      */
 
 
-
+    /**
+     * Constructor that gets logging messages from system. Names them after the fileName at save.
+     * @param fileName
+     */
     public Logger(String fileName){
         this.fileName = fileName;
     }
+
+    /**
+     * Prints the message at different places depending on priority.
+     * @param message
+     * @param priority
+     */
    public void write(String message, int priority){
        switch (priority) {
            case 1:
                System.out.println("[" + timeAndDate() + "]-" + message);
                break;
            case 2:
+               System.out.println("[" + timeAndDate() + "]-" + message);
                break;
            case 3:
+               System.out.println("[" + timeAndDate() + "]-" + message);
                break;
            case 4:
+               System.out.println("[" + timeAndDate() + "]-" + message);
                break;
            case 5:
+               System.out.println("[" + timeAndDate() + "]-" + message);
                break;
            default:
                break;
        }
    }
 
+    /**
+     * Get the time and date in String form.
+     * @return timeAndDate
+     */
     private String timeAndDate(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
