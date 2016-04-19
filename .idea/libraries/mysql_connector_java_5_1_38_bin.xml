@@ -2,8 +2,6 @@
   <library name="mysql-connector-java-5.1.38-bin">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/API/mysql-connector-java-5.1.38-bin.jar!/" />
-      <root url="jar://$PROJECT_DIR$/API/jstick-api-1.7.jar!/" />
-      <root url="jar://$PROJECT_DIR$/API/jna-4.1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

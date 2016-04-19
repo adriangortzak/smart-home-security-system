@@ -1,13 +1,19 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="SmartHomeSecuritySystem:jar">
+  <artifact type="jar" build-on-make="true" name="SmartHomeSecuritySystem:jar">
     <output-path>$PROJECT_DIR$/Server</output-path>
-    <root id="archive" name="SmartHomeLarm.jar">
+    <root id="archive" name="SmartHomeSecuritySystem_jar.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/Server/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="SmartHomeAlarm" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/API/jna-4.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/API/jstick-api-1.7.jar" path-in-jar="/" />
+      <element id="directory" name="API">
+        <element id="file-copy" path="$PROJECT_DIR$/API/mysql-connector-java-5.1.38-bin.jar" />
+        <element id="file-copy" path="$PROJECT_DIR$/API/jstick-api-1.7.jar" />
+        <element id="file-copy" path="$PROJECT_DIR$/API/jna-4.1.0.jar" />
+      </element>
+      <element id="library" level="project" name="jstick-api-1.7" />
+      <element id="library" level="project" name="jna-4.1.0" />
+      <element id="library" level="project" name="mysql-connector-java-5.1.38-bin" />
     </root>
   </artifact>
 </component>
