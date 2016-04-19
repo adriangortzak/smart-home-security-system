@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="SmartHomeAlarm">
+  <artifact type="jar" name="SmartHomeSecuritySystem">
     <output-path>$PROJECT_DIR$/Server/</output-path>
-    <root id="archive" name="SmartHomeAlarm.jar">
+    <root id="archive" name="SmartHomeSecuritySystem.jar">
       <element id="module-output" name="SmartHomeAlarm" />
       <element id="library" level="project" name="mysql-connector-java-5.1.38-bin" />
       <element id="extracted-dir" path="$PROJECT_DIR$/Server/jstick-api-1.7.jar" path-in-jar="/" />
