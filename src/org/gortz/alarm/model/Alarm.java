@@ -1,6 +1,7 @@
 package org.gortz.alarm.model;
 
 import org.gortz.alarm.model.Databases.mysql;
+import org.gortz.alarm.model.Sensors.TellstickDuo;
 
 import java.util.NoSuchElementException;
 
@@ -65,6 +66,14 @@ public class Alarm {
         if(newStatus == Status.PENDING){
             return false;
         }
+        //-----------------------------  DEMO   ----------------------------------------
+        Sensor se = new TellstickDuo();
+        if(newStatus == Status.ON){
+            se.turnOn(1);
+        }else if(newStatus == Status.OFF){
+            se.turnOff(1);
+        }
+        //------------------------------------------------------------------------------
         this.alarmStatus = newStatus;
         alarmLogger.write("Changing alarm status to " + newStatus, 2);
         //Fast check
