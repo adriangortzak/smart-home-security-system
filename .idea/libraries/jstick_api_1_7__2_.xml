@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jstick-api-1.7 (2)">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Server/jstick-api-1.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

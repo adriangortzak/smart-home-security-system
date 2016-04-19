@@ -8,7 +8,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     Tellstick ts;
 
     public TellstickDuo(){
-        ts = new Tellstick(true);
+        ts = new Tellstick(false);
     }
 
     @Override
