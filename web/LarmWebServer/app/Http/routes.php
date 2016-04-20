@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('login');
+   return view('login');
 });
+
+Route::get('sa', function () {
+   return view('home/index');
+});
+
+
+Route::get('home', function () {
+$alarmStatus = 'HomeController@checkAlarmStatus';
+   return view('home');
+});
+
+Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
+Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
+
