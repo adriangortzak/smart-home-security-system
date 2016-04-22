@@ -17,4 +17,6 @@ public interface Database {
      * @param newStatus
      */
     void updateAlarmStatus(Alarm.Status newStatus);
+
+    void writeHistory(String user, String statusChange, String s);
 }

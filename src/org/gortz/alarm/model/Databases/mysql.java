@@ -133,4 +133,25 @@ public class mysql implements Database {
         else throw new NoConnectionPendingException();
     }
 
+    @Override
+    public void writeHistory(String user, String type, String message) {
+        if(connect()){
+            PreparedStatement statment;
+            //-------------------query-----------------------
+            String  prepareStatement = "INSERT INTO `history` (`id`, `date`, `user`, `type`, `message`) VALUES (NULL, CURRENT_TIMESTAMP, ?, ?, ?);";
+            //-----------------------------------------------
+            try {
+                statment = con.prepareStatement(prepareStatement);
+                statment.setString(1, user);
+                statment.setString(2, type);
+                statment.setString(3, message);
+                statment.executeUpdate();
+                con.commit();
+                killConnection();
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

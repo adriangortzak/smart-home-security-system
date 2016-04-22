@@ -21,8 +21,8 @@ public class Controller {
         alarm.trigger();
     }
 
-    public boolean changeAlarmStatus(Alarm.Status newAlarmStatus){
-        return alarm.changeStatus(newAlarmStatus);
+    public boolean changeAlarmStatus(Alarm.Status newAlarmStatus, String user){
+        return alarm.changeStatus(newAlarmStatus, user);
     }
     public String checkAlarmStatus(){
         Alarm.Status res = alarm.getStatus();
