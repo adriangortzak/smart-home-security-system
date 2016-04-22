@@ -1,7 +1,7 @@
 package org.gortz.alarm.Test.Controller;
 
 import org.gortz.alarm.Controller.Controller;
-import org.gortz.alarm.model.Alarm;
+import org.gortz.alarm.model.Alarms.Alarm;
 
 import static junit.framework.TestCase.fail;
 
@@ -34,7 +34,7 @@ public class ControllerTest {
         }
 
         if(!myController.changeAlarmStatus(Alarm.Status.PENDING) == false){
-            fail("Pending is not a state that the Controller can set. So the Alarm shouldn't let it.");
+            fail("Pending is not a state that the Controller can set. So the Alarms shouldn't let it.");
         }
 
     }

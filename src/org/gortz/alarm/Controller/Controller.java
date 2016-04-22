@@ -1,5 +1,5 @@
 package org.gortz.alarm.Controller;
-import org.gortz.alarm.model.Alarm;
+import org.gortz.alarm.model.Alarms.Alarm;
 /**
  * Created by adrian on 02/04/16.
  */
@@ -15,6 +15,10 @@ public class Controller {
         Sensor = new Thread(new SensorController());
         Sensor.start();
         return true; //TODO - fix a better way to check if it succeeded
+    }
+
+    public void triggerAlarm(){
+        alarm.trigger();
     }
 
     public boolean changeAlarmStatus(Alarm.Status newAlarmStatus){

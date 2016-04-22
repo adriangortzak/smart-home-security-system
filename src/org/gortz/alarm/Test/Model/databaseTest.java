@@ -1,15 +1,15 @@
 package org.gortz.alarm.Test.Model;
 
-import org.gortz.alarm.model.Alarm;
+import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Database;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.fail;
-import static org.gortz.alarm.model.Alarm.Status.OFF;
-import static org.gortz.alarm.model.Alarm.Status.ON;
-import static org.gortz.alarm.model.Alarm.Status.PENDING;
+import static org.gortz.alarm.model.Alarms.Alarm.Status.OFF;
+import static org.gortz.alarm.model.Alarms.Alarm.Status.ON;
+import static org.gortz.alarm.model.Alarms.Alarm.Status.PENDING;
 
 /**
  * Created by adrian on 19/04/16.
@@ -19,7 +19,6 @@ public class databaseTest {
     @Before
     public void setUp() throws Exception {
         try {
-         db.connect();
         }catch (Exception e){
          fail("Could not create database connection.");
         }
@@ -27,21 +26,6 @@ public class databaseTest {
 
     @After
     public void tearDown() throws Exception {
-    }
-
-    @Test
-    public void connection() throws Exception {
-    Database db2 = null;
-        try {
-            db2.connect();
-        }catch (Exception e){
-            fail("Could not create database connection.");
-        }
-        try {
-            db2.killConnection();
-        }catch (Exception e){
-            fail("Couldn't close connection to database");
-        }
     }
 
     @Test

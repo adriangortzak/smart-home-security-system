@@ -6,5 +6,4 @@ package org.gortz.alarm.model;
 public interface Sensor {
     boolean turnOn(int deviceID);
     boolean turnOff(int deviceID);
-    void close();
 }

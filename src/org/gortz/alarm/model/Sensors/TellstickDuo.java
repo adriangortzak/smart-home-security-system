@@ -26,7 +26,6 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         if (status == 0) return true;
         else return false;
     }
-    @Override
     public void close(){
         ts.close();
     }

@@ -1,13 +1,13 @@
 package org.gortz.alarm.model.Databases;
 
-import org.gortz.alarm.model.Alarm;
+import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Database;
 
 import java.nio.channels.NoConnectionPendingException;
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
 
-import static org.gortz.alarm.model.Alarm.Status.OFF;
+import static org.gortz.alarm.model.Alarms.Alarm.Status.OFF;
 
 
 /**

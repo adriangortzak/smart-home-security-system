@@ -1,7 +1,7 @@
 package org.gortz.alarm.View;
 import org.gortz.alarm.Controller.Controller;
-import org.gortz.alarm.model.Alarm;
-import org.gortz.alarm.model.Logger;
+import org.gortz.alarm.model.Alarms.Alarm;
+import org.gortz.alarm.model.Loggers.Logger;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -47,7 +47,9 @@ public class View {
                     case "exit" :
 
                         return;
-
+                    case "trigger" :
+                        myController.triggerAlarm();
+                        break;
                     default:
                         print("Invalid input");
                 }
@@ -115,7 +117,7 @@ public class View {
                     response.flush();
                     response.close();
                 } catch (IOException e) {
-                    //Logger
+                    //Loggers
                     //e.printStackTrace();
                 }
             }
