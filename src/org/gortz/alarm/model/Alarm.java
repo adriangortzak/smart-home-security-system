@@ -99,9 +99,10 @@ public class Alarm {
      * @return Alarm.Status from database
      */
     private Status getStatusFromDb(){
-        Status oldStatus = myDatabase.getAlarmStatus();
-        alarmLogger.write("Old status saved in Database is "+ oldStatus,2);
-        return oldStatus;
+        //Status oldStatus = myDatabase.getAlarmStatus();
+        //alarmLogger.write("Old status saved in Database is "+ oldStatus,2);
+        //return oldStatus;
+        return Status.ON;
     }
 
 

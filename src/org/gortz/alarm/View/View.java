@@ -45,6 +45,7 @@ public class View {
                         }else print("System is already running");
                         break;
                     case "exit" :
+
                         return;
 
                     default:
