@@ -62,5 +62,6 @@
     <orderEntry type="library" name="commons-logging-1.2" level="project" />
     <orderEntry type="library" name="jna-4.1.0 (3)" level="project" />
     <orderEntry type="library" name="jstick-api-1.7 (3)" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.38-bin (4)" level="project" />
   </component>
 </module>
