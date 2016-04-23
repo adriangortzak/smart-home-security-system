@@ -14,9 +14,24 @@ Route::get('/',['middleware' => 'auth', function () {
    return view('home');
 }]);
 
+Route::get('settings',['middleware' => 'auth', function () {
+   return view('settings');
+}]);
+
+Route::get('admin',['middleware' => 'auth', function () {
+   return view('admin');
+}]);
+
+
 Route::get('home',['middleware' => 'auth', function () {
    return view('home');
 }]);
+
+Route::get('histories',['middleware' => 'auth', function () {
+   return view('history');
+}]);
+
+
 
 Route::get('users',['middleware' => 'auth', function () {
    $users = App\User::all();
