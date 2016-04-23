@@ -1,7 +1,7 @@
 package org.gortz.alarm.View;
 import org.gortz.alarm.Controller.Controller;
-import org.gortz.alarm.model.Alarm;
-import org.gortz.alarm.model.Logger;
+import org.gortz.alarm.model.Alarms.Alarm;
+import org.gortz.alarm.model.Loggers.Logger;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -47,7 +47,9 @@ public class View {
                     case "exit" :
 
                         return;
-
+                    case "trigger" :
+                        myController.triggerAlarm();
+                        break;
                     default:
                         print("Invalid input");
                 }
@@ -97,41 +99,43 @@ public class View {
                 // open socket
                 try {
                     connection = socket.accept();
-
+                    String user = null;
                     // get output handler
                     DataOutputStream response = new DataOutputStream(connection.getOutputStream());
 
-                    // get input reader
+                    // get user reader
                     InputStreamReader inputStream = new InputStreamReader(connection.getInputStream());
                     BufferedReader input = new BufferedReader(inputStream);
-                    //Get input
+                    //Get user
                     command = input.readLine();
-
+                    String commandPart[] = command.split(":");
+                    user = commandPart[0];
+                    command = commandPart[1];
                     // print message
-                    socketLogger.write("Command: " + command,3);
-                    responseString = InterpretMessage(command);
+                    socketLogger.write("Command: " + command +" by "+user,3);
+                    responseString = InterpretMessage(command, user);
 
                     response.writeBytes(responseString+"\n");
                     response.flush();
                     response.close();
                 } catch (IOException e) {
-                    //Logger
+                    //Loggers
                     //e.printStackTrace();
                 }
             }
         }
-        private String InterpretMessage(String input){
+        private String InterpretMessage(String input, String user){
             switch(input) {
                 case "turn on alarm":
-                    if(myController.changeAlarmStatus(Alarm.Status.ON) == true) return "succeeded";
+                    if(myController.changeAlarmStatus(Alarm.Status.ON, user) == true) return "succeeded";
                     else return "failed";
                 case "turn off alarm":
-                    if(myController.changeAlarmStatus(Alarm.Status.OFF) == true) return "succeeded";
+                    if(myController.changeAlarmStatus(Alarm.Status.OFF, user) == true) return "succeeded";
                     else return "failed";
                 case "check alarm status":
                     return myController.checkAlarmStatus();
                 default:
-                    return "Error invalid input";
+                    return "Error invalid input" + input;
             }
         }
     }

@@ -1,4 +1,4 @@
-package org.gortz.alarm.model;
+package org.gortz.alarm.model.Loggers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,19 +37,19 @@ public class Logger {
    public void write(String message, int priority){
        switch (priority) {
            case 1:
-               System.out.println("[" + timeAndDate() + "]-" + message);
+               System.out.println("[" + timeAndDate() + "] - " + message);
                break;
            case 2:
-               System.out.println("[" + timeAndDate() + "]-" + message);
+               System.out.println("[" + timeAndDate() + "] - " + message);
                break;
            case 3:
-               System.out.println("[" + timeAndDate() + "]-" + message);
+               System.out.println("[" + timeAndDate() + "] - " + message);
                break;
            case 4:
-               System.out.println("[" + timeAndDate() + "]-" + message);
+               System.out.println("[" + timeAndDate() + "] - " + message);
                break;
            case 5:
-               System.out.println("[" + timeAndDate() + "]-" + message);
+               System.out.println("[" + timeAndDate() + "] - " + message);
                break;
            default:
                break;

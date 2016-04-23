@@ -1,5 +1,5 @@
 package org.gortz.alarm.Controller;
-import org.gortz.alarm.model.Alarm;
+import org.gortz.alarm.model.Alarms.Alarm;
 /**
  * Created by adrian on 02/04/16.
  */
@@ -17,8 +17,12 @@ public class Controller {
         return true; //TODO - fix a better way to check if it succeeded
     }
 
-    public boolean changeAlarmStatus(Alarm.Status newAlarmStatus){
-        return alarm.changeStatus(newAlarmStatus);
+    public void triggerAlarm(){
+        alarm.trigger();
+    }
+
+    public boolean changeAlarmStatus(Alarm.Status newAlarmStatus, String user){
+        return alarm.changeStatus(newAlarmStatus, user);
     }
     public String checkAlarmStatus(){
         Alarm.Status res = alarm.getStatus();

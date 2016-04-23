@@ -1,13 +1,13 @@
 package org.gortz.alarm.model.Databases;
 
-import org.gortz.alarm.model.Alarm;
+import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Database;
 
 import java.nio.channels.NoConnectionPendingException;
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
 
-import static org.gortz.alarm.model.Alarm.Status.OFF;
+import static org.gortz.alarm.model.Alarms.Alarm.Status.OFF;
 
 
 /**
@@ -131,6 +131,27 @@ public class mysql implements Database {
             }
         }
         else throw new NoConnectionPendingException();
+    }
+
+    @Override
+    public void writeHistory(String user, String type, String message) {
+        if(connect()){
+            PreparedStatement statment;
+            //-------------------query-----------------------
+            String  prepareStatement = "INSERT INTO `history` (`id`, `date`, `user`, `type`, `message`) VALUES (NULL, CURRENT_TIMESTAMP, ?, ?, ?);";
+            //-----------------------------------------------
+            try {
+                statment = con.prepareStatement(prepareStatement);
+                statment.setString(1, user);
+                statment.setString(2, type);
+                statment.setString(3, message);
+                statment.executeUpdate();
+                con.commit();
+                killConnection();
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
