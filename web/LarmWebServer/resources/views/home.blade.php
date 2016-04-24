@@ -1,5 +1,9 @@
 
 @extends('master')
+@section('dashboard_active')
+	active 
+@stop
+
 @section('main_content')
                   
                   	<div class="row mtbox">
@@ -7,18 +11,7 @@
                   			<div class="box1">
 					  			<span class="li_world"></span>
 					  			<h3>
-								  
-								  <?php
-								     $connected = @fsockopen("www.google.com", 80); 
-								     //website, port  (try 80 or 443)
-								     if ($connected){
-								     echo "OK!"; //action when connected
-								     fclose($connected);
-								     }else{
-								     echo "FAILED"; //action in connection failure
-								     }    
-								    ?>
-
+								  {{ checkInternetConnections() }}
 								</h3>
                   			</div>
 					  			<p>Check if you're able to connect to the Internet</p>
@@ -40,9 +33,9 @@
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_user"></span>
-					  			<h3>10</h3>
+					  			<h3>{{ getUserCount()  }}</h3>
                   			</div>
-					  			<p>There are 10 users on this system</p>
+					  			<p>There are {{ getUserCount()  }} users on this system</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">

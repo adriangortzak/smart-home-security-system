@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
-    
+
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>SHSS</b></a>
+            <a href="/" class="logo"><b>SHSS</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
             </div>
@@ -67,27 +67,27 @@
               	  <h5 class="centered"><?php echo Auth::user()->name;?></h5>
               	  	
                   <li class="mt">
-                      <a class="active" href="/">
+                      <a class="@yield('dashboard_active')" href="/">
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                       <a  href="settings">
+                       <a  class="@yield('settings_active')"  href="settings">
                           <i class="fa fa-cogs"></i>
                           <span>Settings</span>
                       </a>               
                   </li>
 		 <li class="sub-menu">
-                      <a href="histories" >
+                      <a class="@yield('history_active')" href="histories" >
                           <i class="li_calendar"></i>
                           <span>History</span>
                       </a>
                    </li>
 
                         <li class="sub-menu">
-                      <a href="admin" >
+                      <a class="@yield('admin_active')" href="admin" >
                           <i class="fa fa-tasks"></i>
                           <span>Admin</span>
                       </a>                
@@ -115,7 +115,6 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-
               <div class="row">
                   <div class="col-lg-9 main-chart">
         	    @yield('main_content')
@@ -129,42 +128,11 @@
                   <div class="col-lg-3 ds">
                     <!--COMPLETED ACTIONS DONUTS CHART-->
 						<h3>History</h3>
-                                        
-   <?php
-   $history = App\history::orderBy('date','desc')->take(5)->get();
-foreach($history  as $story){
-                echo '<div class="desc">';
-                      echo '<div class="thumb">';
-                                echo '<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>';
-                        echo '</div>';
-                        echo '<div class="details">';
-                                echo '<p><muted>' . $story->date . '</muted><br>';
-                                 echo ' <b>' . $story->user . ' </b> <br>';
-				echo '<muted>' . $story->message   . '</muted>';
-                                echo '</p>';
-                      echo '</div>';
-                      echo '</div>';
-
-}
-?>
+                                        {{ getLastFiveMessageFromHistory() }}
    
-                       <!-- USERS ONLINE SECTION -->
+                       <!-- Team Members SECTION -->
 						<h3>TEAM MEMBERS</h3>
-<?php
-                         $users = App\User::all(); 
-		foreach($users  as $user){
-		echo '<div class="desc">';
-                        echo '<div class="thumb">';
-                                echo '<img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">';
-                        echo '</div>';
-                        echo '<div class="details">';
-                                echo '<p>' . $user->name . '<br>';
-                                   echo '<muted><b>Email: </b>' .$user->email . '</muted>';
-                                echo '</p>';
-                        echo '</div>';
-                      echo '</div>';
-}
-?>
+			{{ getUsers() }}
                            
                   </div><!-- /col-lg-3 -->
               </div><! --/row -->
@@ -237,6 +205,28 @@ foreach($history  as $story){
             var to = $("#" + id).data("to");
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
+
+var idleTime = 0;
+$(document).ready(function () {
+    //Increment the idle time counter every minute.
+    var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+    //Zero the idle timer on mouse movement.
+    $(this).mousemove(function (e) {
+        idleTime = 0;
+    });
+    $(this).keypress(function (e) {
+        idleTime = 0;
+    });
+});
+
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    if (idleTime > 10) { // 11 minutes
+        $.get( "logout");
+	window.location="lock/adrian";
+    }
+}
     </script>
   
 

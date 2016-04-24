@@ -18,13 +18,17 @@ Route::get('settings',['middleware' => 'auth', function () {
    return view('settings');
 }]);
 
+Route::get('lock/{email}', function ($email) {
+   return view('lock');
+});
+
+
 Route::get('admin',['middleware' => 'auth', function () {
    return view('admin');
 }]);
 
-
 Route::get('home',['middleware' => 'auth', function () {
-   return view('home');
+    return view('home');
 }]);
 
 Route::get('histories',['middleware' => 'auth', function () {
