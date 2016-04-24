@@ -16,6 +16,8 @@
         "symfony/dom-crawler": "2.8.*|3.0.*"
     },
     "autoload": {
+          "files": [
+                "app/helpers.php"],
         "classmap": [
             "database"
         ],
