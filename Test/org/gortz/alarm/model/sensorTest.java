@@ -24,6 +24,7 @@ public class sensorTest {
     @After
     public void tearDown() throws Exception {
         try{
+            ts.turnOff(1);
             ts.close();
         }
         catch(Exception e){

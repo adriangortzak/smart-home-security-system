@@ -30,7 +30,7 @@ public class SensorData {
         return model;
     }
 
-    public String gethumidity() {
+    public String getHumidity() {
         return humidity;
     }
 
