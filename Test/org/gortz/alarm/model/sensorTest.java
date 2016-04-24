@@ -1,4 +1,4 @@
-package org.gortz.alarm.Test.Model;
+package org.gortz.alarm.model;
 
 import org.gortz.alarm.model.Sensors.TellstickDuo;
 import org.junit.After;

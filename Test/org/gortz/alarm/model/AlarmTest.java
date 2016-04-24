@@ -1,4 +1,4 @@
-package org.gortz.alarm.Test.Model;
+package org.gortz.alarm.model;
 
 import org.junit.Test;
 

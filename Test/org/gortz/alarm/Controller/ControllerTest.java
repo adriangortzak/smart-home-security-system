@@ -1,4 +1,4 @@
-package org.gortz.alarm.Test.Controller;
+package org.gortz.alarm.Controller;
 
 import org.gortz.alarm.Controller.Controller;
 import org.gortz.alarm.model.Alarms.Alarm;
