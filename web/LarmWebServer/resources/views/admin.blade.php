@@ -1,10 +1,17 @@
 @extends('master')
+@section('admin_active')
+        active
+@stop
+
+
 
 @section('main_content')
 <h1 style="text-align: center;"><b>Admin</b></h1>
 
-<div style="border-style: groove; border-radius:10px; padding:10px;">
-<h2>Create new user</h2>
+<div class="col-lg-12">
+	<div class="form-panel">
+<h4>Create new user</h4>
+<hr>
  <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
@@ -73,5 +80,68 @@
                         </div>
                     </form>
 </div>
+</div>
+
+
+
+<div class="col-lg-12">
+          			<div class="form-panel">
+                  	  <h4 class="mb">Manage User</h4>
+					
+						
+						<hr>
+						<br>
+						<select multiple="" class="form-control" style="height:300px;">
+						  <option>Adrian</option>
+						  <option>Maja</option>
+						  <option>Jimmy</option>
+						  <option>Olle</option>
+						</select>        		
+          			</div><!-- /form-panel -->
+          		</div>
+
+
+
+
+
+
+
+
+<div class="col-lg-12">
+
+                      <section class="task-panel tasks-widget">
+	                	<div class="panel-heading">
+	                        <div class="pull-left"><h4>Sensors</h4></div>
+	                        <br>
+	                 	</div>
+                          <div class="panel-body">
+                              <div class="task-content">
+                                  <ul class="task-list">
+
+                                      <li>
+                                          <div class="task-checkbox">
+                                              <input type="checkbox" class="list-child" value="">
+                                          </div>
+                                          <div class="task-title" >
+                                              <span class="task-title-sp">Motionsensors</span>
+                                              <span class="badge bg-info">Tellstick</span>
+                                              <div class="pull-right hidden-phone">
+                                                  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                                  <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                              </div>
+                                          </div>
+                                      </li>
+				      
+                                  </ul>
+                              </div>
+
+                              <div class=" add-task-row">
+                                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New Sensor</a>
+                              </div>
+                          </div>
+                      </section>
+
+</div>
+
 
 @stop

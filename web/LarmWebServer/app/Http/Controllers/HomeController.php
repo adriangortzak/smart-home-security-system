@@ -115,3 +115,11 @@ else
 socket_close($sock);
  }
 }
+
+public function home(){
+return view('home');
+}
+
+public function internetConnection(){
+return "hej";
+}
