@@ -44,14 +44,14 @@ public class Listen implements Runnable{
                 if(matcher.matches()){
                     if(matcher.group(1).equals("command")){
                         CommandObject c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
-                        myLogger.write(c.getMethod(),3);
+                        myLogger.write("tellstick",c.getMethod(),3);
                     }
                     else if(matcher.group(1).equals("sensor")){
                         SensorData s = new SensorData(matcher.group(2),matcher.group(3),matcher.group(4),matcher.group(10), matcher.group(11));
-                        myLogger.write("Current temp: " + s.getTemp() + " degrees Celsius and current humidity: " + s.getHumidity() + "%",3);
+                        myLogger.write("tellstick","Current temp: " + s.getTemp() + " degrees Celsius and current humidity: " + s.getHumidity() + "%",3);
                     }
                     else{
-                        myLogger.write("Received unknown sensor input", 3);
+                        myLogger.write("tellstick","Received unknown sensor input", 3);
                     }
 
                 }

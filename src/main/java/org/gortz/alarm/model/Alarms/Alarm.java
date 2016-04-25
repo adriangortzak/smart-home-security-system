@@ -1,10 +1,10 @@
 package org.gortz.alarm.model.Alarms;
 
+import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Setting.Settings;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Loggers.Logger;
-
 import java.util.NoSuchElementException;
 
 import static org.gortz.alarm.model.Alarms.Alarm.Status.*;
@@ -20,6 +20,7 @@ public class Alarm {
     Boolean typhoon = false;
     Database myDatabase;
     private static Alarm instance = null;
+    Boolean running;
 
     /**
      * Private constructor to follow the Singleton.
@@ -72,8 +73,8 @@ public class Alarm {
         }
 
         this.status = newStatus;
-        logger.write("Changing alarm status to " + newStatus + " by " + user, 2);
-        myDatabase.writeHistory(user,"statusChange","Changed Alarm status to " + newStatus);
+        logger.write(user,"Changing alarm status to " + newStatus , 5);
+
         //Fast check
         if(this.status == newStatus){
             updateStatusToDb(newStatus);
@@ -98,60 +99,33 @@ public class Alarm {
      */
     private Status getStatusFromDb(){
         Status oldStatus = myDatabase.getAlarmStatus();
-        logger.write("Old status saved in Database is "+ oldStatus,2);
+        logger.write("Server","Old status saved in Database is "+ oldStatus,3);
         return oldStatus;
     }
 
     /**
      * The system has been triggered by a sensor and needs to check if any actions is required
      */
-    public void trigger(){
+    public void trigger(String by){
         if(!typhoon) {
             if (status == ON) {
-                logger.write("Trigged Alarm",5);
-                Thread typhoonThread;
-                typhoonThread = new Thread(new Typhoon());
-                typhoonThread.start();
-                typhoon = true;
-            } else logger.write("Triggered but no reaction", 1);
+                if(!check(pendingTime)) {
+                    logger.write("Server","Trigged Alarm by "+by, 5);
+                    Thread typhoonThread;
+                    typhoonThread = new Thread(new Typhoon());
+                    typhoonThread.start();
+                    typhoon = true;
+                }
+            } else logger.write("Server","Triggered but no reaction", 2);
         }
-        else logger.write("Triggered but typhoon is already ON", 1);
+        else logger.write("Server","Triggered but typhoon is already ON", 2);
     }
 
-    private class Typhoon implements Runnable{
-        Status myStatus;
-        Boolean running;
-        int notificationInterval = settings.getNotificationInterval();
-
-        public void run() {
-        notifyUser();
-        }
-
-        private void notifyUser(){
-            String message;
-            int[] users = new int[0];
-            String[] notificationProtocols = new String[0];
-
-            // int[]String[]
-            //for all user
-            for(int user: users)
-                for (String notificationProtocol : notificationProtocols) {
-               /*     switch (notificationProtocol){
-
-                    }*/
-                }
-            System.out.println("help!");
-            //for all notification wishes
-            //notifaction
-            //Wait for response.
-            check();
-        }
-
-        private void check(){
-        for (int currentSleep = notificationInterval; currentSleep>0; currentSleep--) {
-            if (myStatus == OFF) {
+    private boolean check(int time){
+        for (int currentSleep =  time; currentSleep>0; currentSleep--) {
+            if (status == OFF) {
                 running = false;
-                return; //Stop the typhoon
+                return true; //Stop the typhoon
             } else
                 try {
                     Thread.sleep(1000);//sleep
@@ -159,8 +133,25 @@ public class Alarm {
                     e.printStackTrace();
                 }
         }
+        return false;
+    }
+
+    private class Typhoon implements Runnable{
+        int notificationInterval = settings.getNotificationInterval();
+
+        public void run() {
         notifyUser();
         }
+
+        private void notifyUser(){
+            for(Notification notification : settings.getNotification()){
+                notification.sendMessage("Alarm","Alert! Alert! Sensors has Triggered your Alarm!");
+            }
+            //Wait for response.
+            if(!check(notificationInterval)){notifyUser();}
+        }
+
+
     }
 
 }

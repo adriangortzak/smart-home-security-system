@@ -133,17 +133,17 @@ public class mysql implements Database {
         else throw new NoConnectionPendingException();
     }
 
-    public void writeHistory(String user, String type, String message) {
+
+    public void writeHistory(String user, String message) {
         if(connect()){
             PreparedStatement statment;
             //-------------------query-----------------------
-            String  prepareStatement = "INSERT INTO `history` (`id`, `date`, `user`, `type`, `message`) VALUES (NULL, CURRENT_TIMESTAMP, ?, ?, ?);";
+            String  prepareStatement = "INSERT INTO `history` (`id`, `date`, `user`, `message`) VALUES (NULL, CURRENT_TIMESTAMP, ?, ?);";
             //-----------------------------------------------
             try {
                 statment = con.prepareStatement(prepareStatement);
                 statment.setString(1, user);
-                statment.setString(2, type);
-                statment.setString(3, message);
+                statment.setString(2, message);
                 statment.executeUpdate();
                 con.commit();
                 killConnection();
@@ -151,6 +151,32 @@ public class mysql implements Database {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public int getServerSettingInt(String setting) {
+        if(connect()) {
+            PreparedStatement statment;
+            Statement stmt = null;
+            //-------------------query-----------------------
+            String  prepareStatement  = "SELECT ? FROM serverSettings";
+            //-----------------------------------------------
+
+            try {
+                statment = con.prepareStatement(prepareStatement);
+                statment.setString(1, setting);
+                statment.executeUpdate();
+
+                ResultSet rs = stmt.executeQuery(statment.toString());
+                rs.next();
+                return rs.getByte(setting);
+
+            } catch (SQLException e) {
+                throw new NoConnectionPendingException();
+            }
+        }
+        else throw new NoConnectionPendingException();
+
     }
 
 }

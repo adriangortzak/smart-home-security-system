@@ -18,5 +18,7 @@ public interface Database {
      */
     void updateAlarmStatus(Alarm.Status newStatus);
 
-    void writeHistory(String user, String statusChange, String s);
+    void writeHistory(String user,  String message);
+
+    int getServerSettingInt(String Setting);
 }

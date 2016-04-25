@@ -1,6 +1,9 @@
 package org.gortz.alarm.model.Setting;
 
+import org.gortz.alarm.model.Database;
+import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Loggers.Logger;
+import org.gortz.alarm.model.Notification;
 
 
 /**
@@ -12,16 +15,20 @@ public class Settings {
     //Logger
     Logger logger = Logger.getInstace();
     //
+    Database db;
     //--------------------------------------//
     int pendingTime;
     int notificationInterval;
     String dbPassword;
     String dbUsername;
+    boolean debuggingStatus;
 
+    Notification[] notifications;
     //-------------------------------------
 
 private Settings(){
     update();
+    db = new mysql(getDbUsername(),getDbPassword());
 }
 
     public static Settings getInstance(){
@@ -32,10 +39,12 @@ private Settings(){
     }
 
     public void update(){
-        pendingTime = 120;
-        notificationInterval = 10;
+        logger.write("Server", "Updated settings",3);
+        pendingTime = 10;// db.getServerSettingInt("pendingTime");
+        notificationInterval = 10;//db.getServerSettingInt("notificationInterval");
         dbPassword = "APJ4A5M6sXTPBH74";
         dbUsername = "shss";
+        debuggingStatus = false;
     }
 
 
@@ -47,12 +56,20 @@ private Settings(){
         return notificationInterval;
     }
 
-    public String getDbPassword() {
+    public  String getDbPassword() {
         return dbPassword;
     }
 
     public String getDbUsername() {
         return dbUsername;
+    }
+
+    public boolean getDebuggingStatus() {
+        return debuggingStatus;
+    }
+
+    public  Notification[] getNotification() {
+        return notifications;
     }
 }
 

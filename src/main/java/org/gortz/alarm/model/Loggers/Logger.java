@@ -1,5 +1,7 @@
 package org.gortz.alarm.model.Loggers;
 
+import org.gortz.alarm.model.Database;
+import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Setting.Settings;
 
 import java.text.DateFormat;
@@ -12,7 +14,9 @@ import java.util.Date;
 public class Logger {
     private static Logger instance = null;
     Settings settings = Settings.getInstance();
-    boolean debugging;
+    boolean debugging = settings.getDebuggingStatus();
+    Database db;
+
     /*
     ----------------
     |Priority level|
@@ -26,7 +30,8 @@ public class Logger {
 
 
 
-    private  Logger(){}
+    private  Logger(){
+    }
 
     public static Logger getInstace(){
         if(instance == null){
@@ -36,34 +41,8 @@ public class Logger {
     }
 
 
-    /**
-     * Prints the message at different places depending on priority.
-     * @param message
-     * @param priority
-     */
-   public void write(String message, int priority){
-       switch (priority) {
-           case 1:
-               if(debugging) {
-                   System.out.println("[" + timeAndDate() + "] - " + message);
-               }
-               break;
-           case 2:
-               System.out.println("[" + timeAndDate() + "] - " + message);
-               break;
-           case 3:
-               System.out.println("[" + timeAndDate() + "] - " + message);
-               break;
-           case 4:
-               System.out.println("[" + timeAndDate() + "] - " + message);
-               break;
-           case 5:
-               System.out.println("[" + timeAndDate() + "] - " + message);
-               break;
-           default:
-               break;
-       }
-   }
+
+
 
     /**
      * Get the time and date in String form.
@@ -73,5 +52,34 @@ public class Logger {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+    /**
+     * Prints the message at different places depending on priority.
+     * @param message
+     * @param priority
+     */
+    public void write(String user, String message, int priority) {
+        switch (priority) {
+            case 1:
+                if(debugging) {
+                    System.out.println("[" + timeAndDate() + "] - ("+user+")" + message);
+                }
+                break;
+            case 2:
+                System.out.println("[" + timeAndDate() + "] - ("+user+")" + message);
+                break;
+            case 3:
+                System.out.println("[" + timeAndDate() + "] - ("+user+")" + message);
+                break;
+            case 4:
+                System.out.println("[" + timeAndDate() + "] - ("+user+")" + message);
+                break;
+            case 5:
+                if(db==null)db = new mysql(settings.getDbUsername(),settings.getDbPassword());
+                db.writeHistory(user, message);
+                break;
+            default:
+                break;
+        }
     }
 }
