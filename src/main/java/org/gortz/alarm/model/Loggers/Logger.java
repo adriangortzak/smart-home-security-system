@@ -1,5 +1,7 @@
 package org.gortz.alarm.model.Loggers;
 
+import org.gortz.alarm.model.Setting.Settings;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +11,8 @@ import java.util.Date;
  */
 public class Logger {
     private static Logger instance = null;
+    Settings settings = Settings.getInstance();
+    boolean debugging;
     /*
     ----------------
     |Priority level|
@@ -40,7 +44,9 @@ public class Logger {
    public void write(String message, int priority){
        switch (priority) {
            case 1:
-               System.out.println("[" + timeAndDate() + "] - " + message);
+               if(debugging) {
+                   System.out.println("[" + timeAndDate() + "] - " + message);
+               }
                break;
            case 2:
                System.out.println("[" + timeAndDate() + "] - " + message);

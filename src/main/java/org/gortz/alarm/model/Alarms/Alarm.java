@@ -13,7 +13,7 @@ import static org.gortz.alarm.model.Alarms.Alarm.Status.*;
  * Created by adrian on 14/04/16.
  */
 public class Alarm {
-    Logger logger = new Logger("alarm");
+    Logger logger = Logger.getInstace();
     Settings settings = Settings.getInstance();
     int pendingTime = settings.getPendingTime();
     Status status;

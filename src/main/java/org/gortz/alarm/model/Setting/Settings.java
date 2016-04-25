@@ -10,7 +10,7 @@ public class Settings {
     //Singelton object
     static Settings instance = null;
     //Logger
-    Logger logger = new Logger("");
+    Logger logger = Logger.getInstace();
     //
     //--------------------------------------//
     int pendingTime;

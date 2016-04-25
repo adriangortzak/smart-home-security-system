@@ -72,7 +72,7 @@ public class View {
      * Created by adrian on 04/04/16.
      */
     public class JavaSocket implements Runnable {
-        Logger socketLogger = new Logger("websiteConnectionServer");
+        Logger socketLogger = Logger.getInstace();
 
 
         protected java.net.ServerSocket socket;
