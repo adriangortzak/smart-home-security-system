@@ -47,24 +47,15 @@
 				                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				                          <h4 class="modal-title">Welcome Back</h4>
 				                      </div>
-							 <form class="login" role="form" method="POST" action="{{ url('/login') }}">
-							   {!! csrf_field() !!}
-
-      
 				                      <div class="modal-body">
 				                          <p class="centered"><img class="img-circle" width="80" src="../assets/img/ui-sam.jpg"></p>
-							  
-							  <input type="hidden" name="email" value="<?php echo $email; ?>">							
 				                          <input type="password" name="password" placeholder="Password" autocomplete="off" class="form-control placeholder-no-fix">
 				
 				                      </div>
 				                      <div class="modal-footer centered">
 				                          <button data-dismiss="modal" class="btn btn-theme04" type="button">Cancel</button>
-				                          <button class="btn btn-theme03" type="submit">Login</button>
+				                          <button class="btn btn-theme03" type="button">Login</button>
 				                      </div>
-
-						    </form>
-
 				                  </div>
 				              </div>
 				          </div>

@@ -8,26 +8,29 @@ import java.util.Date;
  * Created by adrian on 04/04/16.
  */
 public class Logger {
-    String fileName;
+    private static Logger instance = null;
     /*
     ----------------
     |Priority level|
     ----------------
-    [1] -- Runtime debugging
-    [2]
-    [3]
-    [4] -- Important message
-    [5] -- Notify users
+    [1] -- Runtime debugging --> "var a = 23"
+    [2] -- Runtime message -->  "Sensor data received";
+    [3] -- Change in system --> "Settings updated"
+    [4] -- Important message --> "[Error] could not connect to database"
+    [5] -- History on website --> "Jimmy changed alarm status to ON"
      */
 
 
-    /**
-     * Constructor that gets logging messages from system. Names them after the fileName at save.
-     * @param fileName
-     */
-    public Logger(String fileName){
-        this.fileName = fileName;
+
+    private  Logger(){}
+
+    public static Logger getInstace(){
+        if(instance == null){
+            instance = new Logger();
+        }
+        return instance;
     }
+
 
     /**
      * Prints the message at different places depending on priority.

@@ -9,7 +9,7 @@
     <p>
 
       <label for="login">Email:</label>
-    <input type="email"  name="email" placeholder="exempel@gmail.com"  value="{{ old('email') }}">
+    <input type="email"  name="email" placeholder="namn@example.com" value="{{ old('email') }}">
     </p>
 
     <p>
@@ -28,7 +28,6 @@
     </p>
     <p class="forgot-password"><a href="{{ url('/password/reset') }}">Forgot your password?</a></p>
              <ul class="help-block">
-
                @if ($errors->has('email'))
                                  
                                         <li>{{ $errors->first('email') }}</li>

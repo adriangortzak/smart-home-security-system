@@ -21,7 +21,7 @@ public class Listen implements Runnable{
 
     public Listen(Tellstick ts) {
         this.ts = ts;
-        myLogger = new Logger("CommandsReceived.txt");
+        myLogger =  Logger.getInstace();
     }
 
     public void terminate(){
@@ -29,7 +29,7 @@ public class Listen implements Runnable{
     }
     @Override
     public void run() {
-        listen();
+        //listen();
     }
 
     public void listen(){

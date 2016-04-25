@@ -1,5 +1,6 @@
 package org.gortz.alarm.model.Alarms;
 
+import org.gortz.alarm.model.Setting.Settings;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Loggers.Logger;
@@ -13,13 +14,11 @@ import static org.gortz.alarm.model.Alarms.Alarm.Status.*;
  */
 public class Alarm {
     Logger logger = new Logger("alarm");
-    int pendingTime = 120;
+    Settings settings = Settings.getInstance();
+    int pendingTime = settings.getPendingTime();
     Status status;
     Boolean typhoon = false;
-
     Database myDatabase;
-
-
     private static Alarm instance = null;
 
     /**
@@ -27,13 +26,13 @@ public class Alarm {
      * Creates connections to the database and gets old status.
      */
     private Alarm(){
-        myDatabase = new mysql("shss", "APJ4A5M6sXTPBH74");
+        myDatabase = new mysql(settings.getDbUsername(), settings.getDbPassword());
         status = getStatusFromDb();
     }
 
     /**
      *Singleton constructor for the alarm.
-     * @return
+     * @return Alarm object
      */
     public static Alarm getInstance(){
         if(instance == null){
@@ -122,7 +121,7 @@ public class Alarm {
     private class Typhoon implements Runnable{
         Status myStatus;
         Boolean running;
-        int notificationInterval = 10;
+        int notificationInterval = settings.getNotificationInterval();
 
         public void run() {
         notifyUser();
@@ -149,7 +148,6 @@ public class Alarm {
         }
 
         private void check(){
-            //int currentSleep =  notificationInterval; //TODO Kopia inte samma värde
         for (int currentSleep = notificationInterval; currentSleep>0; currentSleep--) {
             if (myStatus == OFF) {
                 running = false;
