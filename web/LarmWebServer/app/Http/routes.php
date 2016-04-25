@@ -19,13 +19,20 @@ Route::get('settings',['middleware' => 'auth', function () {
 }]);
 
 Route::get('lock/{email}', function ($email) {
-   return view('lock');
+	Auth::logout();
+	return View::make('lock',['email' => $email]);
 });
 
 
 Route::get('admin',['middleware' => 'auth', function () {
    return view('admin');
 }]);
+
+Route::get('test',['middleware' => 'auth', function () {
+   getAllMessageFromHistory();
+}]);
+
+
 
 Route::get('home',['middleware' => 'auth', function () {
     return view('home');
@@ -52,27 +59,6 @@ echo '<div class="desc">';
                       echo '</div>';
 }
 }]);
-
-Route::get('history',['middleware' => 'auth', function () {
-$history = App\history::orderBy('date','desc')->take(5)->get();
-foreach($history  as $story){
-		echo '<div class="desc">';
-                      echo '<div class="thumb">';
-                      		echo '<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>';
-                      	echo '</div>';
-                      	echo '<div class="details">';
-                      		echo '<p><muted>' . $story->date . '</muted><br>';
-                      		 echo ' <b>' . $story->user . ' </b>' . $story->message . '<br>';
-                      		echo '</p>';
-                      echo '</div>';
-                      echo '</div>';
-
-}
-}]);
-
-
-
-
 
 Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
 Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
