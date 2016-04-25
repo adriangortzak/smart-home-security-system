@@ -123,8 +123,11 @@ public class Alarm {
 
     private boolean check(int time){
         for (int currentSleep =  time; currentSleep>0; currentSleep--) {
+            logger.write("Server","Alarm countdown on "+ currentSleep,3);
+
             if (status == OFF) {
                 running = false;
+                logger.write("Server","Trigger turned off by change of alarm status",3);
                 return true; //Stop the typhoon
             } else
                 try {
@@ -145,6 +148,7 @@ public class Alarm {
 
         private void notifyUser(){
             for(Notification notification : settings.getNotification()){
+                System.out.println("help");
                 notification.sendMessage("Alarm","Alert! Alert! Sensors has Triggered your Alarm!");
             }
             //Wait for response.

@@ -2,6 +2,8 @@ package org.gortz.alarm.model.Databases;
 
 import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Database;
+import org.gortz.alarm.model.Notification;
+import org.gortz.alarm.model.Notifications.PushBullet;
 
 import java.nio.channels.NoConnectionPendingException;
 import java.nio.channels.NotYetConnectedException;
@@ -157,26 +159,52 @@ public class mysql implements Database {
     public int getServerSettingInt(String setting) {
         if(connect()) {
             PreparedStatement statment;
-            Statement stmt = null;
+
             //-------------------query-----------------------
-            String  prepareStatement  = "SELECT ? FROM serverSettings";
+            String  sql  = "SELECT Value FROM `serverSettings` WHERE Setting ="+'"'+setting+'"';
             //-----------------------------------------------
 
             try {
-                statment = con.prepareStatement(prepareStatement);
-                statment.setString(1, setting);
-                statment.executeUpdate();
-
-                ResultSet rs = stmt.executeQuery(statment.toString());
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
                 rs.next();
-                return rs.getByte(setting);
-
+                return rs.getInt("value");
             } catch (SQLException e) {
-                throw new NoConnectionPendingException();
+                e.printStackTrace();
+              throw new NoConnectionPendingException();
             }
         }
         else throw new NoConnectionPendingException();
 
+    }
+
+    @Override
+    public Notification[] getNotifications() {
+        String query;
+        Notification[] notifications;
+        if (connect()) {
+
+            try {
+                query ="SELECT COUNT(*) FROM `notifications` WHERE active = 1";
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                rs.next();
+                  int notificationCount = rs.getInt("count(*)");
+                if(notificationCount !=0){
+                    notifications = new Notification[notificationCount];
+                    query = "SELECT type,token FROM `notifications` WHERE active = 1";
+                    rs = stmt.executeQuery(query);
+                    while (rs.next()){
+                        notificationCount--;
+                        if(rs.getString("type").equals("pushbullet"))  notifications[notificationCount] = new PushBullet(rs.getString("token"));
+                    }
+                    return notifications;
+                }else return new Notification[0];
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new NoConnectionPendingException();
+            }
+        } else throw new NoConnectionPendingException();
     }
 
 }

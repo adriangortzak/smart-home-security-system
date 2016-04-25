@@ -1,5 +1,6 @@
 package org.gortz.alarm.model.Loggers;
 
+import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Setting.Settings;
@@ -15,7 +16,7 @@ public class Logger {
     private static Logger instance = null;
     Settings settings = Settings.getInstance();
     boolean debugging = settings.getDebuggingStatus();
-    Database db;
+    Database db = new mysql(settings.getDbUsername(),settings.getDbPassword());
 
     /*
     ----------------
@@ -75,7 +76,6 @@ public class Logger {
                 System.out.println("[" + timeAndDate() + "] - ("+user+")" + message);
                 break;
             case 5:
-                if(db==null)db = new mysql(settings.getDbUsername(),settings.getDbPassword());
                 db.writeHistory(user, message);
                 break;
             default:

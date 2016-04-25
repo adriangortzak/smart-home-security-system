@@ -14,11 +14,27 @@ public interface Database {
 
     /**
      * Changes the saved status to the new status.
-     * @param newStatus
+     * @param newStatus the desired status on the server
      */
     void updateAlarmStatus(Alarm.Status newStatus);
 
+    /**
+     * Writeing user and message history to database for website interface.
+     * @param user that did the action
+     * @param message of what he/she did
+     */
     void writeHistory(String user,  String message);
 
+    /**
+     * Get setting value in int form
+     * @param Setting that is the wanted setting
+     * @return int with value of setting
+     */
     int getServerSettingInt(String Setting);
+
+    /**
+     * Get all active notifications from database
+     * @return active notifications
+     */
+    Notification[] getNotifications();
 }
