@@ -55,7 +55,12 @@ private Settings(){
             createLock = false;
         }
         while (createLock){
-            System.out.println("test");
+            try{
+                Thread.sleep(1);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
         }
         return instance;
     }
