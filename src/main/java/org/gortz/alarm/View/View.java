@@ -48,7 +48,7 @@ public class View {
 
                         return;
                     case "trigger" :
-                        myController.triggerAlarm();
+                        myController.triggerAlarm("Terminal");
                         break;
                     default:
                         print("Invalid input");
@@ -72,7 +72,7 @@ public class View {
      * Created by adrian on 04/04/16.
      */
     public class JavaSocket implements Runnable {
-        Logger socketLogger = new Logger("websiteConnectionServer");
+        Logger socketLogger = Logger.getInstace();
 
 
         protected java.net.ServerSocket socket;
@@ -83,7 +83,7 @@ public class View {
 
         @Override
         public void run() {
-            socketLogger.write("socket is up and running",2);
+            socketLogger.write("server","socket is up and running",2);
             try {
                 waitForMessage();
             } catch (IOException e) {
@@ -112,7 +112,7 @@ public class View {
                     user = commandPart[0];
                     command = commandPart[1];
                     // print message
-                    socketLogger.write("Command: " + command +" by "+user,3);
+                    socketLogger.write(user,"Command: " + command ,3);
                     responseString = InterpretMessage(command, user);
 
                     response.writeBytes(responseString+"\n");

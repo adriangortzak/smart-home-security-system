@@ -17,8 +17,8 @@ public class Controller {
         return true; //TODO - fix a better way to check if it succeeded
     }
 
-    public void triggerAlarm(){
-        alarm.trigger();
+    public void triggerAlarm(String by){
+        alarm.trigger(by);
     }
 
     public boolean changeAlarmStatus(Alarm.Status newAlarmStatus, String user){
