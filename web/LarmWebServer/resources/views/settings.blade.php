@@ -75,19 +75,7 @@
                               <div class="task-content">
                                   <ul class="task-list">
 
-                                      <li>
-                                          <div class="task-checkbox">
-                                              <input type="checkbox" class="list-child" value="">
-                                          </div>
-                                          <div class="task-title" >
-                                              <span class="task-title-sp">Nokia Home</span>
-                                              <span class="badge bg-info">PushBullet</span>
-                                              <div class="pull-right hidden-phone">
-                                                  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                  <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                              </div>
-                                          </div>
-                                      </li>
+                                      {{   getMyNotifications() }}
 				      
                                   </ul>
                               </div>
