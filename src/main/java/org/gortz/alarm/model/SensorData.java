@@ -38,4 +38,13 @@ public class SensorData {
         return temp;
     }
 
+    public boolean compareTo(SensorData sd){
+        if(!this.getProtocol().equals(sd.getProtocol())) return false;
+        else if(!this.getId().equals(sd.getId())) return false;
+        else if(!this.getModel().equals(sd.getModel())) return false;
+        else if(!this.getHumidity().equals(sd.getHumidity())) return false;
+        else if(!this.getTemp().equals(sd.getTemp())) return false;
+        else return true;
+    }
+
 }

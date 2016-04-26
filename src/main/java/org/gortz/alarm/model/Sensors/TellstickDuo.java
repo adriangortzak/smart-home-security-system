@@ -6,7 +6,6 @@ import net.jstick.api.Tellstick;
  */
 public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     Tellstick ts;
-    Thread listener;
     Listen l;
 
     public TellstickDuo(){
@@ -28,21 +27,16 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
 
     public void startListener() {
         l = new Listen(ts);
-        listener = new Thread(l);
-        listener.start();
+        l.listen();
     }
 
     public void stopListener() {
         l.terminate();
-        try {
-            listener.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Stopped listener and joined threads...\n");
+        System.out.println("Stopped listener\n");
     }
 
     public void close(){
         ts.close();
     }
+
 }

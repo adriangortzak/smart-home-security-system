@@ -49,4 +49,15 @@ public class CommandObject {
     public String getMethod() {
         return method;
     }
+
+    public boolean compareTo(CommandObject co){
+        if(!this.getProtocol().equals(co.getProtocol())) return false;
+        else if(!this.getModel().equals(co.getModel())) return false;
+        else if(!this.getHouse().equals(co.getHouse())) return false;
+        else if(!this.getUnit().equals(co.getUnit())) return false;
+        else if(!this.getGroup().equals(co.getGroup())) return false;
+        else if(!this.getCode().equals(co.getCode())) return false;
+        else if(!this.getMethod().equals(co.getMethod())) return false;
+        else return true;
+    }
 }
