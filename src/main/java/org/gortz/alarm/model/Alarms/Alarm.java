@@ -148,7 +148,6 @@ public class Alarm {
 
         private void notifyUser(){
             for(Notification notification : settings.getNotification()){
-                System.out.println("help");
                 notification.sendMessage("Alarm","Alert! Alert! Sensors has Triggered your Alarm!");
             }
             //Wait for response.

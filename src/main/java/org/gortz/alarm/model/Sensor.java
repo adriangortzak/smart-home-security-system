@@ -9,4 +9,5 @@ public interface Sensor {
     void startListener();
     void stopListener();
     void close();
+    CommandObject[] getConfiguredDevices(int[] list);
 }

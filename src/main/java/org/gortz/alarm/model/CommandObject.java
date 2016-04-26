@@ -55,9 +55,7 @@ public class CommandObject {
         else if(!this.getModel().equals(co.getModel())) return false;
         else if(!this.getHouse().equals(co.getHouse())) return false;
         else if(!this.getUnit().equals(co.getUnit())) return false;
-        else if(!this.getGroup().equals(co.getGroup())) return false;
         else if(!this.getCode().equals(co.getCode())) return false;
-        else if(!this.getMethod().equals(co.getMethod())) return false;
         else return true;
     }
 }

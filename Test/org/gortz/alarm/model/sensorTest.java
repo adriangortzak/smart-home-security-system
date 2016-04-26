@@ -14,7 +14,7 @@ public class sensorTest {
     @Before
     public void setUp() throws Exception {
         try{
-            ts = new TellstickDuo();
+            ts = TellstickDuo.getInstance();
         }
         catch(Exception e){
             fail("Couldn't create TellstickDuo object");
@@ -45,7 +45,7 @@ public class sensorTest {
     @Test
     public void close() throws Exception {
         try{
-            TellstickDuo ts2 = new TellstickDuo();
+            TellstickDuo ts2 = TellstickDuo.getInstance();
             ts2.close();
         }
         catch(Exception e){

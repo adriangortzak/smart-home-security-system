@@ -37,4 +37,6 @@ public interface Database {
      * @return active notifications
      */
     Notification[] getNotifications();
+
+    int[] getTriggerDevices();
 }

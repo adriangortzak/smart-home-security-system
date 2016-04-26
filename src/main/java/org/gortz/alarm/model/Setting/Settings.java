@@ -1,10 +1,14 @@
 package org.gortz.alarm.model.Setting;
 
+import org.gortz.alarm.model.CommandObject;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Loggers.Logger;
 import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Notifications.PushBullet;
+import org.gortz.alarm.model.Sensors.TellstickDuo;
+
+import javax.activation.CommandMap;
 
 import static org.gortz.alarm.model.Setting.Settings.Setting.*;
 
@@ -13,6 +17,7 @@ import static org.gortz.alarm.model.Setting.Settings.Setting.*;
  * Created by adrian on 25/04/16.
  */
 public class Settings {
+    CommandObject triggers[];
     //Singelton object
     static Settings instance = null;
     //
@@ -24,6 +29,8 @@ public class Settings {
     String dbUsername;
     boolean debuggingStatus;
 
+    TellstickDuo ts = TellstickDuo.getInstance();
+
     Notification[] notifications;
     //-------------------------------------
 
@@ -32,6 +39,11 @@ private Settings(){
     db = new mysql(getDbUsername(),getDbPassword());
     update(PARAMETER);
 }
+
+    public CommandObject[] getTriggerObject() {
+        return new CommandObject[0];
+    }
+
     public enum Setting {
         AUTHENTICATION,
         PARAMETER,
@@ -75,6 +87,7 @@ private Settings(){
         notificationInterval = db.getServerSettingInt("notificationInterval");
         debuggingStatus = false;
         notifications = db.getNotifications();
+        triggers = ts.getConfiguredDevices(db.getTriggerDevices());
     }
 
 

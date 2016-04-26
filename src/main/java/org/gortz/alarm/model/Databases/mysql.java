@@ -207,4 +207,11 @@ public class mysql implements Database {
         } else throw new NoConnectionPendingException();
     }
 
+    @Override
+    public int[] getTriggerDevices() {
+        int[] a = {1};
+        //TODO fix
+        return a;
+    }
+
 }
