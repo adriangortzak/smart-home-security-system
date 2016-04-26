@@ -21,10 +21,10 @@ public class Alarm {
     private static Alarm instance = null;
     Boolean running;
 
-    class SharedStatus{
-       public volatile Status status;
-    }
-    final SharedStatus sharedStatus = new SharedStatus();
+
+    //    public AtomicBoolean status = new AtomicBoolean(getStatusFromDb());
+
+     SharedStatus sharedStatus;
 
     /**
      * Private constructor to follow the Singleton.
@@ -32,7 +32,7 @@ public class Alarm {
      */
     private Alarm(){
         myDatabase = new mysql(settings.getDbUsername(), settings.getDbPassword());
-        sharedStatus.status = getStatusFromDb();
+        sharedStatus = new SharedStatus(getStatusFromDb());
     }
 
     /**
@@ -51,9 +51,9 @@ public class Alarm {
      * @return status
      */
     public Status getStatus() {
-        if (sharedStatus.status == ON){return ON;}
-            else if(sharedStatus.status == OFF){return OFF;}
-            else if(sharedStatus.status == PENDING){return PENDING;}
+        boolean status = sharedStatus.status.get();
+            if(!status){return OFF;}
+            else if(status){return ON;}
         else{
             throw new NoSuchElementException();
         }
@@ -61,8 +61,7 @@ public class Alarm {
 
     public enum Status {
         ON,
-        OFF,
-        PENDING
+        OFF
     }
 
     /**
@@ -71,22 +70,27 @@ public class Alarm {
      * @return Succeed
      */
     public boolean changeStatus(Status newStatus, String user){
+        boolean changedTo = false;
         //Public methods cant change status to to pending.
-        if(newStatus == PENDING){
-            return false;
+        if(newStatus == ON){
+            sharedStatus.status.set(true);
+            changedTo = true;
+        }else if(newStatus == OFF){
+            sharedStatus.status.set(false);
+            changedTo = false;
         }
-
-        sharedStatus.status = newStatus;
-        logger.write(user,"Changing alarm status to " + newStatus , 5);
-
+        logger.write(user,"Changing alarm status to " + changedTo , 5);
+        System.out.println(sharedStatus.status.get() + "  and  "+ getStatus());
         //Fast check
-        if(sharedStatus.status == newStatus){
+        if(sharedStatus.status.get() == changedTo){
             updateStatusToDb(newStatus);
             return true;
         }
         else{
             return false;
         }
+
+
     }
 
     /**
@@ -101,8 +105,8 @@ public class Alarm {
      * Retrieves last set alarm status from the database
      * @return Alarms.Status from database
      */
-    private Status getStatusFromDb(){
-        Status oldStatus = myDatabase.getAlarmStatus();
+    private boolean getStatusFromDb(){
+        boolean oldStatus = myDatabase.getAlarmStatus();
         logger.write("Server","Old status saved in Database is "+ oldStatus,3);
         return oldStatus;
     }
@@ -112,7 +116,7 @@ public class Alarm {
      */
     public void trigger(String by){
         if(!typhoon) {
-            if (sharedStatus.status == ON) {
+            if (getStatus() == ON) {
                 if(!check(pendingTime)) {
                     logger.write("Server","Trigged Alarm by "+by, 5);
                     Thread typhoonThread;
@@ -120,7 +124,7 @@ public class Alarm {
                     typhoonThread.start();
                     typhoon = true;
                 }
-            } else logger.write("Server","Triggered but no reaction"+ sharedStatus.status, 2);
+            } else logger.write("Server","Triggered but no reaction", 2);
         }
         else logger.write("Server","Triggered but typhoon is already ON", 2);
     }
@@ -129,7 +133,7 @@ public class Alarm {
         for (int currentSleep =  time; currentSleep>0; currentSleep--) {
             logger.write("Server","Alarm countdown on "+ currentSleep,3);
 
-            if (sharedStatus.status == OFF) {
+            if (getStatus() == OFF) {
                 running = false;
                 logger.write("Server","Trigger turned off by change of alarm status",3);
                 return true; //Stop the typhoon

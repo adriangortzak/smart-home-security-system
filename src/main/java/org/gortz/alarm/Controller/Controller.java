@@ -28,7 +28,6 @@ public class Controller {
         Alarm.Status res = alarm.getStatus();
         if(res == Alarm.Status.ON) return "ON";
         else if(res == Alarm.Status.OFF)return "OFF";
-        else if(res == Alarm.Status.PENDING)return "PENDING";
         else return "Error";
     }
 }

@@ -19,7 +19,6 @@ public class Listen {
     Tellstick ts;
     Logger myLogger;
     RawEventListener rel;
-    Alarm alrm = Alarm.getInstance();
     Settings sett;
 
     public Listen(Tellstick ts) {
@@ -51,10 +50,11 @@ public class Listen {
                         CommandObject c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                         for(CommandObject curr : sett.getTriggerObject()){
                             if(c.compareTo(curr)){
+                                Alarm alrm = Alarm.getInstance();
                                 myLogger.write("server",c.getMethod(),3);
                                 alrm.trigger("sensor");
                                 break;
-                            }else   System.out.print("Not the same");
+                            }else   myLogger.write("Server","Sensor but not a trigger",1);
 
                         }
 

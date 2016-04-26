@@ -33,10 +33,6 @@ public class ControllerTest {
             fail("Cant change status on alarm from Controller");
         }
 
-        if(!myController.changeAlarmStatus(Alarm.Status.PENDING, "test") == false){
-            fail("Pending is not a state that the Controller can set. So the Alarms shouldn't let it.");
-        }
-
     }
 
     @org.junit.Test

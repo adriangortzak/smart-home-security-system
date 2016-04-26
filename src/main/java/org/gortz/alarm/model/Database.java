@@ -10,7 +10,7 @@ public interface Database {
      * Retrieve the last saved alarm status from database
      * @return alarmStatus
      */
-    Alarm.Status getAlarmStatus();
+    boolean getAlarmStatus();
 
     /**
      * Changes the saved status to the new status.

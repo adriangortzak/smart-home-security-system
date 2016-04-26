@@ -1,16 +1,13 @@
 package org.gortz.alarm.model;
 
-import org.gortz.alarm.model.Alarms.Alarm;
-import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.mysql;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static junit.framework.TestCase.fail;
 import static org.gortz.alarm.model.Alarms.Alarm.Status.OFF;
 import static org.gortz.alarm.model.Alarms.Alarm.Status.ON;
-import static org.gortz.alarm.model.Alarms.Alarm.Status.PENDING;
+
 
 /**
  * Created by adrian on 19/04/16.
@@ -32,7 +29,7 @@ public class databaseTest {
 
     @Test
     public void AlarmStatus() throws Exception {
-        Alarm.Status oldDbStatus = null;
+        boolean oldDbStatus = false;
 
         //Get status atm and save it for later so we don't change the database.
         try {
@@ -43,23 +40,18 @@ public class databaseTest {
 
         try {
             db.updateAlarmStatus(OFF);
-            if (db.getAlarmStatus() != OFF) fail("Didn't change the db value or couldn't retrieve the right status");
+            if (db.getAlarmStatus()) fail("Didn't change the db value or couldn't retrieve the right status");
             db.updateAlarmStatus(ON);
-            if (db.getAlarmStatus() != ON) fail("Didn't change the db value or couldn't retrieve the right status");
+            if (!db.getAlarmStatus()) fail("Didn't change the db value or couldn't retrieve the right status");
         }catch (Exception e){
             fail("couldn't change alarm status in database");
         }
 
-        try {
-            db.updateAlarmStatus(PENDING);
-            fail("It let me change the database alarm status to pending");
-        }catch (IllegalArgumentException e){
-            //Success
-        }
-
         //Set database status back to the state it had before we tested.
         try {
-            db.updateAlarmStatus(oldDbStatus);
+            if(oldDbStatus){
+                db.updateAlarmStatus(ON);
+            }else db.updateAlarmStatus(OFF);
         }catch (Exception e){
         }
 

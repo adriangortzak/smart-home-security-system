@@ -69,10 +69,10 @@ public class mysql implements Database {
      * Retrivse the last saved alarm status from database
      * @return alarmStatus
      */
-    public Alarm.Status getAlarmStatus() throws NoConnectionPendingException {
+    public boolean getAlarmStatus() throws NoConnectionPendingException {
         if(connect()) {
-            Alarm.Status result = null;
-            Statement stmt = null;
+            boolean result = false;
+            Statement stmt;
             //-------------------query-----------------------
             String  query = "SELECT activeAlarm FROM alarmStatus";
             //-----------------------------------------------
@@ -88,10 +88,10 @@ public class mysql implements Database {
             }
            switch (svar){
                 case 0:
-                    result = OFF;
+                    result = false;
                     break;
                case 1:
-                   result = Alarm.Status.ON;
+                   result = true;
                    break;
                case -1:
                    throw new NotYetConnectedException();
@@ -116,7 +116,7 @@ public class mysql implements Database {
                     break;
                 case ON: newState = "1";
                     break;
-                case PENDING:
+                default:
                     throw new IllegalArgumentException();
             }
             PreparedStatement statment;
