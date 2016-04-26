@@ -17,9 +17,10 @@ import static org.gortz.alarm.model.Setting.Settings.Setting.*;
  * Created by adrian on 25/04/16.
  */
 public class Settings {
-    CommandObject triggers[];
+
     //Singelton object
     static Settings instance = null;
+    static boolean createLock = false;
     //
     Database db;
     //--------------------------------------//
@@ -28,7 +29,7 @@ public class Settings {
     String dbPassword;
     String dbUsername;
     boolean debuggingStatus;
-
+    CommandObject triggers[];
     TellstickDuo ts = TellstickDuo.getInstance();
 
     Notification[] notifications;
@@ -40,10 +41,6 @@ private Settings(){
     update(PARAMETER);
 }
 
-    public CommandObject[] getTriggerObject() {
-        return new CommandObject[0];
-    }
-
     public enum Setting {
         AUTHENTICATION,
         PARAMETER,
@@ -52,8 +49,13 @@ private Settings(){
 
 
     public static Settings getInstance(){
-        if(instance == null){
+        if(instance == null && !createLock){
+            createLock = true;
             instance = new Settings();
+            createLock = false;
+        }
+        while (createLock){
+            System.out.println("test");
         }
         return instance;
     }
@@ -88,6 +90,7 @@ private Settings(){
         debuggingStatus = false;
         notifications = db.getNotifications();
         triggers = ts.getConfiguredDevices(db.getTriggerDevices());
+        System.out.println(triggers.length);
     }
 
 
@@ -115,6 +118,10 @@ private Settings(){
 
     public  Notification[] getNotification() {
         return notifications;
+    }
+
+    public CommandObject[] getTriggerObject() {
+        return triggers;
     }
 }
 

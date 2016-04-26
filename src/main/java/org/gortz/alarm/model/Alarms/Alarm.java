@@ -16,11 +16,15 @@ public class Alarm {
     Logger logger = Logger.getInstace();
     Settings settings = Settings.getInstance();
     int pendingTime = settings.getPendingTime();
-    Status status;
     Boolean typhoon = false;
     Database myDatabase;
     private static Alarm instance = null;
     Boolean running;
+
+    class SharedStatus{
+       public volatile Status status;
+    }
+    final SharedStatus sharedStatus = new SharedStatus();
 
     /**
      * Private constructor to follow the Singleton.
@@ -28,7 +32,7 @@ public class Alarm {
      */
     private Alarm(){
         myDatabase = new mysql(settings.getDbUsername(), settings.getDbPassword());
-        status = getStatusFromDb();
+        sharedStatus.status = getStatusFromDb();
     }
 
     /**
@@ -47,9 +51,9 @@ public class Alarm {
      * @return status
      */
     public Status getStatus() {
-        if (status == ON){return ON;}
-            else if(status == OFF){return OFF;}
-            else if(status == PENDING){return PENDING;}
+        if (sharedStatus.status == ON){return ON;}
+            else if(sharedStatus.status == OFF){return OFF;}
+            else if(sharedStatus.status == PENDING){return PENDING;}
         else{
             throw new NoSuchElementException();
         }
@@ -72,11 +76,11 @@ public class Alarm {
             return false;
         }
 
-        this.status = newStatus;
+        sharedStatus.status = newStatus;
         logger.write(user,"Changing alarm status to " + newStatus , 5);
 
         //Fast check
-        if(this.status == newStatus){
+        if(sharedStatus.status == newStatus){
             updateStatusToDb(newStatus);
             return true;
         }
@@ -108,7 +112,7 @@ public class Alarm {
      */
     public void trigger(String by){
         if(!typhoon) {
-            if (status == ON) {
+            if (sharedStatus.status == ON) {
                 if(!check(pendingTime)) {
                     logger.write("Server","Trigged Alarm by "+by, 5);
                     Thread typhoonThread;
@@ -116,7 +120,7 @@ public class Alarm {
                     typhoonThread.start();
                     typhoon = true;
                 }
-            } else logger.write("Server","Triggered but no reaction", 2);
+            } else logger.write("Server","Triggered but no reaction"+ sharedStatus.status, 2);
         }
         else logger.write("Server","Triggered but typhoon is already ON", 2);
     }
@@ -125,7 +129,7 @@ public class Alarm {
         for (int currentSleep =  time; currentSleep>0; currentSleep--) {
             logger.write("Server","Alarm countdown on "+ currentSleep,3);
 
-            if (status == OFF) {
+            if (sharedStatus.status == OFF) {
                 running = false;
                 logger.write("Server","Trigger turned off by change of alarm status",3);
                 return true; //Stop the typhoon

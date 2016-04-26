@@ -51,11 +51,31 @@ public class CommandObject {
     }
 
     public boolean compareTo(CommandObject co){
-        if(!this.getProtocol().equals(co.getProtocol())) return false;
-        else if(!this.getModel().equals(co.getModel())) return false;
-        else if(!this.getHouse().equals(co.getHouse())) return false;
-        else if(!this.getUnit().equals(co.getUnit())) return false;
-        else if(!this.getCode().equals(co.getCode())) return false;
-        else return true;
+        if(!this.getProtocol().equals(co.getProtocol())) {
+            return false;
+        }
+        else if(!this.getModel().equals(co.getModel())){
+            return false;
+        }
+        switch (this.getProtocol()){
+            case "arcteck":
+                if(!this.getHouse().equals(co.getHouse())){
+
+                    return false;
+                }
+                else if(!this.getUnit().equals(co.getUnit())){
+
+                    return false;
+                }
+                return true;
+            case "sartano":
+                     if(!this.getCode().equals(co.getCode())){
+                        return false;
+                     }
+                return true;
+            default:
+                return false;
+
+        }
     }
 }

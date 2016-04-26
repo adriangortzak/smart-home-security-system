@@ -55,7 +55,15 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         int j = 0;
         for (int i : list) {
             d = ts.getDevice(i);
-            co[j++] = new CommandObject(d.getProto(),d.getModel(),ts.getDeviceParameter(i,"house", "Null"),ts.getDeviceParameter(i, "unit", "Null"), "Null", "Null","Null"); //TODO koll om det ska vara null eller Null eller NULL
+            switch (d.getProto()){
+                case "arctech":
+                    co[j++] = new CommandObject(d.getProto(),d.getModel(),ts.getDeviceParameter(i,"house", "Null"),ts.getDeviceParameter(i, "unit", "Null"), "Null", "Null","Null"); //TODO koll om det ska vara null eller Null eller NULL
+                    break;
+                case "sartano":
+                    co[j++] = new CommandObject(d.getProto(),d.getModel(),ts.getDeviceParameter(i,"house", "Null"),ts.getDeviceParameter(i, "unit", "Null"), "Null",ts.getDeviceParameter(i,"code", "Null"), "Null"); //TODO koll om det ska vara null eller Null eller NULL
+                    break;
+            }
+
         }
         return co;
     }

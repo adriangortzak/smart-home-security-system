@@ -54,7 +54,7 @@ public class Listen {
                                 myLogger.write("server",c.getMethod(),3);
                                 alrm.trigger("sensor");
                                 break;
-                            }
+                            }else   System.out.print("Not the same");
 
                         }
 
