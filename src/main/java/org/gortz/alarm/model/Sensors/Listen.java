@@ -22,7 +22,7 @@ public class Listen {
 
     public Listen(Tellstick ts) {
         this.ts = ts;
-        myLogger = new Logger("CommandsReceived");
+        myLogger = Logger.getInstace();
     }
 
     public void terminate(){
@@ -46,15 +46,15 @@ public class Listen {
                 if(matcher.matches()){
                     if(matcher.group(1).equals("command")){
                         CommandObject c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
-                        myLogger.write(c.getMethod(),3);
+                        myLogger.write("server",c.getMethod(),3);
                         //alrm.trigger(); //TODO send message of what the trigger is?
                     }
                     else if(matcher.group(1).equals("sensor")){
                         SensorData s = new SensorData(matcher.group(2),matcher.group(3),matcher.group(4),matcher.group(10), matcher.group(11));
-                        myLogger.write("Current temp: " + s.getTemp() + " degrees Celsius and current humidity: " + s.getHumidity() + "%",3);
+                        myLogger.write("server","Current temp: " + s.getTemp() + " degrees Celsius and current humidity: " + s.getHumidity() + "%",3);
                     }
                     else{
-                        myLogger.write("Received unknown sensor input", 3);
+                        myLogger.write("server","Received unknown sensor input", 3);
                     }
                 }
             }
