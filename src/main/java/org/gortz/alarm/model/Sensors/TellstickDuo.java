@@ -51,21 +51,24 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     @Override
     public CommandObject[] getConfiguredDevices(int[] list) {
         CommandObject co[] = new CommandObject[list.length];
-        Device d;
+        Device device;
         int j = 0;
         for (int i : list) {
-            d = ts.getDevice(i);
-            switch (d.getProto()){
+            device = ts.getDevice(i);
+            switch (device.getProto()){
                 case "arctech":
-                    co[j++] = new CommandObject(d.getProto(),d.getModel(),ts.getDeviceParameter(i,"house", "Null"),ts.getDeviceParameter(i, "unit", "Null"), "Null", "Null","Null"); //TODO koll om det ska vara null eller Null eller NULL
+                    co[j++] = new CommandObject(device.getProto(),device.getModel(),ts.getDeviceParameter(i,"house", "Null"),ts.getDeviceParameter(i, "unit", "Null"), "Null", "Null","Null"); //TODO koll om det ska vara null eller Null eller NULL
                     break;
                 case "sartano":
-                    co[j++] = new CommandObject(d.getProto(),d.getModel(),ts.getDeviceParameter(i,"house", "Null"),ts.getDeviceParameter(i, "unit", "Null"), "Null",ts.getDeviceParameter(i,"code", "Null"), "Null"); //TODO koll om det ska vara null eller Null eller NULL
+                    co[j++] = new CommandObject(device.getProto(),device.getModel(),ts.getDeviceParameter(i,"house", "Null"),ts.getDeviceParameter(i, "unit", "Null"), "Null",ts.getDeviceParameter(i,"code", "Null"), "Null"); //TODO koll om det ska vara null eller Null eller NULL
                     break;
             }
 
         }
         return co;
+    }
+    public void sendCommand(){
+        ts.sendRawCommand("S$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$kk$$kk$$kk$$}+");
     }
 
 }

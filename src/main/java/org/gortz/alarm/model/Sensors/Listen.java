@@ -54,7 +54,9 @@ public class Listen {
                                 myLogger.write("server",c.getMethod(),3);
                                 alrm.trigger("sensor");
                                 break;
-                            }else   myLogger.write("Server","Sensor but not a trigger",1);
+                            }else  {
+                                myLogger.write("Server","Sensor but not a trigger",1);
+                            }
 
                         }
 
