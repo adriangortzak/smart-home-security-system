@@ -64,7 +64,7 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></p>
-              	  <h5 class="centered"><?php echo Auth::user()->name;?></h5>
+              	  <h5 class="centered"><?php echo Auth::user()->name; ?></h5>
               	  	
                   <li class="mt">
                       <a class="@yield('dashboard_active')" href="/">
@@ -222,9 +222,9 @@ $(document).ready(function () {
 
 function timerIncrement() {
     idleTime = idleTime + 1;
-    if (idleTime > 10) { // 11 minutes
+    if (idleTime > 1) { // 11 minutes
         $.get( "logout");
-	window.location="lock/adrian";
+	window.location="lock/<?php echo Auth::user()->email; ?>";
     }
 }
     </script>

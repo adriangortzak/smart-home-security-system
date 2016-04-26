@@ -66,6 +66,34 @@ function getUserCount(){
 echo App\User::all()->count();
 }
 
+function getMyNotifications(){
+$notifications = App\notifications::all();
+foreach($notifications  as $notification){
+
+echo '<li>';
+            echo  '<div class="task-checkbox">';
+              echo '<input type="checkbox" class="list-child" ';
+              if ($notification->active == 1){
+              echo "checked";
+              }
+              echo '>';
+		echo '</div>';
+                echo '<div class="task-title">';
+                echo '<span class="task-title-sp">' . $notification->name . '</span>';
+                echo '<span class="badge bg-info">' . $notification->type . '</span>';
+		echo '<span><a style="padding-left:20px;">Token: </a></span>';
+		echo '<span><input style="width:40%; padding:10p; border-radius:5px;" type="text" value="'. $notification->token . '">';
+                echo '<div class="pull-right hidden-phone">';
+                echo '<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
+                echo '<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>';
+		echo '</div>';
+                echo '</div>';
+                echo '</li>';
+}
+
+
+}
+
 
 function getUsers(){
                         $users = App\User::all();
