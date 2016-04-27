@@ -126,6 +126,9 @@ public class View {
         }
         private String InterpretMessage(String input, String user){
             switch(input) {
+                case "trigger":
+                    myController.triggerAlarm(user);
+                    return "triggered";
                 case "turn on alarm":
                     if(myController.changeAlarmStatus(Alarm.Status.ON, user) == true) return "succeeded";
                     else return "failed";

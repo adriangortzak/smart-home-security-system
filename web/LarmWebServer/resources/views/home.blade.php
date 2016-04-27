@@ -26,9 +26,9 @@
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_eye"></span>
-					  			<h3>7</h3>
+					  			<h3>{{ getTriggerCount() }}</h3>
                   			</div>
-					  			<p>You have 7 sensors active.</p>
+					  			<p>You have {{ getTriggerCount() }} sensors active.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
@@ -105,7 +105,7 @@
                       	<div class="col-md-4 col-sm-4 mb">
 							<div class="weather pn">
 								<i class="fa fa-cloud fa-4x"></i>
-								<h2>11º C</h2>
+								<h2>11ï¿½ C</h2>
 								<h4>Stockholm</h4>
 							</div>
 						</div><!-- /col-md-4-->

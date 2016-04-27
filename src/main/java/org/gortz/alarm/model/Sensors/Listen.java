@@ -50,9 +50,9 @@ public class Listen {
                         CommandObject c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                         for(CommandObject curr : sett.getTriggerObject()){
                             if(c.compareTo(curr)){
-                                Alarm alrm = Alarm.getInstance();
+                                Alarm alarm = Alarm.getInstance();
                                 myLogger.write("server",c.getMethod(),3);
-                                alrm.trigger("sensor");
+                                alarm.trigger("sensor");
                                 break;
                             }else  {
                                 myLogger.write("Server","Sensor but not a trigger",1);

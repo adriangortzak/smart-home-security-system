@@ -209,9 +209,35 @@ public class mysql implements Database {
 
     @Override
     public int[] getTriggerDevices() {
-        int[] a = {1};
-        //TODO fix
-        return a;
+        if(connect()) {
+            int result[] = new int[0];
+            //-------------------query-----------------------
+            String  query = "SELECT COUNT(*) FROM triggers";
+            //-----------------------------------------------
+            try {
+                Statement stmt;
+                stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                rs.next();
+                int size = rs.getInt("COUNT(*)");
+                result = new int[size];
+                query = "SELECT * FROM triggers WHERE active=1";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                int j=size;
+                while (rs.next()){
+                    j--;
+                    result[j] = rs.getInt("sensor");
+                }
+
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            killConnection();
+            return result;
+        }
+        else throw new NoConnectionPendingException();
     }
 
 }

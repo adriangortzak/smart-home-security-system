@@ -90,26 +90,28 @@ echo '<li>';
                 echo '</div>';
                 echo '</li>';
 }
-
-
 }
 
 
-function getUsers(){
-                        $users = App\User::all();
-                foreach($users  as $user){
-                echo '<div class="desc">';
-                        echo '<div class="thumb">';
-                                             echo '<img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">';
-                        echo '</div>';
-                        echo '<div class="details">';
-                                echo '<p>' . $user->name . '<br>';
-                                   echo '<muted><b>Email: </b>' .$user->email . '</muted>';
-                                echo '</p>';
-                        echo '</div>';
-                      echo '</div>';
+function getUsers()
+{
+    $users = App\User::all();
+    foreach ($users as $user) {
+        echo '<div class="desc">';
+        echo '<div class="thumb">';
+        echo '<img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">';
+        echo '</div>';
+        echo '<div class="details">';
+        echo '<p>' . $user->name . '<br>';
+        echo '<muted><b>Email: </b>' . $user->email . '</muted>';
+        echo '</p>';
+        echo '</div>';
+        echo '</div>';
+    }
 }
+function getTriggerCount()
+{
+    $triggers = App\triggers::all()->count();
+    echo $triggers;
 }
-
-
 ?>

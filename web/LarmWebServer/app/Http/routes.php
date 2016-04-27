@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -28,8 +28,9 @@ Route::get('admin',['middleware' => 'auth', function () {
    return view('admin');
 }]);
 
-Route::get('test',['middleware' => 'auth', function () {
-   getMyNotifications();
+Route::get('trigger',['middleware' => 'auth', function () {
+	$controller = new HomeController();
+	$controller->trigger();
 }]);
 
 

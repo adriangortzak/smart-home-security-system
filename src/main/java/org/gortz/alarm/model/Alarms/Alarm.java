@@ -80,7 +80,6 @@ public class Alarm {
             changedTo = false;
         }
         logger.write(user,"Changing alarm status to " + changedTo , 5);
-        System.out.println(sharedStatus.status.get() + "  and  "+ getStatus());
         //Fast check
         if(sharedStatus.status.get() == changedTo){
             updateStatusToDb(newStatus);
@@ -136,6 +135,7 @@ public class Alarm {
             if (getStatus() == OFF) {
                 running = false;
                 logger.write("Server","Trigger turned off by change of alarm status",3);
+                typhoon = false;
                 return true; //Stop the typhoon
             } else
                 try {
