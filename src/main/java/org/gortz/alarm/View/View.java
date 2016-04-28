@@ -52,7 +52,7 @@ public class View {
                         try{
                             clientSocket = new Socket("localhost", 1967);
                             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                            outToServer.writeBytes("stop\n");
+                            outToServer.writeBytes("server:stop\n");
                             clientSocket.close();
                         }catch(Exception e){e.printStackTrace();}
 
