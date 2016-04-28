@@ -28,10 +28,7 @@ public class View {
     void start() {
 
             myLogger = Logger.getInstace();
-            try{
-                clientSocket = new Socket("localhost", 1967);
-            }
-            catch(Exception e){e.printStackTrace();}
+
             String input;
             Scanner in = new Scanner(System.in);
             while (true){
@@ -53,6 +50,7 @@ public class View {
                     case "exit" :
                         myLogger.write("server", "Shutting down view.", 3);
                         try{
+                            clientSocket = new Socket("localhost", 1967);
                             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                             outToServer.writeBytes("stop\n");
                             clientSocket.close();
