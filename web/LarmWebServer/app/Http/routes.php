@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web']], function () {
 	});
 	//Dashboard settings
 	Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
+        Route::get('stop', 'HomeController@test');
 	Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
 	Route::get('trigger', function () {
 		$controller = new HomeController();
@@ -65,7 +66,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('logout', 'Auth\AuthController@logout');
 
 // Registration Routes...
-	Route::post('register', 'Auth\AuthController@register');
+//	Route::post('register', 'Auth\AuthController@register');
 
 // Password Reset Routes...
 	Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
