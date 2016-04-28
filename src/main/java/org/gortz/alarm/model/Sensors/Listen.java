@@ -50,8 +50,8 @@ public class Listen {
                         CommandObject c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                         for(CommandObject curr : sett.getTriggerObject()){
                             if(c.compareTo(curr)){
-                                Alarm alarm = Alarm.getInstance();
-                                myLogger.write("server",c.getMethod(),3);
+                                Alarm alarm = Alarm.getInstance(); //TODO Flytta deklaration utanför. Varför måste den hämta nya instance?
+                                //myLogger.write("server",c.getMethod(),3);
                                 alarm.trigger("sensor");
                                 break;
                             }else  {
@@ -61,13 +61,13 @@ public class Listen {
                         }
 
                     }
-                    else if(matcher.group(1).equals("sensor")){
+                    /**else if(matcher.group(1).equals("sensor")){
                         SensorData s = new SensorData(matcher.group(2),matcher.group(3),matcher.group(4),matcher.group(10), matcher.group(11));
                         myLogger.write("server","Current temp: " + s.getTemp() + " degrees Celsius and current humidity: " + s.getHumidity() + "%",3);
                     }
                     else{
                         myLogger.write("server","Received unknown sensor input", 3);
-                    }
+                    }**/
                 }
             }
         };

@@ -16,8 +16,8 @@ public class SensorController implements Runnable  {
         myLogger = Logger.getInstace();
         s = TellstickDuo.getInstance();
         s.startListener();
-        myLogger.write("server","Am now sniffing for commands and sending the method to the logger!\n", 3);
-        s.sendCommand();
+        //myLogger.write("server","Am now sniffing for commands and sending the method to the logger!\n", 3);
+        //s.sendCommand();
     }
 
 }

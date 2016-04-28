@@ -16,6 +16,7 @@ public class View {
     Controller myController;
     boolean started = false;
     Thread socket;
+    Logger myLogger;
     //Constructor
     public View(){
         start();
@@ -24,29 +25,28 @@ public class View {
     //Called by the constructor to start View
     void start() {
 
-
+            myLogger = Logger.getInstace();
             String input;
             Scanner in = new Scanner(System.in);
             while (true){
 
                 input = in.next();
                 input.toLowerCase();
-
                 switch(input){
                     case "start":
                         if(!started) {
-                            print("Booting up system");
+                            myLogger.write("server","Booting up system",3);
                             started = true;
                             myController = new Controller();
                             //Create socket thread to read input from website
                             socket = new Thread(new JavaSocket());
                             socket.start();
 
-                        }else print("System is already running");
+                        }else myLogger.write("server","System is already running",3);
                         break;
                     case "exit" :
-
-                        return;
+                        myLogger.write("server", "Shutting down view.", 3);
+                        return; //TODO Perhaps use a Thread join before return to wait for the other thread to stop.
                     case "trigger" :
                         myController.triggerAlarm("Terminal");
                         break;
@@ -73,7 +73,7 @@ public class View {
      */
     public class JavaSocket implements Runnable {
         Logger socketLogger = Logger.getInstace();
-
+        volatile boolean running;
 
         protected java.net.ServerSocket socket;
         protected final int port = 1967;
@@ -85,6 +85,7 @@ public class View {
         public void run() {
             socketLogger.write("server","socket is up and running",2);
             try {
+                running = true;
                 waitForMessage();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -94,7 +95,7 @@ public class View {
         public void waitForMessage() throws IOException {
             socket = new java.net.ServerSocket(port,0, InetAddress.getByName(null));
 
-            while(true)
+            while(running)
             {
                 // open socket
                 try {
@@ -141,6 +142,9 @@ public class View {
                     return myController.checkAlarmStatus();
                 case "ServerStatus":
                     return myController.serverAliveCheck();
+                case "stop": //TODO Implement a request saying "stop" from webserver.
+                    running = false;
+                    return "stopping thread.";
                 default:
                     return "Error invalid input" + input;
             }
