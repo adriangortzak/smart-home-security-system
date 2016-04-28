@@ -20,11 +20,13 @@ public class Listen {
     Logger myLogger;
     RawEventListener rel;
     Settings sett;
+    Alarm alarm;
 
     public Listen(Tellstick ts) {
         this.ts = ts;
         myLogger = Logger.getInstace();
         sett = Settings.getInstance();
+        alarm = Alarm.getInstance();
     }
 
     public void terminate(){
@@ -50,7 +52,6 @@ public class Listen {
                         CommandObject c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                         for(CommandObject curr : sett.getTriggerObject()){
                             if(c.compareTo(curr)){
-                                Alarm alarm = Alarm.getInstance(); //TODO Flytta deklaration utanför. Varför måste den hämta nya instance?
                                 //myLogger.write("server",c.getMethod(),3);
                                 alarm.trigger("sensor");
                                 break;
