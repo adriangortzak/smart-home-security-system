@@ -4,7 +4,6 @@
 @stop
 
 
-
 @section('main_content')
 <h1 style="text-align: center;"><b>Admin</b></h1>
 
@@ -12,7 +11,6 @@
 	<div class="form-panel">
 <h4>Create new user</h4>
 <hr>
- <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -20,12 +18,6 @@
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -34,12 +26,6 @@
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -62,12 +48,6 @@
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -78,7 +58,13 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                   <script>
+
+
+                       
+                   </script>
+
+
 </div>
 </div>
 

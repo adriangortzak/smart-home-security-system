@@ -137,6 +137,10 @@ public class View {
                     else return "failed";
                 case "check alarm status":
                     return myController.checkAlarmStatus();
+                case "SirenStatus":
+                    return myController.checkAlarmStatus();
+                case "ServerStatus":
+                    return myController.serverAliveCheck();
                 default:
                     return "Error invalid input" + input;
             }

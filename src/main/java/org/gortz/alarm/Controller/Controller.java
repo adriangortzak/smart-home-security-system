@@ -30,4 +30,10 @@ public class Controller {
         else if(res == Alarm.Status.OFF)return "OFF";
         else return "Error";
     }
+    public String serverAliveCheck(){
+        return "OK!";
+    }
+    public String Siren(){
+    return alarm.getSirenStatus();
+    }
 }

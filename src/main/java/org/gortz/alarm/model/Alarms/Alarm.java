@@ -6,6 +6,7 @@ import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Loggers.Logger;
 import java.util.NoSuchElementException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.gortz.alarm.model.Alarms.Alarm.Status.*;
 
@@ -16,7 +17,7 @@ public class Alarm {
     Logger logger = Logger.getInstace();
     Settings settings = Settings.getInstance();
     int pendingTime = settings.getPendingTime();
-    Boolean typhoon = false;
+    AtomicBoolean typhoon = new AtomicBoolean(false);
     Database myDatabase;
     private static Alarm instance = null;
     Boolean running;
@@ -59,6 +60,20 @@ public class Alarm {
         }
     }
 
+    /**
+     * Reports of the Siren is running on the server
+     * @return Siren status
+     */
+    public String getSirenStatus() {
+        if(typhoon.get()){
+            return "ON";
+        }
+        else return "OFF";
+    }
+
+    /**
+     * Alarm server states
+     */
     public enum Status {
         ON,
         OFF
@@ -114,14 +129,14 @@ public class Alarm {
      * The system has been triggered by a sensor and needs to check if any actions is required
      */
     public void trigger(String by){
-        if(!typhoon) {
+        if(!typhoon.get()) {
             if (getStatus() == ON) {
                 if(!check(pendingTime)) {
                     logger.write("Server","Trigged Alarm by "+by, 5);
                     Thread typhoonThread;
                     typhoonThread = new Thread(new Typhoon());
                     typhoonThread.start();
-                    typhoon = true;
+                    typhoon.set(true);
                 }
             } else logger.write("Server","Triggered but no reaction", 2);
         }
@@ -135,7 +150,7 @@ public class Alarm {
             if (getStatus() == OFF) {
                 running = false;
                 logger.write("Server","Trigger turned off by change of alarm status",3);
-                typhoon = false;
+                typhoon.set(false);
                 return true; //Stop the typhoon
             } else
                 try {

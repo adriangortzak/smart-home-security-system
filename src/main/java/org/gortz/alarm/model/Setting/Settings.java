@@ -10,6 +10,9 @@ import org.gortz.alarm.model.Sensors.TellstickDuo;
 
 import javax.activation.CommandMap;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.gortz.alarm.model.Setting.Settings.Setting.*;
 
 
@@ -24,11 +27,11 @@ public class Settings {
     //
     Database db;
     //--------------------------------------//
-    int pendingTime;
-    int notificationInterval;
+    AtomicInteger pendingTime = new AtomicInteger();
+    AtomicInteger notificationInterval = new AtomicInteger();
     String dbPassword;
     String dbUsername;
-    boolean debuggingStatus;
+    AtomicBoolean debuggingStatus = new AtomicBoolean();
     CommandObject triggers[];
     TellstickDuo ts = TellstickDuo.getInstance();
 
@@ -46,7 +49,6 @@ private Settings(){
         PARAMETER,
         ALL
     }
-
 
     public static Settings getInstance(){
         if(instance == null && !createLock){
@@ -77,10 +79,6 @@ private Settings(){
                 updateAuthentication();
                 updateParameters();
                 break;
-            default:
-                //TODO throw exception
-                break;
-
         }
     }
 
@@ -90,23 +88,22 @@ private Settings(){
     }
 
     public void updateParameters(){
-        pendingTime = db.getServerSettingInt("pendingTime");
-        notificationInterval = db.getServerSettingInt("notificationInterval");
-        debuggingStatus = false;
+        pendingTime.set(db.getServerSettingInt("pendingTime"));
+        notificationInterval.set( db.getServerSettingInt("notificationInterval"));
+        debuggingStatus.set(false);
         notifications = db.getNotifications();
         triggers = ts.getConfiguredDevices(db.getTriggerDevices());
-        System.out.println(triggers.length);
     }
 
 
 
 
     public int getPendingTime() {
-        return pendingTime;
+        return pendingTime.get();
     }
 
     public int getNotificationInterval() {
-        return notificationInterval;
+        return notificationInterval.get();
     }
 
     public  String getDbPassword() {
@@ -118,7 +115,7 @@ private Settings(){
     }
 
     public boolean getDebuggingStatus() {
-        return debuggingStatus;
+        return debuggingStatus.get();
     }
 
     public  Notification[] getNotification() {

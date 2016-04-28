@@ -1,5 +1,4 @@
 <?php
-use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,56 +13,51 @@ Route::get('/',['middleware' => 'auth', function () {
    return view('home');
 }]);
 
-Route::get('settings',['middleware' => 'auth', function () {
-   return view('settings');
-}]);
 
-Route::get('lock/{email}', function ($email) {
-	Auth::logout();
-	return View::make('lock',['email' => $email]);
+use App\Http\Controllers\HomeController;
+Route::group(['middleware' => ['web']], function () {
+
+//Dashboard page
+	Route::get('home', function () {
+		return view('home');
+	});
+	//Dashboard settings
+	Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
+	Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
+	Route::get('trigger', function () {
+		$controller = new HomeController();
+		$controller->trigger();
+	});
+	Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
+
+		//Dasboard Update
+	Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
+	Route::get('internetStatus', 'HomeController@internetStatus');
+	Route::get('userCount', 'HomeController@userCount');
+	Route::get('ServerCheck', 'HomeController@ServerCheck');
+	Route::get('triggerCount', 'HomeController@triggerCount');
+
+
+
+//Settings page
+	Route::get('settings', function () {
+		return view('settings');
+	});
+
+//History page
+	Route::get('histories', function () {
+		return view('history');
+	});
+//Admin page
+	Route::get('admin', function () {
+		return view('admin');
+	});
+//Lock screen
+	Route::get('lock/{email}', function ($email) {
+		Auth::logout();
+		return View::make('lock',['email' => $email]);
+	});
 });
-
-
-Route::get('admin',['middleware' => 'auth', function () {
-   return view('admin');
-}]);
-
-Route::get('trigger',['middleware' => 'auth', function () {
-	$controller = new HomeController();
-	$controller->trigger();
-}]);
-
-
-
-Route::get('home',['middleware' => 'auth', function () {
-    return view('home');
-}]);
-
-Route::get('histories',['middleware' => 'auth', function () {
-   return view('history');
-}]);
-
-
-
-Route::get('users',['middleware' => 'auth', function () {
-   $users = App\User::all();
-foreach($users  as $user){
-echo '<div class="desc">';
-                      	echo '<div class="thumb">';
-                      		echo '<img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">';
-                      	echo '</div>';
-                      	echo '<div class="details">';
-                      		echo '<p>' . $user->name . '<br>';
-                      		   echo '<muted><b>Email:</b>' .$user->email . '</muted>';
-                      		echo '</p>';
-                      	echo '</div>';
-                      echo '</div>';
-}
-}]);
-
-Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
-Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
-
 
 // Authentication Routes...
 	Route::get('login', 'Auth\AuthController@showLoginForm');

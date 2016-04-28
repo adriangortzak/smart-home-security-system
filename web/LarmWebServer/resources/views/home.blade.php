@@ -10,8 +10,8 @@
                   		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
                   			<div class="box1">
 					  			<span class="li_world"></span>
-					  			<h3>
-								  {{ checkInternetConnections() }}
+					  			<h3 id="internetConnection">
+									Failed
 								</h3>
                   			</div>
 					  			<p>Check if you're able to connect to the Internet</p>
@@ -19,34 +19,58 @@
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_megaphone"></span>
-					  			<h3>OFF</h3>
+					  			<h3 id="megaphone"></h3>
                   			</div>
-					  			<p>Siren is turned OFF.</p>
+					  			<p>Siren is state.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_eye"></span>
-					  			<h3>{{ getTriggerCount() }}</h3>
+					  			<h3 id="triggerCount"></h3>
                   			</div>
-					  			<p>You have {{ getTriggerCount() }} sensors active.</p>
+					  			<p>Sensors that is active.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_user"></span>
-					  			<h3>{{ getUserCount()  }}</h3>
+					  			<h3 id="userCount"></h3>
                   			</div>
-					  			<p>There are {{ getUserCount()  }} users on this system</p>
+					  			<p>Users on this system</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_data"></span>
-					  			<h3>OK!</h3>
+					  			<h3 id="serverStatus"></h3>
                   			</div>
 					  			<p>Your database connection is OK!</p>
                   		</div>
                   	
                   	</div><!-- /row mt -->	
-                  
+                  <script>
+
+					function updateDashboard(){
+						$.get( "ServerCheck", function( data ){
+							document.getElementById('serverStatus').innerText=data;
+						});
+						$.get( "userCount", function( data ){
+							document.getElementById('userCount').innerText=data;
+						});
+						$.get( "alarmStatus", function( data ){
+							document.getElementById('megaphone').innerText=data;
+						});
+						$.get( "internetStatus", function( data ){
+							document.getElementById('internetConnection').innerText=data;
+						});
+						$.get( "triggerCount", function( data ){
+							document.getElementById('triggerCount').innerText=data;
+						});
+
+
+					}
+					updateDashboard();
+
+
+				  </script>
                       
                       <div class="row mt">
                       <!-- SERVER STATUS PANELS -->
@@ -114,10 +138,12 @@
 					  			<div class="green-header">
 						  			<h5>Alarm</h5>
 					  			</div>
-                                  <button type="button"  style="width:99%; height:37%;" class="btn btn-danger">Trigger</button>
-								  <button type="button"  style="width:99%; height:37%; padding-bottom:20px;" class="btn btn-success">Stop</button>
-						      
-                            
+                                  <button type="button"  onclick="startTrigger()" style="width:99%; height:70%;" class="btn btn-danger">Trigger</button>
+								<script>
+									function startTrigger(){
+										$.get("trigger");
+									}
+								</script>
 					  		</div>
 					  	</div><! --/col-md-4 -->
                     </div><!-- /row -->
