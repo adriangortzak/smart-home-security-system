@@ -12,8 +12,9 @@
 	<div class="form-panel">
 <h4>Create new user</h4>
 <hr>
+        <form class="form-horizontal" >
                         {!! csrf_field() !!}
-<div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Name</label>
 
@@ -53,7 +54,7 @@
                                 </button>
                             </div>
                         </div>
-</div>
+        </form>
 </div>
 </div>
 
