@@ -77,11 +77,6 @@ public function trigger(){
 	$this->socketSend($message);
 }
 
-public function test(){
-	$message = "stop\n";
-	$this->socketSend($message);
-}
-
 	function socketSend($message)
 	{
 		if (!($sock = socket_create(AF_INET, SOCK_STREAM, 0))) {

@@ -22,7 +22,6 @@ Route::group(['middleware' => ['web']], function () {
 	});
 	//Dashboard settings
 	Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
-        Route::get('stop', 'HomeController@test');
 	Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
 	Route::get('trigger', function () {
 		$controller = new HomeController();
