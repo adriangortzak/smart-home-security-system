@@ -35,7 +35,7 @@ public class View {
                 switch(input){
                     case "start":
                         if(!started) {
-                            print("Booting up system");
+                            myLogger.write("server","Booting up system",3);
                             started = true;
                             myController = new Controller();
                             //Create socket thread to read input from website
