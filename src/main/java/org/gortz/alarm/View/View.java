@@ -56,7 +56,7 @@ public class View {
                             clientSocket.close();
                         }catch(Exception e){e.printStackTrace();}
 
-                        return; //TODO Perhaps use a Thread join before return to wait for the other thread to stop.
+                        return;
                     case "trigger" :
                         myController.triggerAlarm("Terminal");
                         break;
@@ -153,7 +153,7 @@ public class View {
                     return myController.checkAlarmStatus();
                 case "ServerStatus":
                     return myController.serverAliveCheck();
-                case "stop": //TODO Implement a request saying "stop" from webserver.
+                case "stop":
                     running = false;
                     return "stopping thread.";
                 default:
