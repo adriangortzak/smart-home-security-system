@@ -16,6 +16,7 @@ public class View {
     Controller myController;
     boolean started = false;
     Thread socket;
+    Logger myLogger;
     //Constructor
     public View(){
         start();
@@ -24,14 +25,13 @@ public class View {
     //Called by the constructor to start View
     void start() {
 
-
+            myLogger = Logger.getInstace();
             String input;
             Scanner in = new Scanner(System.in);
             while (true){
 
                 input = in.next();
                 input.toLowerCase();
-
                 switch(input){
                     case "start":
                         if(!started) {
@@ -45,7 +45,7 @@ public class View {
                         }else print("System is already running");
                         break;
                     case "exit" :
-
+                        myLogger.write("server", "Shutting down view.", 3);
                         return;
                     case "trigger" :
                         myController.triggerAlarm("Terminal");
