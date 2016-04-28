@@ -60,7 +60,7 @@
 
 <script>
     function registerUser() {
-        $.post("newUser", {name:$("#name").attr('value'),email: $("#email").attr('value'), password:$("#password").attr('value'),_token:$('meta[name=csrf-token]').attr('content')}, function(data){
+        $.post("newUser", {name:$("#name").attr('value'),email: $("#email").attr('value'), password:$("#password1").attr('value'),_token:$('meta[name=csrf-token]').attr('content')}, function(data){
             alert("Data: " + data);
         })
     }
