@@ -148,6 +148,7 @@ public function test(){
 	}
 
 	public  function createUser(Request $request){
+
 		$data[] = array(
 			'name' => $request->input('name'),
 			'email' => $request->input('email'),
@@ -162,11 +163,13 @@ public function test(){
 		if($valid){
 
 			if(User::all()->where('name',$request->input('name'))->count() == 0) {
+				$password = $request->input('password');
 				User::create([
 					'name' => $request->input('name'),
 					'email' => $request->input('email'),
-					'password' => bcrypt($request->input('password')),
+					'password' => bcrypt($password),
 				]);
+
 				echo "Success";
 			}else{
 				echo "Exist";

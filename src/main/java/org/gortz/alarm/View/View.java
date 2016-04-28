@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.util.Scanner;
 /**
  * Created by adrian on 01/04/16.
@@ -17,6 +18,7 @@ public class View {
     boolean started = false;
     Thread socket;
     Logger myLogger;
+    protected Socket clientSocket;
     //Constructor
     public View(){
         start();
@@ -26,6 +28,10 @@ public class View {
     void start() {
 
             myLogger = Logger.getInstace();
+            try{
+                clientSocket = new Socket("localhost", 1967);
+            }
+            catch(Exception e){e.printStackTrace();}
             String input;
             Scanner in = new Scanner(System.in);
             while (true){
@@ -46,6 +52,12 @@ public class View {
                         break;
                     case "exit" :
                         myLogger.write("server", "Shutting down view.", 3);
+                        try{
+                            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                            outToServer.writeBytes("stop\n");
+                            clientSocket.close();
+                        }catch(Exception e){e.printStackTrace();}
+
                         return; //TODO Perhaps use a Thread join before return to wait for the other thread to stop.
                     case "trigger" :
                         myController.triggerAlarm("Terminal");
