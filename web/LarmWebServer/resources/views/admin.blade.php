@@ -67,28 +67,31 @@
     }
 </script>
 
-
 <div class="col-lg-12">
-          			<div class="form-panel">
-                  	  <h4 class="mb">Manage User</h4>
-					
-						
-						<hr>
-						<br>
-						<select multiple="" class="form-control" style="height:300px;">
-						  <option>Adrian</option>
-						  <option>Maja</option>
-						  <option>Jimmy</option>
-						  <option>Olle</option>
-						</select>        		
-          			</div><!-- /form-panel -->
-          		</div>
 
+    <section class="task-panel tasks-widget">
+        <div class="panel-heading">
+            <div class="pull-left"><h4>Manage User</h4></div>
+            <br>
+        </div>
+        <div class="panel-body">
+            <div class="task-content">
+                <ul class="task-list">
 
+                    {{ userConfigList() }}
 
+                </ul>
+            </div>
 
+        </div>
+    </section>
+</div>
 
-
+<script>
+    function removeUser(email) {
+        $.get("removeUser/"+email);
+    }
+</script>
 
 
 <div class="col-lg-12">

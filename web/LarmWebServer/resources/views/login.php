@@ -23,7 +23,7 @@
 
     <p class="login-submit">
 
-      <button type="button" onclick="location.href='home'" class="login-button">Login</button>
+      <button type="button" onclick="location.href='password/reset/{{ csrf_token() }}" class="login-button">Login</button>
 
     </p>
     <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
