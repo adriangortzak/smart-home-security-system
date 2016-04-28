@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
+use Validator;
 
 class HomeController extends Controller
 {
@@ -139,6 +141,34 @@ public function trigger(){
 		socket_close($sock);
 		return $message;
 	}
-	
-	
+
+	public  function createUser(Request $request){
+		$data[] = array(
+			'name' => $request->input('name'),
+			'email' => $request->input('email'),
+			'password' => $request->input('password')
+
+		);
+		$valid = Validator::make($data, [
+			'name' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required|min:6|confirmed'
+		]);
+		if($valid){
+
+			if(User::all()->where('name',$request->input('name'))->count() == 0) {
+				User::create([
+					'name' => $request->input('name'),
+					'email' => $request->input('email'),
+					'password' => bcrypt($request->input('password')),
+				]);
+				echo "Success";
+			}else{
+				echo "Exist";
+			}
+		}else{
+			echo "NotValid";
+		}
+
+	}
 }

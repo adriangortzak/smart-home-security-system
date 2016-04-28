@@ -13,7 +13,6 @@ Route::get('/',['middleware' => 'auth', function () {
    return view('home');
 }]);
 
-
 use App\Http\Controllers\HomeController;
 Route::group(['middleware' => ['web']], function () {
 
@@ -38,6 +37,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('triggerCount', 'HomeController@triggerCount');
 
 
+	Route::post('newUser', 'HomeController@createUser');
 
 //Settings page
 	Route::get('settings', function () {
