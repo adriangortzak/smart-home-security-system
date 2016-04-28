@@ -159,7 +159,7 @@ public function trigger(){
 
 			if(User::all()->where('name',$request->input('name'))->count() == 0) {
 				$password = $request->input('password');
-				ser::create([
+				User::create([
 					'name' => $request->input('name'),
 					'email' => $request->input('email'),
 					'password' => bcrypt($password),
