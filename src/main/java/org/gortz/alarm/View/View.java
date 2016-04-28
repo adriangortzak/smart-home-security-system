@@ -124,6 +124,7 @@ public class View {
                     //e.printStackTrace();
                 }
             }
+            myLogger.write("server", "Stopping thread waitForMessage.", 3);
         }
         private String InterpretMessage(String input, String user){
             switch(input) {
