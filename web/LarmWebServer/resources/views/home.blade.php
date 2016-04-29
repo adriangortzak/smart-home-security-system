@@ -19,30 +19,30 @@
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_megaphone"></span>
-					  			<h3 id="megaphone"></h3>
+					  			<h3 id="megaphone">OFF!</h3>
                   			</div>
 					  			<p>Siren is state.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_eye"></span>
-					  			<h3 id="triggerCount"></h3>
+					  			<h3 id="triggerCount">0</h3>
                   			</div>
 					  			<p>Sensors that is active.</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_user"></span>
-					  			<h3 id="userCount"></h3>
+					  			<h3 id="userCount">0</h3>
                   			</div>
 					  			<p>Users on this system</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_data"></span>
-					  			<h3 id="serverStatus"></h3>
+					  			<h3 id="serverStatus">FALSE!</h3>
                   			</div>
-					  			<p>Your database connection is OK!</p>
+					  			<p>Check connection to Server!</p>
                   		</div>
                   	
                   	</div><!-- /row mt -->	
@@ -63,6 +63,11 @@
 						});
 						$.get( "triggerCount", function( data ){
 							document.getElementById('triggerCount').innerText=data;
+						});
+						$.get( "getWeather", function( data ){
+							var obj = JSON.parse(data);
+							document.getElementById('temp').innerText=obj.temp;
+							document.getElementById('city').innerText=obj.city;
 						});
 
 
@@ -129,8 +134,8 @@
                       	<div class="col-md-4 col-sm-4 mb">
 							<div class="weather pn">
 								<i class="fa fa-cloud fa-4x"></i>
-								<h2>11� C</h2>
-								<h4>Stockholm</h4>
+								<h2 id=temp>Temp</h2>
+								<h4 id=city>City</h4>
 							</div>
 						</div><!-- /col-md-4-->
                   <div class="col-md-4 col-sm-4 mb">
