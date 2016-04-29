@@ -64,6 +64,11 @@
 						$.get( "triggerCount", function( data ){
 							document.getElementById('triggerCount').innerText=data;
 						});
+						$.get( "getWeather", function( data ){
+							var obj = JSON.parse(data);
+							document.getElementById('temp').innerText=obj.temp;
+							document.getElementById('city').innerText=obj.city;
+						});
 
 
 					}
@@ -129,8 +134,8 @@
                       	<div class="col-md-4 col-sm-4 mb">
 							<div class="weather pn">
 								<i class="fa fa-cloud fa-4x"></i>
-								<h2>11� C</h2>
-								<h4>Stockholm</h4>
+								<h2 id=temp>Temp</h2>
+								<h4 id=city>City</h4>
 							</div>
 						</div><!-- /col-md-4-->
                   <div class="col-md-4 col-sm-4 mb">

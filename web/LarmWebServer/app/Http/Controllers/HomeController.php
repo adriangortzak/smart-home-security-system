@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\ServerSetting;
 use Validator;
 
 class HomeController extends Controller
@@ -70,6 +71,21 @@ public function userCount(){
 }
 public function ServerCheck(){
 	$this->checkIfServerIsAlive();
+}
+
+public function getWeather(){
+	//Get variables from database
+	$city = ServerSetting::where('Setting','=','city')->first();
+	$country = ServerSetting::where('Setting','=','countryCode')->first();
+	$api = ServerSetting::where('Setting','=','openWeatherMapAPI')->first();
+
+	//Retrieve data from OpenWeatherMap.org
+	$url="http://api.openweathermap.org/data/2.5/weather?q=".$city->Value.",".$country->Value."&units=metric&cnt=7&lang=en&APPID=$api->Value";
+	
+	//Extract data and return temp and city
+	$json=file_get_contents($url);
+	$data=json_decode($json,true);
+	echo '{"temp":"'. round($data['main']['temp'])." C".'"'.',"city":'.'"'.$city->Value.'"}';
 }
 
 public function trigger(){

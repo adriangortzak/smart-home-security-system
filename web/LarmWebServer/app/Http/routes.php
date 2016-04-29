@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('userCount', 'HomeController@userCount');
 	Route::get('ServerCheck', 'HomeController@ServerCheck');
 	Route::get('triggerCount', 'HomeController@triggerCount');
+	Route::get('getWeather', 'HomeController@getWeather');
 
 
 	Route::post('newUser', 'HomeController@createUser');
