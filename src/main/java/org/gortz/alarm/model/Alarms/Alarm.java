@@ -1,6 +1,7 @@
 package org.gortz.alarm.model.Alarms;
 
 import org.gortz.alarm.model.Notification;
+import org.gortz.alarm.model.Notifications.Mail;
 import org.gortz.alarm.model.Setting.Settings;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.mysql;
@@ -175,6 +176,7 @@ public class Alarm {
         }
 
         private void notifyUser(){
+            Mail mail;
             for(Notification notification : settings.getNotification()){
                 notification.sendMessage("Alarm","Alert! Alert! Sensors has Triggered your Alarm!");
             }
