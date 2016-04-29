@@ -17,10 +17,10 @@ public class Alarm {
     Logger logger = Logger.getInstace();
     Settings settings = Settings.getInstance();
     int pendingTime = settings.getPendingTime();
-    AtomicBoolean typhoon = new AtomicBoolean(false);
+    AtomicBoolean roar = new AtomicBoolean(false);
     Database myDatabase;
     private static Alarm instance = null;
-    Boolean running;
+    AtomicBoolean running = new AtomicBoolean(false);
 
 
     //    public AtomicBoolean status = new AtomicBoolean(getStatusFromDb());
@@ -65,7 +65,7 @@ public class Alarm {
      * @return Siren status
      */
     public String getSirenStatus() {
-        if(typhoon.get()){
+        if(roar.get()){
             return "ON";
         }
         else return "OFF";
@@ -129,29 +129,34 @@ public class Alarm {
      * The system has been triggered by a sensor and needs to check if any actions is required
      */
     public void trigger(String by){
-        if(!typhoon.get()) {
+        if(!running.get()) {
+            running.set(true);
             if (getStatus() == ON) {
                 if(!check(pendingTime)) {
                     logger.write("Server","Trigged Alarm by "+by, 5);
                     Thread typhoonThread;
                     typhoonThread = new Thread(new Typhoon());
                     typhoonThread.start();
-                    typhoon.set(true);
+                    roar.set(true);
                 }
-            } else logger.write("Server","Triggered but no reaction", 2);
+            }
+            else {
+                running.set(false);
+                logger.write("Server","Triggered but no reaction", 2);
+            }
         }
-        else logger.write("Server","Triggered but typhoon is already ON", 2);
+        else logger.write("Server","Triggered but roar is already ON", 2);
     }
 
     private boolean check(int time){
         for (int currentSleep =  time; currentSleep>0; currentSleep--) {
             logger.write("Server","Alarm countdown on "+ currentSleep,3);
 
-            if (getStatus() == OFF) {
-                running = false;
+            if (getStatus().equals(OFF)) {
+                running.set(false);
                 logger.write("Server","Trigger turned off by change of alarm status",3);
-                typhoon.set(false);
-                return true; //Stop the typhoon
+                roar.set(false);
+                return true; //Stop the roar
             } else
                 try {
                     Thread.sleep(1000);//sleep
