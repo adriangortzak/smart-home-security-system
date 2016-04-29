@@ -26,7 +26,6 @@ public class Listen {
         this.ts = ts;
         myLogger = Logger.getInstace();
         sett = Settings.getInstance();
-        alarm = Alarm.getInstance();
     }
 
     public void terminate(){
@@ -53,6 +52,7 @@ public class Listen {
                         for(CommandObject curr : sett.getTriggerObject()){
                             if(c.compareTo(curr)){
                                 //myLogger.write("server",c.getMethod(),3);
+                                alarm = Alarm.getInstance();
                                 alarm.trigger("sensor");
                                 break;
                             }else  {
