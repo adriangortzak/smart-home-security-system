@@ -82,7 +82,7 @@ echo '<li>';
                 echo '<span class="task-title-sp">' . $notification->name . '</span>';
                 echo '<span class="badge bg-info">' . $notification->type . '</span>';
 		echo '<span><a style="padding-left:20px;">Token: </a></span>';
-		echo '<span><input style="width:40%; padding:10p; border-radius:5px;" type="text" value="'. $notification->token . '">';
+		echo '<span><input style="width:40%; padding:10px; border-radius:5px;" type="text" value="'. $notification->token . '">';
                 echo '<div class="pull-right hidden-phone">';
                 echo '<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
                 echo '<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>';
@@ -91,7 +91,20 @@ echo '<li>';
                 echo '</li>';
 }
 }
-
+function userConfigList(){
+$users = App\User::all();
+foreach ($users as $user) {
+    echo '<li>';
+    echo '<div class="task-title" >';
+    echo '<span class="task-title-sp">' . $user->name . '</span>';
+    echo '<span class="badge bg-info">User</span>';
+    echo '<div class="pull-right hidden-phone">';
+    echo '<button onclick="removeUser(' . "'" .$user->email . "'" . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>';
+                          echo '</div>';
+            echo '</div>';
+  echo '</li>';
+    }
+}
 
 function getUsers()
 {

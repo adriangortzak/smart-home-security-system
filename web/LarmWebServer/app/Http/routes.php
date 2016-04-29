@@ -52,6 +52,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('admin', function () {
 		return view('admin');
 	});
+
+	Route::get('removeUser/{email}', 'HomeController@removeUser');
+
 //Lock screen
 	Route::get('lock/{email}', function ($email) {
 		Auth::logout();

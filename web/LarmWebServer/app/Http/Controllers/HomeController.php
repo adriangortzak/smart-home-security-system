@@ -142,6 +142,11 @@ public function trigger(){
 		return $message;
 	}
 
+	public function removeUser($email)
+	{
+		User::where('email', $email)->delete();
+	}
+
 	public  function createUser(Request $request){
 
 		$data[] = array(
