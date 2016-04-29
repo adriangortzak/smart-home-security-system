@@ -20,7 +20,6 @@ public class Listen {
     Logger myLogger;
     RawEventListener rel;
     Settings sett;
-    Alarm alarm;
 
     public Listen(Tellstick ts) {
         this.ts = ts;
@@ -52,7 +51,7 @@ public class Listen {
                         for(CommandObject curr : sett.getTriggerObject()){
                             if(c.compareTo(curr)){
                                 //myLogger.write("server",c.getMethod(),3);
-                                alarm = Alarm.getInstance();
+                                Alarm alarm = Alarm.getInstance();
                                 alarm.trigger("sensor");
                                 break;
                             }else  {
