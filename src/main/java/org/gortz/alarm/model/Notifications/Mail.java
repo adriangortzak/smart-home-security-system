@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 public class Mail implements Notification {
     final static String username = "II1302Group13@gmail.com";
     final static String password = "DcPfop-T";
-    private String recipient;
+    private final String recipient;
 
     public Mail(String recipient){
         this.recipient = recipient;

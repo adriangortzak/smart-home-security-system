@@ -3,6 +3,7 @@ package org.gortz.alarm.model.Databases;
 import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Notification;
+import org.gortz.alarm.model.Notifications.Mail;
 import org.gortz.alarm.model.Notifications.PushBullet;
 
 import java.nio.channels.NoConnectionPendingException;
@@ -196,7 +197,8 @@ public class mysql implements Database {
                     rs = stmt.executeQuery(query);
                     while (rs.next()){
                         notificationCount--;
-                        if(rs.getString("type").equals("pushbullet"))  notifications[notificationCount] = new PushBullet(rs.getString("token"));
+                        if(rs.getString("type").equals("pushbullet")) notifications[notificationCount] = new PushBullet(rs.getString("token"));
+                        if(rs.getString("type").equals("mail")) notifications[notificationCount] = new Mail(rs.getString("token"));
                     }
                     return notifications;
                 }else return new Notification[0];
