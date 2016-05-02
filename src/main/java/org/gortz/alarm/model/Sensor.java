@@ -10,6 +10,6 @@ public interface Sensor {
     void stopListener();
     void close();
     CommandObject[] getConfiguredDevices(int[] list);
-    void sendCommand();
+    void sendCommand(String state);
 
 }

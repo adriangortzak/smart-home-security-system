@@ -114,7 +114,7 @@
                         if(data === "ON\n"){
 	                        button.className ="btn btn-round btn-danger";
         	button.textContent="Turn off Alarm";
-		textStatis.innerHTML ="ON";
+		textStatus.innerHTML ="ON";
                         }else if(data === "OFF\n"){
         	                button.className = "btn btn-round btn-success";
 	        button.textContent = "Turn on Alarm";

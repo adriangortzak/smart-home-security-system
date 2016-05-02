@@ -5,6 +5,7 @@ import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Notifications.Mail;
 import org.gortz.alarm.model.Notifications.PushBullet;
+import org.gortz.alarm.model.Notifications.TellstickAction;
 
 import java.nio.channels.NoConnectionPendingException;
 import java.nio.channels.NotYetConnectedException;
@@ -187,6 +188,7 @@ public class mysql implements Database {
 
             try {
                 query ="SELECT COUNT(*) FROM `notifications` WHERE active = 1";
+
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 rs.next();
@@ -199,6 +201,7 @@ public class mysql implements Database {
                         notificationCount--;
                         if(rs.getString("type").equals("pushbullet")) notifications[notificationCount] = new PushBullet(rs.getString("token"));
                         if(rs.getString("type").equals("mail")) notifications[notificationCount] = new Mail(rs.getString("token"));
+                        if(rs.getString("type").equals("tellstickaction")) notifications[notificationCount] = new TellstickAction(rs.getString("token"));
                     }
                     return notifications;
                 }else return new Notification[0];
