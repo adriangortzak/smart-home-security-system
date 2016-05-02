@@ -10,9 +10,9 @@ import org.gortz.alarm.model.Sensors.TellstickDuo;
  */
 public class TellstickAction implements Notification {
     Sensor tellstick = TellstickDuo.getInstance();
-
-    public TellstickAction(String id){
-
+    int id;
+    public TellstickAction(String idFromDb){
+    id = Integer.parseInt(idFromDb);
     }
 
 
@@ -20,11 +20,11 @@ public class TellstickAction implements Notification {
     public void sendMessage(String title, String message) {
     switch (title){
         case "It's safe":
-            tellstick.sendCommand("ON");
+            tellstick.sendCommand(id,"OFF");
             break;
         case "Alert":
 
-            tellstick.sendCommand("OFF");
+            tellstick.sendCommand(id,"ON");
             break;
     }
     }

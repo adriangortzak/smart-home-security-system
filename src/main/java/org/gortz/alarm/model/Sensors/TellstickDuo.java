@@ -66,8 +66,9 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         }
         return co;
     }
-    public void sendCommand(String state){
-        ts.sendRawCommand("S$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$kk$$kk$$kk$$}+");
+    public void sendCommand(int id,String state){
+        ts.sendCmd(id,state);
+        //ts.sendRawCommand("S$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$kk$$kk$$kk$$}+");
     }
 
 }
