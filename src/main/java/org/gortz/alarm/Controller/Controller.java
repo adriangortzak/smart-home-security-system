@@ -24,6 +24,7 @@ public class Controller {
     public boolean changeAlarmStatus(Alarm.Status newAlarmStatus, String user){
         return alarm.changeStatus(newAlarmStatus, user);
     }
+
     public String checkAlarmStatus(){
         Alarm.Status res = alarm.getStatus();
         if(res == Alarm.Status.ON) return "ON";
@@ -33,7 +34,7 @@ public class Controller {
     public String serverAliveCheck(){
         return "OK!";
     }
-    public String Siren(){
+    public String SirenStatus(){
     return alarm.getSirenStatus();
     }
 }

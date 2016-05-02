@@ -26,6 +26,37 @@ public class ControllerTest {
             fail("Could not create Controller");
         };
     }
+    @org.junit.Test
+    public void triggerAlarm(){
+        try {
+            myController.triggerAlarm("Test");
+        }catch (Exception e){
+            fail("Controller could'nt trigger alarm");
+        }
+
+    }
+    @org.junit.Test
+    public void serverAliveCheck(){
+        try {
+            if(!myController.serverAliveCheck().equals("OK!")) fail("Wrong response from ServerAliveCheck");
+        }catch (Exception e){
+            fail("Could'nt call serverAliveCheck from Controller");
+        }
+    }
+
+    @org.junit.Test
+    public void sirenStatus(){
+        try {
+            String resp = myController.SirenStatus();
+            switch (resp){
+                case "ON": break;
+                case "OFF":break;
+                    default: fail("Not allowed response from function SirenStatus from Controller");
+            }
+        }catch (Exception e){
+            fail("Could'nt call SirenStatus from Controller");
+        }
+    }
 
     @org.junit.Test
     public void changeAlarmStatus() throws Exception {

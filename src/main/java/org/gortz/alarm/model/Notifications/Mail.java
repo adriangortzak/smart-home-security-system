@@ -18,6 +18,9 @@ public class Mail implements Notification {
     final static String password = "DcPfop-T";
     private final String recipient;
 
+
+    //TODO gör om, ska vara username och Password. Lägg även till stöd i databas som uppdaeras i settings.
+
     public Mail(String recipient){
         this.recipient = recipient;
     }

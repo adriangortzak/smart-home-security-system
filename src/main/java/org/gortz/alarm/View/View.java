@@ -150,7 +150,7 @@ public class View {
                 case "check alarm status":
                     return myController.checkAlarmStatus();
                 case "SirenStatus":
-                    return myController.checkAlarmStatus();
+                    return myController.SirenStatus();
                 case "ServerStatus":
                     return myController.serverAliveCheck();
                 case "stop":
