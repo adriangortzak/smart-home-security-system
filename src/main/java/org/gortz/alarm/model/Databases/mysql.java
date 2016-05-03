@@ -30,6 +30,7 @@ public class mysql implements Database {
         this.userID = username;
         this.password = password;
     }
+
     /**
      * Create a connection to the database and returns true on success.
      * @return succeeded
