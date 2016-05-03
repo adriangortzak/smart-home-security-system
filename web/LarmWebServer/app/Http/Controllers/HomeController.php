@@ -168,7 +168,7 @@ public function trigger(){
                 $this->validate($request, [
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
-			'password' => 'required|min:6'
+			'password' => 'required|min:6|confirmed'
 		]);
 
 			if(User::all()->where('name',$request->input('name'))->count() == 0) {

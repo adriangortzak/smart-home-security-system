@@ -49,9 +49,9 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="button" onclick="registerUser()" class="btn btn-primary">
+                                <button style="float:left"  type="button" onclick="registerUser()" class="btn btn-primary">
                                     <i class="fa fa-btn fa-user"></i>Register
-                                </button>
+                                </button><p style="float:left; padding-left:20px" id="newUserSatatus"></p>
                             </div>
                         </div>
         </form>
@@ -65,10 +65,15 @@
 $.ajax({
     url: "newUser",
     type: 'POST',
-    data:  {name:$("#name").attr('value'),email: $("#email").attr('value'), password:$("#password1").attr('value'),_token:$('meta[name=csrf-token]').attr('content')},
+    data:  {name:$("#name").attr('value'),email: $("#email").attr('value'), password:$("#password1").attr('value'),password_confirmation:$("#password2").attr('value'), _token:$('meta[name=csrf-token]').attr('content')},
     success: function(data){
         // Success...
-        console.log(data);
+	$("#name").val("");
+	$("#email").val("");
+	$("#password1").val("");
+	$("#password2").val("");
+        document.getElementById('newUserSatatus').innerText = "Created a new user";
+       updateUserManagement();
     },
     error: function(data){
          // Error...
@@ -84,12 +89,6 @@ $.ajax({
     });
     }
 });
-
-
-/**
-        $.post("newUser", {name:$("#name").attr('value'),email: $("#email").attr('value'), password:$("#password1").attr('value'),_token:$('meta[name=csrf-token]').attr('content')}, function(data){
-            alert("Data: " + data);
-       }) **/
     }
 </script>
 
@@ -102,10 +101,7 @@ $.ajax({
         </div>
         <div class="panel-body">
             <div class="task-content">
-                <ul class="task-list">
-
-                    {{ userConfigList() }}
-
+                <ul class="task-list" id="userManagement">
                 </ul>
             </div>
 
@@ -114,8 +110,20 @@ $.ajax({
 </div>
 
 <script>
+    function updateUserManagement(){
+	
+$.get( "userManagement", function( data ) {  
+document.getElementById('userManagement').innerHTML= data;
+
+});
+}
+
+updateUserManagement();
+
     function removeUser(email) {
-        $.get("removeUser/"+email);
+        $.get("removeUser/"+email,function(){
+       updateUserManagement();
+});
     }
 </script>
 

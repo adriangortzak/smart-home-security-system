@@ -53,6 +53,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('admin', function () {
 		return view('admin');
 	});
+	   Route::get('userManagement', function () {
+                userConfigList();
+        });
+
 
 	Route::get('removeUser/{email}', 'HomeController@removeUser');
 
