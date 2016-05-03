@@ -53,7 +53,7 @@ public class Mail implements Notification {
                 });
         try {
             Message emailMessage = new MimeMessage(session);
-            emailMessage.setFrom(new InternetAddress(username));
+            emailMessage.setFrom(new InternetAddress("II1302Group13@gmail.com"));
             emailMessage.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
             emailMessage.setSubject(title);
