@@ -6,7 +6,6 @@ import net.jstick.api.Tellstick;
 import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.CommandObject;
 import org.gortz.alarm.model.Loggers.Logger;
-import org.gortz.alarm.model.SensorData;
 import org.gortz.alarm.model.Setting.Settings;
 
 import java.util.regex.Matcher;
@@ -23,7 +22,7 @@ public class Listen {
 
     public Listen(Tellstick ts) {
         this.ts = ts;
-        myLogger = Logger.getInstace();
+        myLogger = Logger.getInstance();
         sett = Settings.getInstance();
     }
 

@@ -27,7 +27,7 @@ public class View {
     //Called by the constructor to start View
     void start() {
 
-            myLogger = Logger.getInstace();
+            myLogger = Logger.getInstance();
 
             String input;
             Scanner in = new Scanner(System.in);
@@ -82,7 +82,7 @@ public class View {
      * Created by adrian on 04/04/16.
      */
     public class JavaSocket implements Runnable {
-        Logger socketLogger = Logger.getInstace();
+        Logger socketLogger = Logger.getInstance();
         volatile boolean running;
 
         protected java.net.ServerSocket socket;

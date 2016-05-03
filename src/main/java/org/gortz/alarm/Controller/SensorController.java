@@ -13,7 +13,7 @@ public class SensorController implements Runnable  {
 
     @Override
     public void run() {
-        myLogger = Logger.getInstace();
+        myLogger = Logger.getInstance();
         s = TellstickDuo.getInstance();
         s.startListener();
         //myLogger.write("server","Am now sniffing for commands and sending the method to the logger!\n", 3);

@@ -32,9 +32,7 @@ public class Mail implements Notification {
         mySql = new Mysql(set.getDbUsername(),set.getDbPassword());
         username = mySql.getServerSettingString("email_username");
         password = mySql.getServerSettingString("email_password");
-        myLogger = Logger.getInstace();
-        myLogger.write("test", "email username is: " + username, 3);
-        myLogger.write("test", "email password is: " + password, 3);
+        myLogger = Logger.getInstance();
     }
 
     /**
@@ -58,8 +56,6 @@ public class Mail implements Notification {
                 });
         try {
             Message emailMessage = new MimeMessage(session);
-            myLogger.write("test", "email username is: " + username, 3);
-            myLogger.write("test", "email password is: " + password, 3);
             emailMessage.setFrom(new InternetAddress(username));
             emailMessage.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));

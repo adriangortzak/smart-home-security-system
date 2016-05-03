@@ -14,7 +14,7 @@ import static org.gortz.alarm.model.Alarms.Alarm.Status.*;
  * Created by adrian on 14/04/16.
  */
 public class Alarm {
-    Logger logger = Logger.getInstace();
+    Logger logger = Logger.getInstance();
     Settings settings = Settings.getInstance();
     int pendingTime = settings.getPendingTime();
     AtomicBoolean roar = new AtomicBoolean(false);
@@ -169,7 +169,14 @@ public class Alarm {
     }
      private void notifyDevices(String topic, String message) {
         for(Notification notification : settings.getNotification()){
-            notification.sendMessage(topic,message);
+            try{
+                notification.sendMessage(topic,message);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+                //TODO Log or react to not being able to send notification.
+            }
+
         }
     }
 
