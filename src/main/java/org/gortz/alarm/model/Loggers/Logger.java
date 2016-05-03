@@ -13,9 +13,8 @@ import java.util.Date;
  */
 public class Logger {
     private static Logger instance = null;
-    Settings settings = Settings.getInstance();
-    boolean debugging = settings.getDebuggingStatus();
-    Database db = new Mysql(settings.getDbUsername(),settings.getDbPassword());
+    boolean debugging = Settings.getDebuggingStatus();
+    Database db = new Mysql(Settings.getDbUsername(),Settings.getDbPassword());
 
     /*
     ----------------
@@ -27,8 +26,6 @@ public class Logger {
     [4] -- Important message --> "[Error] could not connect to database"
     [5] -- History on website --> "Jimmy changed alarm status to ON"
      */
-
-
 
     private  Logger(){
     }

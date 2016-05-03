@@ -79,7 +79,7 @@ private Settings(){
         return dbUsername;
     }
 
-    public boolean getDebuggingStatus() {
+    public static boolean getDebuggingStatus() {
         return debuggingStatus.get();
     }
 
