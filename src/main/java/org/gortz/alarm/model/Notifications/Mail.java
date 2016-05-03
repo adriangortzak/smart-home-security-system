@@ -60,7 +60,7 @@ public class Mail implements Notification {
             Message emailMessage = new MimeMessage(session);
             myLogger.write("test", "email username is: " + username, 3);
             myLogger.write("test", "email password is: " + password, 3);
-            emailMessage.setFrom(new InternetAddress("II1302Group13@gmail.com"));
+            emailMessage.setFrom(new InternetAddress(username));
             emailMessage.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
             emailMessage.setSubject(title);
