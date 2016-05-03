@@ -157,6 +157,7 @@ public class Alarm {
                 running.set(false);
                 logger.write("Server","Trigger turned off by change of alarm status",3);
                 roar.set(false);
+                notifyDevices("It's safe", "Alarm is off");
                 return true; //Stop the roar
             } else
                 try {
@@ -167,21 +168,23 @@ public class Alarm {
         }
         return false;
     }
+     private void notifyDevices(String topic, String message) {
+        for(Notification notification : settings.getNotification()){
+            notification.sendMessage(topic,message);
+        }
+    }
 
     private class Typhoon implements Runnable{
         int notificationInterval = settings.getNotificationInterval();
 
         public void run() {
-        notifyUser();
+        running();
         }
 
-        private void notifyUser(){
-            Mail mail;
-            for(Notification notification : settings.getNotification()){
-                notification.sendMessage("Alarm","Alert! Alert! Sensors has Triggered your Alarm!");
-            }
+        private void running(){
+            notifyDevices("Alert","Alert! Alert! Sensors has Triggered your Alarm!");
             //Wait for response.
-            if(!check(notificationInterval)){notifyUser();}
+            if(!check(notificationInterval)){running();}
         }
 
 
