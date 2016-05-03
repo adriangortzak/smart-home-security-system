@@ -22,13 +22,13 @@ public class TellstickAction implements Notification {
     @Override
     public void sendMessage(String title, String message) {
         myLogger.write("Test", "I'm in tellstick action sendMessage", 3);
-    switch (title){
+    /*switch (title){
         case "Safe":
-            tellstick.sendCommand(5,"OFF");
+            tellstick.sendCommand(id,"OFF");
             break;
         case "Alert":
-            tellstick.sendCommand(5, "ON");
+            tellstick.sendCommand(id, "ON");
             break;
-    }
+    }*/
     }
 }
