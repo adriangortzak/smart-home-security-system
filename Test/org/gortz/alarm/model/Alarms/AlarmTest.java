@@ -68,12 +68,19 @@ public class AlarmTest {
     public void trigger() throws Exception {
     try {
         alarm.changeStatus(Alarm.Status.OFF, "Test");
+        Thread.sleep(3000);// Requires a sleep because it tries to read the value before it is updated
+        //while(!alarm.getSirenStatus().equals("ON"))
+
         if(alarm.getSirenStatus() == "ON") fail("Siren can't be on if alarm system is OFF");
         alarm.changeStatus(Alarm.Status.ON,"Test");
         try {
+            System.out.println("Siren status:");
+            System.out.println(alarm.getSirenStatus());
             alarm.trigger("Test");
             if(!alarm.getSirenStatus().equals("ON")) fail("Siren did'nt started after trigger");
             alarm.changeStatus(Alarm.Status.OFF, "Test");
+            //while(!alarm.getSirenStatus().equals("OFF")){}
+            Thread.sleep(3000);// Requires a sleep because it tries to read the value before it is updated
             if(alarm.getSirenStatus().equals("ON")) fail("Siren still on after turn off");
         }catch (Exception e){
             fail("Could'nt call to trigger och getSirenStatus");
