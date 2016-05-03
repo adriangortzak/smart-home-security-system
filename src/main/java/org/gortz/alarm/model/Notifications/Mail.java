@@ -2,6 +2,7 @@ package org.gortz.alarm.model.Notifications;
 
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.Mysql;
+import org.gortz.alarm.model.Loggers.Logger;
 import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Setting.Settings;
 
@@ -23,6 +24,7 @@ public class Mail implements Notification {
     private final String recipient;
     private Database mySql;
     private Settings set;
+    Logger myLogger;
 
     public Mail(String recipient){
         this.recipient = recipient;
@@ -30,6 +32,9 @@ public class Mail implements Notification {
         mySql = new Mysql(set.getDbUsername(),set.getDbPassword());
         username = mySql.getServerSettingString("email_username");
         password = mySql.getServerSettingString("email_password");
+        myLogger = Logger.getInstace();
+        myLogger.write("test", "email username is: " + username, 3);
+        myLogger.write("test", "email password is: " + password, 3);
     }
 
     /**
@@ -53,8 +58,8 @@ public class Mail implements Notification {
                 });
         try {
             Message emailMessage = new MimeMessage(session);
-            System.out.println("email username is: " + username);
-            System.out.println("email password is: " + password);
+            myLogger.write("test", "email username is: " + username, 3);
+            myLogger.write("test", "email password is: " + password, 3);
             emailMessage.setFrom(new InternetAddress("II1302Group13@gmail.com"));
             emailMessage.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
