@@ -156,7 +156,7 @@ public class Alarm {
                 running.set(false);
                 logger.write("Server","Trigger turned off by change of alarm status",3);
                 roar.set(false);
-                notifyDevices("It's safe", "Alarm is off");
+                notifyDevices("Safe", "Alarm is off");
                 return true; //Stop the roar
             } else
                 try {

@@ -12,18 +12,17 @@ public class TellstickAction implements Notification {
     Sensor tellstick = TellstickDuo.getInstance();
     int id;
     public TellstickAction(String idFromDb){
-    id = Integer.parseInt(idFromDb);
+        id = Integer.parseInt(idFromDb);
     }
 
 
     @Override
     public void sendMessage(String title, String message) {
     switch (title){
-        case "It's safe":
+        case "Safe":
             tellstick.sendCommand(id,"OFF");
             break;
         case "Alert":
-
             tellstick.sendCommand(id,"ON");
             break;
     }
