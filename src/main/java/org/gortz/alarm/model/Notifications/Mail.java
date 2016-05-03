@@ -24,7 +24,6 @@ public class Mail implements Notification {
     private final String recipient;
     private Database mySql;
     private Settings set;
-    Logger myLogger;
 
     public Mail(String recipient){
         this.recipient = recipient;
@@ -32,7 +31,7 @@ public class Mail implements Notification {
         mySql = new Mysql(set.getDbUsername(),set.getDbPassword());
         username = mySql.getServerSettingString("email_username");
         password = mySql.getServerSettingString("email_password");
-        myLogger = Logger.getInstance();
+
     }
 
     /**
