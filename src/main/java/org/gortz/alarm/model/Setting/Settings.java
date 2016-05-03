@@ -24,7 +24,7 @@ public class Settings {
     AtomicInteger notificationInterval = new AtomicInteger();
     static String dbPassword ="APJ4A5M6sXTPBH74";
     static String dbUsername ="shss";
-    AtomicBoolean debuggingStatus = new AtomicBoolean();
+    static boolean debuggingStatus = false;
     CommandObject[] triggers;
     TellstickDuo ts = TellstickDuo.getInstance();
 
@@ -57,7 +57,6 @@ private Settings(){
     public void update(){
         pendingTime.set(db.getServerSettingInt("pendingTime"));
         notificationInterval.set( db.getServerSettingInt("notificationInterval"));
-        debuggingStatus.set(false);
         notifications = db.getNotifications();
         triggers = ts.getConfiguredDevices(db.getTriggerDevices());
     }
@@ -80,7 +79,7 @@ private Settings(){
     }
 
     public static boolean getDebuggingStatus() {
-        return debuggingStatus.get();
+        return debuggingStatus;
     }
 
     public  Notification[] getNotification() {
