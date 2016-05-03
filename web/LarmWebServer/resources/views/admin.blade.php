@@ -61,9 +61,35 @@
 
 <script>
     function registerUser() {
+
+$.ajax({
+    url: "newUser",
+    type: 'POST',
+    data:  {name:$("#name").attr('value'),email: $("#email").attr('value'), password:$("#password1").attr('value'),_token:$('meta[name=csrf-token]').attr('content')},
+    success: function(data){
+        // Success...
+        console.log(data);
+    },
+    error: function(data){
+         // Error...
+    var errors = $.parseJSON(data.responseText);
+
+    console.log(errors);
+
+    $.each(errors, function(index, value) {
+        $.gritter.add({
+            title: 'Error',
+            text: value
+        });
+    });
+    }
+});
+
+
+/**
         $.post("newUser", {name:$("#name").attr('value'),email: $("#email").attr('value'), password:$("#password1").attr('value'),_token:$('meta[name=csrf-token]').attr('content')}, function(data){
             alert("Data: " + data);
-        })
+       }) **/
     }
 </script>
 

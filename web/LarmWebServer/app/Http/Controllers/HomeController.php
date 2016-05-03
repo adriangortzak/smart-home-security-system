@@ -165,18 +165,11 @@ public function trigger(){
 
 	public  function createUser(Request $request){
 
-		$data[] = array(
-			'name' => $request->input('name'),
-			'email' => $request->input('email'),
-			'password' => $request->input('password')
-
-		);
-		$valid = Validator::make($data, [
+                $this->validate($request, [
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
-			'password' => 'required|min:6|confirmed'
+			'password' => 'required|min:6'
 		]);
-		if($valid){
 
 			if(User::all()->where('name',$request->input('name'))->count() == 0) {
 				$password = $request->input('password');
@@ -190,9 +183,5 @@ public function trigger(){
 			}else{
 				echo "Exist";
 			}
-		}else{
-			echo "NotValid";
-		}
-
 	}
 }
