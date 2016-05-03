@@ -17,16 +17,16 @@ import static org.gortz.alarm.model.Alarms.Alarm.Status.OFF;
 /**
  * Created by adrian on 18/04/16.
  */
-public class mysql implements Database {
+public class Mysql implements Database {
     // DB connection variable
     static protected Connection con;
     // DB access variables
-    private String URL = "jdbc:mysql://127.0.0.1:3306/SHSS";
-    private String driver = "com.mysql.jdbc.Driver";
+    private String URL = "jdbc:Mysql://127.0.0.1:3306/SHSS";
+    private String driver = "com.Mysql.jdbc.Driver";
     private String userID = null;
     private String password = null;
 
-    public mysql(String username, String password) {
+    public Mysql(String username, String password) {
         this.userID = username;
         this.password = password;
     }
@@ -159,6 +159,33 @@ public class mysql implements Database {
 
     @Override
     public int getServerSettingInt(String setting) {
+        ResultSet rs = getServerSetting(setting);
+        try{
+            int result = rs.getInt("Value");
+            rs.close();
+            return result;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            throw new NoConnectionPendingException();
+        }
+    }
+
+    @Override
+    public String getServerSettingString(String setting) {
+        ResultSet rs = getServerSetting(setting);
+        try {
+            String result = rs.getString("Value");
+            rs.close();
+            return result;
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            throw new NoConnectionPendingException();
+        }
+    }
+
+    private ResultSet getServerSetting(String setting){
         if(connect()) {
             PreparedStatement statment;
 
@@ -170,14 +197,13 @@ public class mysql implements Database {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
                 rs.next();
-                return rs.getInt("value");
+                return rs;
             } catch (SQLException e) {
                 e.printStackTrace();
-              throw new NoConnectionPendingException();
+                throw new NoConnectionPendingException();
             }
         }
         else throw new NoConnectionPendingException();
-
     }
 
     @Override

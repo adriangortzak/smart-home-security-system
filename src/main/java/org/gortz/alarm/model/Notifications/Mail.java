@@ -1,6 +1,10 @@
 package org.gortz.alarm.model.Notifications;
 
+import org.gortz.alarm.model.Database;
+import org.gortz.alarm.model.Databases.Mysql;
 import org.gortz.alarm.model.Notification;
+import org.gortz.alarm.model.Setting.Settings;
+
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,16 +18,25 @@ import javax.mail.internet.MimeMessage;
  * Created by jimmy on 4/29/16.
  */
 public class Mail implements Notification {
-    final static String username = "II1302Group13@gmail.com";
-    final static String password = "DcPfop-T";
+    private String username;
+    private String password;
     private final String recipient;
-
-
-    //TODO gör om, ska vara username och Password. Lägg även till stöd i databas som uppdaeras i settings.
+    private Database mySql;
+    private Settings set;
 
     public Mail(String recipient){
         this.recipient = recipient;
+        set = Settings.getInstance();
+        mySql = new Mysql(set.getDbUsername(),set.getDbPassword());
+        username = mySql.getServerSettingString("email_username");
+        password = mySql.getServerSettingString("email_password");
     }
+
+    /**
+     * Sends a message with a title to selected email recipient
+     * @param title subject of message
+     * @param message content of message
+     */
     @Override
     public void sendMessage(String title, String message) {
         Properties props = new Properties();
@@ -40,7 +53,7 @@ public class Mail implements Notification {
                 });
         try {
             Message emailMessage = new MimeMessage(session);
-            emailMessage.setFrom(new InternetAddress("II1302Group13@gmail.com"));
+            emailMessage.setFrom(new InternetAddress(username));
             emailMessage.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
             emailMessage.setSubject(title);

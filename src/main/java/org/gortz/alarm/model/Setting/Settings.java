@@ -2,13 +2,9 @@ package org.gortz.alarm.model.Setting;
 
 import org.gortz.alarm.model.CommandObject;
 import org.gortz.alarm.model.Database;
-import org.gortz.alarm.model.Databases.mysql;
-import org.gortz.alarm.model.Loggers.Logger;
+import org.gortz.alarm.model.Databases.Mysql;
 import org.gortz.alarm.model.Notification;
-import org.gortz.alarm.model.Notifications.PushBullet;
 import org.gortz.alarm.model.Sensors.TellstickDuo;
-
-import javax.activation.CommandMap;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,7 +36,7 @@ public class Settings {
 
 private Settings(){
     update(AUTHENTICATION);
-    db = new mysql(getDbUsername(),getDbPassword());
+    db = new Mysql(getDbUsername(),getDbPassword());
     update(PARAMETER);
 }
 

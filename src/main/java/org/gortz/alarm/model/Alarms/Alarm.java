@@ -1,10 +1,9 @@
 package org.gortz.alarm.model.Alarms;
 
+import org.gortz.alarm.model.Databases.Mysql;
 import org.gortz.alarm.model.Notification;
-import org.gortz.alarm.model.Notifications.Mail;
 import org.gortz.alarm.model.Setting.Settings;
 import org.gortz.alarm.model.Database;
-import org.gortz.alarm.model.Databases.mysql;
 import org.gortz.alarm.model.Loggers.Logger;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -33,7 +32,7 @@ public class Alarm {
      * Creates connections to the database and gets old status.
      */
     private Alarm(){
-        myDatabase = new mysql(settings.getDbUsername(), settings.getDbPassword());
+        myDatabase = new Mysql(settings.getDbUsername(), settings.getDbPassword());
         sharedStatus = new SharedStatus(getStatusFromDb());
     }
 

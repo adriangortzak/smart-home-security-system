@@ -1,8 +1,7 @@
 package org.gortz.alarm.model.Loggers;
 
-import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Database;
-import org.gortz.alarm.model.Databases.mysql;
+import org.gortz.alarm.model.Databases.Mysql;
 import org.gortz.alarm.model.Setting.Settings;
 
 import java.text.DateFormat;
@@ -16,7 +15,7 @@ public class Logger {
     private static Logger instance = null;
     Settings settings = Settings.getInstance();
     boolean debugging = settings.getDebuggingStatus();
-    Database db = new mysql(settings.getDbUsername(),settings.getDbPassword());
+    Database db = new Mysql(settings.getDbUsername(),settings.getDbPassword());
 
     /*
     ----------------

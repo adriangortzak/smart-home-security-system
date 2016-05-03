@@ -1,6 +1,6 @@
 package org.gortz.alarm.model;
 
-import org.gortz.alarm.model.Databases.mysql;
+import org.gortz.alarm.model.Databases.Mysql;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class databaseTest {
     @Before
     public void setUp() throws Exception {
         try {
-            db = new mysql("shss", "APJ4A5M6sXTPBH74");
+            db = new Mysql("shss", "APJ4A5M6sXTPBH74");
         }catch (Exception e){
          fail("Could not create database connection.");
         }

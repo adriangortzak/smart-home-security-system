@@ -26,11 +26,18 @@ public interface Database {
     void writeHistory(String user,  String message);
 
     /**
-     * Get setting value in int form
+     * Get setting value in int format
      * @param Setting that is the wanted setting
      * @return int with value of setting
      */
     int getServerSettingInt(String Setting);
+
+    /**
+     * Get setting value in string format
+     * @param Setting that is the wanted setting
+     * @return String with value of selected setting
+     */
+    String getServerSettingString(String Setting);
 
     /**
      * Get all active notifications from database
