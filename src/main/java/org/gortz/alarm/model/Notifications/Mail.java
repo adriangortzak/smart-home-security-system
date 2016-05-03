@@ -23,12 +23,11 @@ public class Mail implements Notification {
     private String password;
     private final String recipient;
     private Database mySql;
-    private Settings set;
+
 
     public Mail(String recipient){
         this.recipient = recipient;
-        set = Settings.getInstance();
-        mySql = new Mysql(set.getDbUsername(),set.getDbPassword());
+        mySql = new Mysql(Settings.getDbUsername(),Settings.getDbPassword());
         username = mySql.getServerSettingString("email_username");
         password = mySql.getServerSettingString("email_password");
 

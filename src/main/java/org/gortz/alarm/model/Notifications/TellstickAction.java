@@ -1,6 +1,5 @@
 package org.gortz.alarm.model.Notifications;
 
-import org.gortz.alarm.model.Loggers.Logger;
 import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Sensor;
 import org.gortz.alarm.model.Sensors.TellstickDuo;
@@ -11,7 +10,6 @@ import org.gortz.alarm.model.Sensors.TellstickDuo;
 public class TellstickAction implements Notification {
     Sensor tellstick = TellstickDuo.getInstance();
     int id;
-    Logger myLogger;
     public TellstickAction(String idFromDb){
         id = Integer.parseInt(idFromDb);
     }
