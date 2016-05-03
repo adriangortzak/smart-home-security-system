@@ -11,13 +11,17 @@ import org.gortz.alarm.model.Sensors.TellstickDuo;
 public class TellstickAction implements Notification {
     Sensor tellstick = TellstickDuo.getInstance();
     int id;
+    Logger myLogger;
     public TellstickAction(String idFromDb){
         id = Integer.parseInt(idFromDb);
+        myLogger = Logger.getInstance();
+        myLogger.write("Test", "Succeeded in creating tellstick action object!", 3);
     }
 
 
     @Override
     public void sendMessage(String title, String message) {
+        myLogger.write("Test", "I'm in tellstick action sendMessage", 3);
     switch (title){
         case "Safe":
             tellstick.sendCommand(id,"OFF");

@@ -170,13 +170,12 @@ public class Alarm {
      private void notifyDevices(String topic, String message) {
         for(Notification notification : settings.getNotification()){
             try{
-                notification.sendMessage(topic,message);
+                notification.sendMessage(topic, message);
             }
             catch(Exception e){
                 e.printStackTrace();
                 //TODO Log or react to not being able to send notification.
             }
-
         }
     }
 
