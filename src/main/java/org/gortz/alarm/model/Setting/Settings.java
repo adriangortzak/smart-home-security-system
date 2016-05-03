@@ -9,9 +9,6 @@ import org.gortz.alarm.model.Sensors.TellstickDuo;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.gortz.alarm.model.Setting.Settings.Setting.*;
-
-
 /**
  * Created by adrian on 25/04/16.
  */
@@ -25,8 +22,8 @@ public class Settings {
     //--------------------------------------//
     AtomicInteger pendingTime = new AtomicInteger();
     AtomicInteger notificationInterval = new AtomicInteger();
-    String dbPassword;
-    String dbUsername;
+    static String dbPassword ="APJ4A5M6sXTPBH74";
+    static String dbUsername ="shss";
     AtomicBoolean debuggingStatus = new AtomicBoolean();
     CommandObject[] triggers;
     TellstickDuo ts = TellstickDuo.getInstance();
@@ -35,16 +32,10 @@ public class Settings {
     //-------------------------------------
 
 private Settings(){
-    update(AUTHENTICATION);
     db = new Mysql(getDbUsername(),getDbPassword());
-    update(PARAMETER);
+    update();
 }
 
-    public enum Setting {
-        AUTHENTICATION,
-        PARAMETER,
-        ALL
-    }
 
     public static Settings getInstance(){
         if(instance == null && !createLock){
@@ -63,35 +54,13 @@ private Settings(){
         return instance;
     }
 
-    public void update(Setting type){
-        switch (type){
-            case AUTHENTICATION:
-                updateAuthentication();
-                break;
-            case PARAMETER:
-                updateParameters();
-                break;
-            case ALL:
-                updateAuthentication();
-                updateParameters();
-                break;
-        }
-    }
-
-    public void updateAuthentication(){//TODO fix file instead of database for password and add to gitignore
-        dbPassword = "APJ4A5M6sXTPBH74";
-        dbUsername = "shss";
-    }
-
-    public void updateParameters(){
+    public void update(){
         pendingTime.set(db.getServerSettingInt("pendingTime"));
         notificationInterval.set( db.getServerSettingInt("notificationInterval"));
         debuggingStatus.set(false);
         notifications = db.getNotifications();
         triggers = ts.getConfiguredDevices(db.getTriggerDevices());
     }
-
-
 
 
     public int getPendingTime() {
@@ -102,11 +71,11 @@ private Settings(){
         return notificationInterval.get();
     }
 
-    public  String getDbPassword() {
+    public static  String getDbPassword() {
         return dbPassword;
     }
 
-    public String getDbUsername() {
+    public static String getDbUsername() {
         return dbUsername;
     }
 
