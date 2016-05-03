@@ -44,7 +44,7 @@ Ett smart hemlarm med både lokal och remote kommunikation. Larmet triggas av at
 
 ## Usage
 
-TODO: Write usage instructions
+Visit you ip/Domain and login with the standard username "root" and password "awq12ersdsa"
 
 ## Contributing
 
