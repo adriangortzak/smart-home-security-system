@@ -22,6 +22,7 @@ system via the web interface.
 -  Mbstring PHP Extension
 -  Tokenizer PHP Extension
 -  git
+
 ## Installation
 ##### Installing requirements (If not allready installed)
 
