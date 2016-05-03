@@ -11,9 +11,6 @@ import java.nio.channels.NoConnectionPendingException;
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
 
-import static org.gortz.alarm.model.Alarms.Alarm.Status.OFF;
-
-
 /**
  * Created by adrian on 18/04/16.
  */
@@ -22,7 +19,7 @@ public class Mysql implements Database {
     static protected Connection con;
     // DB access variables
     private String URL = "jdbc:Mysql://127.0.0.1:3306/SHSS";
-    private String driver = "com.Mysql.jdbc.Driver";
+    private final String driver = "com.mysql.jdbc.Driver";
     private String userID = null;
     private String password = null;
 

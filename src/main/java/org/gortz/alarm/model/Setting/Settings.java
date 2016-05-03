@@ -1,11 +1,11 @@
 package org.gortz.alarm.model.Setting;
 
+
 import org.gortz.alarm.model.CommandObject;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.Mysql;
 import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Sensors.TellstickDuo;
-
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,7 +28,7 @@ public class Settings {
     String dbPassword;
     String dbUsername;
     AtomicBoolean debuggingStatus = new AtomicBoolean();
-    CommandObject triggers[];
+    CommandObject[] triggers;
     TellstickDuo ts = TellstickDuo.getInstance();
 
     Notification[] notifications;
