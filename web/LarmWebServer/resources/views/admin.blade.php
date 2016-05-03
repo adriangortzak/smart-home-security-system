@@ -137,28 +137,34 @@ updateUserManagement();
 	                 	</div>
                           <div class="panel-body">
                               <div class="task-content">
-                                  <ul class="task-list">
-
-                                      <li>
-                                          <div class="task-checkbox">
-                                              <input type="checkbox" class="list-child" value="">
-                                          </div>
-                                          <div class="task-title" >
-                                              <span class="task-title-sp">Motionsensors</span>
-                                              <span class="badge bg-info">Tellstick</span>
-                                              <div class="pull-right hidden-phone">
-                                                  <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                                  <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                              </div>
-                                          </div>
-                                      </li>
-				      
+                                  <ul class="task-list" id="sensorList">
                                   </ul>
                               </div>
+<script>
+    function removeSensor(id) {
+        alert("removeing " + id + "test")
+    }
 
+    function getSensors() {
+        $.get( "getSensors", function( data ) {
+            document.getElementById('sensorList').innerHTML = data;
+        })
+    }
+    getSensors();
+</script>
                               <div class=" add-task-row">
+				<div>
+                    <table><tr>
+                            <td>
+                                <select>
+                                    <option value="tellstick">Tellstick</option>
+                                </select>
+                            </td>
+                            <td>  Token:</td><td><input type="text"></td>
+                        </tr></table>
+				</div>
                                   <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New Sensor</a>
-                              </div>
+				               </div>
                           </div>
                       </section>
 

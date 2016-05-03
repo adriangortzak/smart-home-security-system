@@ -222,7 +222,7 @@ $(document).ready(function () {
 
 function timerIncrement() {
     idleTime = idleTime + 1;
-    if (idleTime > 1) { // 11 minutes
+    if (idleTime > 10) { // 11 minutes
         $.get( "logout");
 	window.location="lock/<?php echo Auth::user()->email; ?>";
     }

@@ -56,6 +56,9 @@ Route::group(['middleware' => ['web']], function () {
 	   Route::get('userManagement', function () {
                 userConfigList();
         });
+	Route::get('getSensors', function () {
+		getMyTriggers();
+	});
 
 
 	Route::get('removeUser/{email}', 'HomeController@removeUser');

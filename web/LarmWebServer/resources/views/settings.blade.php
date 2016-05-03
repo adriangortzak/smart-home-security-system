@@ -26,14 +26,6 @@
           	</div>
 
 
-
-
-
-
-
-
-
-
 <div class="row mt">
           		<div class="col-lg-12">
           			<div class="form-panel">
@@ -54,18 +46,7 @@
           	</div>
 
 
-
-
-
-
-
-
-
-
-
 <!-- Notification -->
-
-
                       <section class="task-panel tasks-widget">
 	                	<div class="panel-heading">
 	                        <div class="pull-left"><h5><i class="fa fa-tasks"></i> Notification</h5></div>
@@ -79,12 +60,22 @@
 				      
                                   </ul>
                               </div>
+				<div>
+					<table><tr>
+						<td>						
+							<select>
+							  <option value="pushbullet">PushBullet</option>
+							  <option value="email">email</option>
+							  <option value="tellstickaction">TellstickAction</option>
+							</select>
+						</td>
+						<td>  Token:</td><td><input type="text"></td>
+					</tr></table>
+				</div>
 
                               <div class=" add-task-row">
                                   <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New Notification</a>
                               </div>
                           </div>
                       </section>
-
-
 @stop

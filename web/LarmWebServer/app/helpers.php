@@ -82,7 +82,7 @@ echo '<li>';
                 echo '<span class="task-title-sp">' . $notification->name . '</span>';
                 echo '<span class="badge bg-info">' . $notification->type . '</span>';
 		echo '<span><a style="padding-left:20px;">Token: </a></span>';
-		echo '<span><input style="width:40%; padding:10px; border-radius:5px;" type="text" value="'. $notification->token . '">';
+		echo '<span><input style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $notification->token . '">';
                 echo '<div class="pull-right hidden-phone">';
                 echo '<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
                 echo '<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>';
@@ -91,6 +91,38 @@ echo '<li>';
                 echo '</li>';
 }
 }
+
+function getMyTriggers(){
+    $triggers = App\triggers::all();
+    foreach($triggers  as $trigger){
+
+        echo '<li>';
+        echo  '<div class="task-checkbox">';
+        echo '<input type="checkbox" class="list-child" ';
+        if ($trigger->active == 1){
+            echo "checked";
+        }
+        echo '>';
+        echo '</div>';
+        echo '<div class="task-title">';
+        echo '<span class="task-title-sp">' . $trigger->name . '</span>';
+        echo '<span class="badge bg-info">' . $trigger->type . '</span>';
+        echo '<span><a style="padding-left:20px;">ID: </a></span>';
+        echo '<span><input style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $trigger->sensor
+            . '">';
+        echo '<div class="pull-right hidden-phone">';
+        echo '<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
+        echo '<button class="btn btn-danger btn-xs" onclick="removeSensor(' . $trigger->id . ')"><i class="fa fa-trash-o "></i></button>';
+        echo '</div>';
+        echo '</div>';
+        echo '</li>';
+    }
+}
+
+
+
+
+
 function userConfigList(){
 $users = App\User::all();
 foreach ($users as $user) {
