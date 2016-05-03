@@ -24,10 +24,10 @@ public class TellstickAction implements Notification {
         myLogger.write("Test", "I'm in tellstick action sendMessage", 3);
     switch (title){
         case "Safe":
-            tellstick.sendCommand(id,"OFF");
+            tellstick.sendCommand(5,"OFF");
             break;
         case "Alert":
-            tellstick.sendCommand(id,"ON");
+            tellstick.sendCommand(5, "ON");
             break;
     }
     }
