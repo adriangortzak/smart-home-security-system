@@ -51,6 +51,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     @Override
     public CommandObject[] getConfiguredDevices(int[] list) {
         CommandObject co[] = new CommandObject[list.length];
+        System.out.println(list.length);
         Device device;
         int j = 0;
         for (int i : list) {
