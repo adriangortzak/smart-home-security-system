@@ -5,6 +5,7 @@
 
 
 @section('main_content')
+
 <h1>Settings</h1>
 
 
@@ -90,6 +91,7 @@
 						<td> Token:<input id="notificationId" type="text"></td>
 					</tr></table>
 				</div>
+                              {!! csrf_field() !!}
 							  <script>
 								  function getNotifications(){
 									  $.get( "getNotifications", function( data ) {
@@ -107,7 +109,7 @@
 
 								  function addNotification() {
 
-							
+
 
 									  var name = document.getElementById('notificationName').value;
 									  var type = document.getElementById('notificationTyp').value;
@@ -118,7 +120,7 @@
 											  text: "More information is required for adding new notification"
 										  });
 									  }else{
-
+                                            alert($('meta[name=_token]').attr('value'));
 										  $.ajax({
 											  url: "addNotification",
 											  type: 'POST',

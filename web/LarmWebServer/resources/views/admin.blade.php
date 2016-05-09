@@ -156,7 +156,6 @@ updateUserManagement();
 				               </div>
                           </div>
                       </section>
-
 </div>
 <script>
 
@@ -165,7 +164,7 @@ updateUserManagement();
         $.get( "getSensors", function( data ) {
             document.getElementById('sensorList').innerHTML = data;
         })
-    }3
+    }
     getSensors();
 
     function removeSensor(id) {
@@ -187,7 +186,7 @@ updateUserManagement();
             $.ajax({
                 url: "addSensor",
                 type: 'POST',
-                data:  {name:$("#sensorName").attr('value'),type: $("#sensorType").attr('value'), token:$("#sensorToken").attr('value'), _token:$('meta[name=csrf-token]').attr('content')},
+                data:  {name:$("#sensorName").attr('value'),type: $("#sensorType").attr('value'), sensor:$("#sensorToken").attr('value'), _token:$('meta[name=csrf-token]').attr('content')},
                 success: function(data){
                     // Success...
                     $("#sensorToken").val("");
