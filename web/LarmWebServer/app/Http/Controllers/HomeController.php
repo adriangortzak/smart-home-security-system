@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\notifications;
+use App\triggers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
@@ -122,6 +124,38 @@ public function trigger(){
 		}
 		echo "Message send successfully \n";
 	}
+	public function addSensor(Request $request){
+
+		$this->validate($request, [
+			'name' => 'required|max:255',
+			'type' => 'required',
+			'sensor' => 'required'
+		]);
+
+		triggers::create([
+			'name' => $request->input('name'),
+			'type' => $request->input('type'),
+			'sensor' => $request->input('sensor'),
+		]);
+	}
+
+	public function addNotification(Request $request){
+
+		$this->validate($request, [
+			'name' => 'required|max:255',
+			'type' => 'required',
+			'token' => 'required'
+		]);
+
+		notifications::create([
+			'name' => $request->input('name'),
+			'type' => $request->input('type'),
+			'token' => $request->input('token'),
+		]);
+	}
+
+
+
 
 	function socketSendAndReceive($message){
 		if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
@@ -162,9 +196,16 @@ public function trigger(){
 	{
 		User::where('email', $email)->delete();
 	}
+	public function removeSensor($id)
+	{
+		triggers::where('id', $id)->delete();
+	}
+
+	public function removeNotification($id){
+		notifications::where('id', $id)->delete();
+	}
 
 	public  function createUser(Request $request){
-
                 $this->validate($request, [
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',

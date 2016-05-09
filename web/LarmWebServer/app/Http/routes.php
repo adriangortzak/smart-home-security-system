@@ -44,12 +44,20 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('settings', function () {
 		return view('settings');
 	});
+	Route::get('removeNotification/{id}', 'HomeController@removeNotification');
+	Route::get('getNotifications', function () {
+		getMyNotifications();
+	});
+	Route::post('addNotification', 'HomeController@addNotification');
+
 
 //History page
 	Route::get('histories', function () {
 		return view('history');
 	});
 //Admin page
+	Route::get('removeSensor/{id}', 'HomeController@removeSensor');
+	Route::post('addSensor', 'HomeController@addSensor');
 	Route::get('admin', function () {
 		return view('admin');
 	});

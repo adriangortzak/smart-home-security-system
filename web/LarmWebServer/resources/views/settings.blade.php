@@ -16,7 +16,7 @@
 		        	<form action="demo_form.asp">
 				<table>
 				<tr>
-				<td> <input type="file" name="pic" accept="image/*"></td>
+				<td> <input type="file" id="pic" accept="image/*"></td>
   	 	     		<td>  <input class="btn btn-success btn-sm pull-left" type="submit" value="Upload"></td>
 				</tr>
 				</table>
@@ -33,18 +33,35 @@
                       <form class="form-inline" role="form">
                           <div class="form-group">
                               <label class="sr-only" for="exampleInputEmail2">New Password</label>
-                              <input type="password" class="form-control" id="exampleInputEmail2" placeholder="Password">
+                              <input type="password" class="form-control" id="password1" placeholder="Password">
                           </div>
                           <div class="form-group">
                               <label class="sr-only" for="exampleInputPassword2">New Password again</label>
-                              <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                              <input type="password" class="form-control" id="password2" placeholder="Password">
                           </div>
-                          <button type="submit" class="btn btn-theme">Change</button>
+                          <button type="button" onclick="changePassword()" class="btn btn-theme">Change</button>
                       </form>
           			</div><!-- /form-panel -->
           		</div><!-- /col-lg-12 -->
           	</div>
 
+<script>
+	function changePassword() {
+		var password1 = document.getElementById('password1').value;
+		var password2 = document.getElementById('password2').value;
+	if(password1 == ""){
+		alert("More information is required");
+	}
+	else if(password1 != password2){
+			alert("Password is not the same");
+		}else{
+		alert("Password has changed");
+			password1="";
+			password2="";
+		}
+	}
+
+</script>
 
 <!-- Notification -->
                       <section class="task-panel tasks-widget">
@@ -54,27 +71,98 @@
 	                 	</div>
                           <div class="panel-body">
                               <div class="task-content">
-                                  <ul class="task-list">
+                                  <ul class="task-list" id="notificationList">
 
-                                      {{   getMyNotifications() }}
+
 				      
                                   </ul>
                               </div>
 				<div>
 					<table><tr>
-						<td>						
-							<select>
+							<td>Name:<input id="notificationName" type="text"></td>
+						<td>Type:
+							<select id="notificationTyp">
 							  <option value="pushbullet">PushBullet</option>
 							  <option value="email">email</option>
 							  <option value="tellstickaction">TellstickAction</option>
 							</select>
 						</td>
-						<td>  Token:</td><td><input type="text"></td>
+						<td> Token:<input id="notificationId" type="text"></td>
 					</tr></table>
 				</div>
+							  <script>
+								  function getNotifications(){
+									  $.get( "getNotifications", function( data ) {
+										  document.getElementById('notificationList').innerHTML = data;
+									  })
+								  }
+								  
+								  getNotifications();
+
+								  function removeNotification(id){
+									  $.get( "removeNotification/"+id, function() {
+										  getNotifications();
+									  })
+								  }
+
+								  function addNotification() {
+
+							
+
+									  var name = document.getElementById('notificationName').value;
+									  var type = document.getElementById('notificationTyp').value;
+									  var token = document.getElementById('notificationId').value;
+									  if(name == "" && token == ""){
+										  $.gritter.add({
+											  title: 'Error',
+											  text: "More information is required for adding new notification"
+										  });
+									  }else{
+
+										  $.ajax({
+											  url: "addNotification",
+											  type: 'POST',
+											  data:  {name:$("#notificationName").attr('value'),type: $("#notificationTyp").attr('value'), sensor:$("#notificationId").attr('value'), _token:$('meta[name=csrf-token]').attr('content')},
+											  success: function(){
+												  // Success...
+												  $("#notificationId").val("");
+												  $("#notificationName").val("");
+												  getNotifications();
+											  },
+											  error: function(data){
+												  // Error...
+												  var errors = $.parseJSON(data.responseText);
+
+												  console.log(errors);
+
+												  $.each(errors, function(index, value) {
+													  $.gritter.add({
+														  title: 'Error',
+														  text: value
+													  });
+												  });
+											  }
+										  });
+
+
+
+
+
+
+
+									  }
+								  }
+
+
+
+							  </script>
 
                               <div class=" add-task-row">
-                                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New Notification</a>
+								  <tr>
+									  <td>
+										  <a class="btn btn-success btn-sm pull-left" onclick="addNotification()">Add New Notification</a>
+									  </td>
+								  </tr>
                               </div>
                           </div>
                       </section>

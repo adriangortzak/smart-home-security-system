@@ -140,35 +140,77 @@ updateUserManagement();
                                   <ul class="task-list" id="sensorList">
                                   </ul>
                               </div>
-<script>
-    function removeSensor(id) {
-        alert("removeing " + id + "test")
-    }
-
-    function getSensors() {
-        $.get( "getSensors", function( data ) {
-            document.getElementById('sensorList').innerHTML = data;
-        })
-    }
-    getSensors();
-</script>
                               <div class=" add-task-row">
 				<div>
                     <table><tr>
+                            <td>Name: <input id="sensorName" type="text"> </td>
                             <td>
-                                <select>
+                                <select id="sensorType">
                                     <option value="tellstick">Tellstick</option>
                                 </select>
                             </td>
-                            <td>  Token:</td><td><input type="text"></td>
+                            <td>  Token: <input id="sensorToken" type="text"></td>
                         </tr></table>
 				</div>
-                                  <a class="btn btn-success btn-sm pull-left" href="todo_list.html#">Add New Sensor</a>
+                                  <a class="btn btn-success btn-sm pull-left" onclick="addSensor()">Add New Sensor</a>
 				               </div>
                           </div>
                       </section>
 
 </div>
+<script>
+
+
+    function getSensors() {
+        $.get( "getSensors", function( data ) {
+            document.getElementById('sensorList').innerHTML = data;
+        })
+    }3
+    getSensors();
+
+    function removeSensor(id) {
+        $.get( "removeSensor/"+id, function() {
+            getSensors();
+        })
+    }
+    
+    
+    function addSensor() {
+        var type = document.getElementById('sensorType').value;
+        var token = document.getElementById('sensorToken').value;
+        var name = document.getElementById('sensorName').value;
+        
+        if(token == "" && name == ""){
+            alert("more info is required");
+        }else{
+
+            $.ajax({
+                url: "addSensor",
+                type: 'POST',
+                data:  {name:$("#sensorName").attr('value'),type: $("#sensorType").attr('value'), token:$("#sensorToken").attr('value'), _token:$('meta[name=csrf-token]').attr('content')},
+                success: function(data){
+                    // Success...
+                    $("#sensorToken").val("");
+                    $("#sensorName").val("");
+                    getSensors();
+                },
+                error: function(data){
+                    // Error...
+                    var errors = $.parseJSON(data.responseText);
+
+                    console.log(errors);
+
+                    $.each(errors, function(index, value) {
+                        $.gritter.add({
+                            title: 'Error',
+                            text: value
+                        });
+                    });
+                }
+            });
+        }
+    }
+</script>
 
 
 @stop

@@ -85,7 +85,7 @@ echo '<li>';
 		echo '<span><input style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $notification->token . '">';
                 echo '<div class="pull-right hidden-phone">';
                 echo '<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
-                echo '<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>';
+                echo '<button class="btn btn-danger btn-xs" onclick="removeNotification(' . $notification->id . ')"><i class="fa fa-trash-o "></i></button>';
 		echo '</div>';
                 echo '</div>';
                 echo '</li>';
