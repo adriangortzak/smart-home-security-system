@@ -241,7 +241,7 @@ public class Mysql implements Database {
         if(connect()) {
             int result[] = new int[0];
             //-------------------query-----------------------
-            String  query = "SELECT COUNT(*) FROM triggers";
+            String  query = "SELECT COUNT(*) FROM triggers WHERE active=1";
             //-----------------------------------------------
             try {
                 Statement stmt;
