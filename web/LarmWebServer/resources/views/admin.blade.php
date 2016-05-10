@@ -174,6 +174,9 @@ updateUserManagement();
 	document.getElementById( id + '-cancel').style.display = "inline";
 	document.getElementById( id + '-edit').style.display = "none";
 	document.getElementById( id + '-thrash').style.display = "none";
+	$('#'+id+'-sensorID').prop('readonly', false);
+	$('#'+id+'-sensorCheckbox').prop('disabled', false);
+
 	// Set input for all fields. Hidden inputs?
     }
 
@@ -182,6 +185,21 @@ updateUserManagement();
 	document.getElementById( id + '-cancel').style.display = "none";
 	document.getElementById( id + '-edit').style.display = "inline";
 	document.getElementById( id + '-thrash').style.display = "inline";
+	$('#'+id+'-sensorID').prop('readonly', true);
+	$('#'+id+'-sensorCheckbox').prop('disabled', true);
+	var value = document.getElementById(id + '-sensorID').value;
+	var checked = document.getElementById( id + '-sensorCheckbox').checked;
+	var checkbox = checked ? 1 : 0;
+//	if (checked == false){
+//		document.getElementById( id + '-sensorCheckbox').checked = true;
+//	}
+//	else {
+//		document.getElementById( id + '-sensorCheckbox').checked = false;
+//	}
+	$.get( "updateSensors/"+id+"/"+value+"/"+checkbox, function() {
+		
+	})
+
 	// Do some stuff to apply the changes...
 	// update database with new values and remove hidden inputs?
     }

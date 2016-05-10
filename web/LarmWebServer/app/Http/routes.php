@@ -67,6 +67,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('getSensors', function () {
 		getMyTriggers();
 	});
+	Route::get('updateSensors/{id}/{value}/{checkbox}', function ($id, $value, $checkbox){
+		updateSensors($id,$value,$checkbox);	
+	});
 
 
 	Route::get('removeUser/{email}', 'HomeController@removeUser');

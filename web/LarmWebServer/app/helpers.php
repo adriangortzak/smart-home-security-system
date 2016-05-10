@@ -98,7 +98,7 @@ function getMyTriggers(){
 
         echo '<li>';
         echo  '<div class="task-checkbox">';
-        echo '<input type="checkbox" class="list-child" ';
+        echo '<input id="' . $trigger->id . '-sensorCheckbox"' . ' disabled type="checkbox" class="list-child" ';
         if ($trigger->active == 1){
             echo "checked";
         }
@@ -108,7 +108,7 @@ function getMyTriggers(){
         echo '<span class="task-title-sp">' . $trigger->name . '</span>';
         echo '<span class="badge bg-info">' . $trigger->type . '</span>';
         echo '<span><a style="padding-left:20px;">ID: </a></span>';
-        echo '<span><input style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $trigger->sensor
+        echo '<span><input id="' . $trigger->id . '-sensorID" style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $trigger->sensor
             . '">';
         echo '<div class="pull-right hidden-phone">';
 	echo '<button id="' . $trigger->id . '-check" style="display:none;" class="btn btn-success btn-xs" onclick="confirmSensorEdit(' . $trigger->id . ')"><i class="fa fa-check"></i></button>';
@@ -161,4 +161,10 @@ function getTriggerCount()
     $triggers = App\triggers::all()->count();
     echo $triggers;
 }
+
+function updateSensors($id, $value, $checkbox){
+   App\triggers::where('id',$id)->update(array('sensor' => $value)); 
+   App\triggers::where('id',$id)->update(array('active' => $checkbox));
+}
+
 ?>
