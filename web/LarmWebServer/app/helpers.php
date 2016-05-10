@@ -111,8 +111,10 @@ function getMyTriggers(){
         echo '<span><input style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $trigger->sensor
             . '">';
         echo '<div class="pull-right hidden-phone">';
-        echo '<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
-        echo '<button class="btn btn-danger btn-xs" onclick="removeSensor(' . $trigger->id . ')"><i class="fa fa-trash-o "></i></button>';
+	echo '<button id="' . $trigger->id . '-check" style="display:none;" class="btn btn-success btn-xs" onclick="confirmSensorEdit(' . $trigger->id . ')"><i class="fa fa-check"></i></button>';
+        echo '<button id="' . $trigger->id . '-cancel" style="display:none;" class="btn btn-danger btn-xs" onclick="cancelSensorEdit(' . $trigger->id . ')"><i class="fa fa-times "></i></button>';
+        echo '<button id="' . $trigger->id . '-edit" style="display:inline;" class="btn btn-primary btn-xs" onclick="editSensor(' . $trigger->id . ')"><i class="fa fa-pencil"></i></button>';
+        echo '<button id="' . $trigger->id . '-thrash" style="display:inline;" class="btn btn-danger btn-xs" onclick="removeSensor(' . $trigger->id . ')"><i class="fa fa-trash-o "></i></button>';
         echo '</div>';
         echo '</div>';
         echo '</li>';

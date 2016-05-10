@@ -158,7 +158,33 @@ updateUserManagement();
                       </section>
 </div>
 <script>
+    function cancelSensorEdit(id) {
+        document.getElementById( id + '-check').style.display = none;
+	document.getElementById( id + '-cancel').style.display = none;
+	document.getElementById( id + '-edit').style.display = inline;
+	document.getElementById( id + '-thrash').style.display = inline;
+	getSensors();
+	
+	//Probably do some stuff to reload values from database or restore them from local copy while editing.
+	// Get only the values for this row.
+    }
 
+    function editSensor(id) {
+        document.getElementById( id + '-check').style.display = inline;
+	document.getElementById( id + '-cancel').style.display = inline;
+	document.getElementById( id + '-edit').style.display = none;
+	document.getElementById( id + '-thrash').style.display = none;
+	// Set input for all fields. Hidden inputs?
+    }
+
+    function confirmSensorEdit(id) {
+        document.getElementById( id + '-check').style.display = none;
+	document.getElementById( id + '-cancel').style.display = none;
+	document.getElementById( id + '-edit').style.display = inline;
+	document.getElementById( id + '-thrash').style.display = inline;
+	// Do some stuff to apply the changes...
+	// update database with new values and remove hidden inputs?
+    }
 
     function getSensors() {
         $.get( "getSensors", function( data ) {
