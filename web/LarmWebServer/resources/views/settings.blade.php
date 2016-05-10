@@ -120,11 +120,10 @@
 											  text: "More information is required for adding new notification"
 										  });
 									  }else{
-                                            alert($('meta[name=_token]').attr('value'));
 										  $.ajax({
 											  url: "addNotification",
 											  type: 'POST',
-											  data:  {name:$("#notificationName").attr('value'),type: $("#notificationTyp").attr('value'), sensor:$("#notificationId").attr('value'), _token:$('meta[name=csrf-token]').attr('content')},
+											  data:  {name:$("#notificationName").attr('value'),type: $("#notificationTyp").attr('value'), token:$("#notificationId").attr('value'), _token:"{{ csrf_token() }}"},
 											  success: function(){
 												  // Success...
 												  $("#notificationId").val("");

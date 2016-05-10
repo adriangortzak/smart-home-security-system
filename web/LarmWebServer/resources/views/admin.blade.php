@@ -93,7 +93,6 @@ $.ajax({
 </script>
 
 <div class="col-lg-12">
-
     <section class="task-panel tasks-widget">
         <div class="panel-heading">
             <div class="pull-left"><h4>Manage User</h4></div>
@@ -108,6 +107,63 @@ $.ajax({
         </div>
     </section>
 </div>
+
+
+<div class="col-lg-12">
+    <section class="task-panel tasks-widget">
+        <div class="panel-heading">
+            <div class="pull-left"><h4>Pending time (seconds)</h4></div>
+            <br>
+        </div>
+        <div class="panel-body">
+            <div class="task-content">
+                <input type="text"><button style="float:right;"  class="btn btn-success btn-xs">Update</button>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+
+<div class="col-lg-12">
+    <section class="task-panel tasks-widget">
+        <div class="panel-heading">
+            <div class="pull-left"><h4>Notification Interval (seconds)</h4></div>
+            <br>
+        </div>
+        <div class="panel-body">
+            <div class="task-content">
+                <input type="text"><button style="float:right;" class="btn btn-success btn-xs">Update</button>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+
+<div class="col-lg-12">
+    <section class="task-panel tasks-widget">
+        <div class="panel-heading">
+            <div class="pull-left"><h4>Temperature</h4></div>
+            <br>
+        </div>
+        <div class="panel-body">
+            <div class="task-content">
+                <p><b>City: </b></p><input type="text">
+            </div>
+            <div class="task-content">
+                <p><b>Country Code:</b></p><input type="text">
+            </div>
+            <div class="task-content">
+                <p><b>openWeatherMap Api-key</b></p><input type="text">
+            </div>
+            <div class="task-content">
+                <button class="btn btn-success btn-xs">Update</button>
+            </div>
+        </div>
+    </section>
+</div>
+
 
 <script>
     function updateUserManagement(){
@@ -126,7 +182,6 @@ updateUserManagement();
 });
     }
 </script>
-
 
 <div class="col-lg-12">
 
