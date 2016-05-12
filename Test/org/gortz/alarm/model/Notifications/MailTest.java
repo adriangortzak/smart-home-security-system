@@ -22,7 +22,9 @@ public class MailTest {
 
     @Test
     public void sendMessage() throws Exception {
-     noti.sendMessage("Test","Testsson");
+
+     noti.setMessage("Test","Testsson");
+        noti.run();
     }
 
 }

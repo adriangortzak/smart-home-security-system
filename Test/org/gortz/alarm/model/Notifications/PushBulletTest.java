@@ -23,7 +23,8 @@ public class PushBulletTest {
     @Test
     public void sendMessage() throws Exception {
         try{
-            noti.sendMessage("Test","testings");
+            noti.setMessage("Test","testings");
+            noti.run();
         }catch (Exception e){
             fail("Could'nt send push notification by Pushbullet");
         }
