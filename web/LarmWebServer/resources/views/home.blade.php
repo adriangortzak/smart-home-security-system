@@ -79,6 +79,7 @@
                       
                       <div class="row mt">
                       <!-- SERVER STATUS PANELS -->
+						  @if(checkControlGroup() == 1)
                       	<div class="col-md-4 col-sm-4 mb">
                       		<div class="white-panel pn donut-chart">
                       			<div class="white-header">
@@ -129,7 +130,8 @@
 								
 	                      	</div><! --/grey-panel -->
                       	</div><!-- /col-md-4-->
-                      	
+                      	@else
+						  @endif
                   			<!-- WEATHER PANEL -->
                       	<div class="col-md-4 col-sm-4 mb">
 							<div class="weather pn">
@@ -138,6 +140,8 @@
 								<h4 id=city>City</h4>
 							</div>
 						</div><!-- /col-md-4-->
+
+						  @if(checkControlGroup() == 1)
                   <div class="col-md-4 col-sm-4 mb">
 					  		<div class="green-panel pn">
 					  			<div class="green-header">
@@ -151,6 +155,8 @@
 								</script>
 					  		</div>
 					  	</div><! --/col-md-4 -->
+						  @else
+						  @endif
                     </div><!-- /row -->
                     
                     				

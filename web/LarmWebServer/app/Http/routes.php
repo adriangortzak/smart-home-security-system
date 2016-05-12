@@ -60,7 +60,7 @@ Route::group(['middleware' => ['web','admin']], function () {
     Route::get('updateSensors/{id}/{value}/{checkbox}', function ($id, $value, $checkbox){
         updateSensors($id,$value,$checkbox);
     });
-    
+
     Route::get('removeUser/{email}', 'HomeController@removeUser');
 });
 
@@ -71,9 +71,7 @@ use App\Http\Controllers\HomeController;
 Route::group(['middleware' => ['web']], function () {
 
     //Dashboard page
-    Route::get('home', function () {
-	return view('home');
-    });
+    Route::get('home', 'HomeController@viewHome'); 
     //Dashboard settings
     Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
     Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');

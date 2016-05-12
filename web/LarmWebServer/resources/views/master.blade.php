@@ -77,15 +77,20 @@
                        <a  class="@yield('settings_active')"  href="settings">
                           <i class="fa fa-cogs"></i>
                           <span>Settings</span>
-                      </a>               
-                  </li>
-		 <li class="sub-menu">
+                      </a>
+
+                      @if(checkHistory() == 1)
+		            <li class="sub-menu">
                       <a class="@yield('history_active')" href="histories" >
                           <i class="li_calendar"></i>
                           <span>History</span>
                       </a>
                    </li>
-                  @if(App\groups::where('id', App\User::where('email', Auth::user()->email)->first()->group)->first()->admin == 1)
+                  @else
+                  @endif
+
+
+                  @if(checkAdmin() == 1)
                   <li class="sub-menu">
                       <a class="@yield('admin_active')" href="admin" >
                           <i class="fa fa-tasks"></i>
@@ -130,10 +135,16 @@
       *********************************************************************************************************************************************************** -->                  
                   
                   <div class="col-lg-3 ds">
+
+                      @if(checkHistory() == 1)
                     <!--COMPLETED ACTIONS DONUTS CHART-->
 						<h3>History</h3>
                                         {{ getLastFiveMessageFromHistory() }}
-   
+
+                      @else
+
+                      @endif
+
                        <!-- Team Members SECTION -->
 						<h3>TEAM MEMBERS</h3>
 			{{ getUsers() }}

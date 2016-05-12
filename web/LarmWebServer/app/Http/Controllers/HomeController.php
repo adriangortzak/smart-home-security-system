@@ -57,6 +57,9 @@ class HomeController extends Controller
 	echo $this->socketSendAndReceive("SirenStatus\n");
     }
 
+	public function viewHome(){
+		return view('home');
+	}
     public function checkAlarmStatus(){
 	echo $this->socketSendAndReceive("check alarm status\n");
     }

@@ -94,6 +94,19 @@ function getMyNotifications(){
     }
 }
 
+function checkAdmin(){
+    return App\groups::where('id', App\User::where('email', Auth::user()->email)->first()->group)->first()->admin;
+}
+
+function checkHistory(){
+    return App\groups::where('id', App\User::where('email', Auth::user()->email)->first()->group)->first()->history;
+}
+
+function checkControlGroup(){
+    return App\groups::where('id', App\User::where('email', Auth::user()->email)->first()->group)->first()->control;
+}
+
+
 function getMyTriggers(){
     $triggers = App\triggers::all();
     foreach($triggers  as $trigger){
