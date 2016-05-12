@@ -26,7 +26,7 @@ public class Settings {
     static String dbUsername ="shss";
     static boolean debuggingStatus = false;
     CommandObject[] triggers;
-    AtomicInteger threadPoolCount;
+    AtomicInteger threadPoolCount = new AtomicInteger();
     TellstickDuo ts = TellstickDuo.getInstance();
 
     Notification[] notifications;
