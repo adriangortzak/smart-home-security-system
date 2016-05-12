@@ -2,6 +2,8 @@ package org.gortz.alarm.model;
 
 import org.gortz.alarm.model.Alarms.Alarm;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Created by adrian on 18/04/16.
  */
@@ -46,4 +48,6 @@ public interface Database {
     Notification[] getNotifications();
 
     int[] getTriggerDevices();
+
+    int getThreadPoolCount();
 }

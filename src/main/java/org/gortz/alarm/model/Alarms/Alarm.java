@@ -6,6 +6,8 @@ import org.gortz.alarm.model.Setting.Settings;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Loggers.Logger;
 import java.util.NoSuchElementException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.gortz.alarm.model.Alarms.Alarm.Status.*;
@@ -168,9 +170,11 @@ public class Alarm {
         return false;
     }
      private void notifyDevices(String topic, String message) {
+         Executor executor = Executors.newFixedThreadPool(settings.getThreadPoolCount());
         for(Notification notification : settings.getNotification()){
             try{
-                notification.sendMessage(topic, message);
+                notification.setMessage(topic, message);
+                executor.execute(notification);
             }
             catch(Exception e){
                 e.printStackTrace();

@@ -7,6 +7,7 @@ import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Setting.Settings;
 
 import java.util.Properties;
+import java.util.StringJoiner;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -19,6 +20,8 @@ import javax.mail.internet.MimeMessage;
  * Created by jimmy on 4/29/16.
  */
 public class Mail implements Notification {
+    private String message;
+    private String title;
     private String username;
     private String password;
     private final String recipient;
@@ -34,12 +37,19 @@ public class Mail implements Notification {
     }
 
     /**
-     * Sends a message with a title to selected email recipient
+     * Sets the message variables for execution
      * @param title subject of message
      * @param message content of message
      */
     @Override
-    public void sendMessage(String title, String message) {
+    public void setMessage(String title, String message) {
+        this.message = message;
+        this.title = title;
+    }
+
+
+    @Override
+    public void run() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");

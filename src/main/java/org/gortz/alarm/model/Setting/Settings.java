@@ -26,6 +26,7 @@ public class Settings {
     static String dbUsername ="shss";
     static boolean debuggingStatus = false;
     CommandObject[] triggers;
+    AtomicInteger threadPoolCount;
     TellstickDuo ts = TellstickDuo.getInstance();
 
     Notification[] notifications;
@@ -59,6 +60,7 @@ private Settings(){
         notificationInterval.set( db.getServerSettingInt("notificationInterval"));
         notifications = db.getNotifications();
         triggers = ts.getConfiguredDevices(db.getTriggerDevices());
+        threadPoolCount.set(db.getThreadPoolCount());
     }
 
 
@@ -88,6 +90,10 @@ private Settings(){
 
     public CommandObject[] getTriggerObject() {
         return triggers;
+    }
+
+    public int getThreadPoolCount() {
+        return threadPoolCount.get();
     }
 }
 

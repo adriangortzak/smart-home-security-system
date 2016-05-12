@@ -10,6 +10,7 @@ import org.gortz.alarm.model.Notifications.TellstickAction;
 import java.nio.channels.NoConnectionPendingException;
 import java.nio.channels.NotYetConnectedException;
 import java.sql.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by adrian on 18/04/16.
@@ -267,6 +268,11 @@ public class Mysql implements Database {
             return result;
         }
         else throw new NoConnectionPendingException();
+    }
+
+    @Override
+    public int getThreadPoolCount() {
+        return getServerSettingInt("threadPool");
     }
 
 }
