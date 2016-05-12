@@ -126,7 +126,7 @@ $.ajax({
 
 <script>
  function getPendingTime(){
-     document.getElementById('PendingTimeValue').value = "testing";
+     document.getElementById('pendingTimeValue').value = "testing";
  }
  getPendingTime();
 </script>
