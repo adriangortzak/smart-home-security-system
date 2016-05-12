@@ -170,17 +170,24 @@ public class Alarm {
         return false;
     }
      private void notifyDevices(String topic, String message) {
-         Executor executor = Executors.newFixedThreadPool(settings.getThreadPoolCount());
-        for(Notification notification : settings.getNotification()){
-            try{
-                notification.setMessage(topic, message);
-                executor.execute(notification);
-            }
-            catch(Exception e){
-                e.printStackTrace();
-                //TODO Log or react to not being able to send notification.
-            }
-        }
+         Thread notifyThread = new Thread()
+         {
+             public void run()
+             {
+                 Executor executor = Executors.newFixedThreadPool(settings.getThreadPoolCount());
+                 for(Notification notification : settings.getNotification()){
+                     try{
+                         notification.setMessage(topic, message);
+                         executor.execute(notification);
+                     }
+                     catch(Exception e){
+                         e.printStackTrace();
+                         //TODO Log or react to not being able to send notification.
+                     }
+                 }
+             }
+         };
+         notifyThread.run();
     }
 
     private class Typhoon implements Runnable{
