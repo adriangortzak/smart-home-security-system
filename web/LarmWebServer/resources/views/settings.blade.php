@@ -67,7 +67,7 @@
 	document.getElementById( id + '-notificationCancel').style.display = "none";
 	document.getElementById( id + '-notificationEdit').style.display = "inline";
 	document.getElementById( id + '-notificationThrash').style.display = "inline";
-//	getSensors();
+	getNotifications();
 	
 	//Probably do some stuff to reload values from database or restore them from local copy while editing.
 	// Get only the values for this row.
