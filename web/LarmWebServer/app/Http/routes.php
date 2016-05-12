@@ -13,6 +13,60 @@ Route::get('/',['middleware' => 'auth', function () {
     return view('home');
 }]);
 
+Route::group(['middleware' => ['web','admin']], function () {
+    //Admin page
+    Route::get('removeSensor/{id}', 'HomeController@removeSensor');
+    Route::post('addSensor', 'HomeController@addSensor');
+    Route::get('admin', function () {
+        return view('admin');
+    });
+    Route::get('userManagement', function () {
+        userConfigList();
+    });
+    Route::get('getPendingTime', function () {
+        echo getSetting('pendingTime');
+    });
+    Route::get('setPendingTime/{value}', function ($value) {
+        setSetting('pendingTime', $value);
+    });
+    Route::get('getNotificationInterval', function () {
+        echo getSetting('notificationInterval');
+    });
+    Route::get('setNotificationInterval/{value}', function ($value){
+        setSetting('notificationInterval', $value);
+    });
+    Route::get('getThreadPool', function () {
+        echo getSetting('threadPool');
+    });
+    Route::get('setThreadPool/{value}', function ($value){
+        setSetting('threadPool', $value);
+    });
+    Route::get('getOpenWeatherSettings', function(){
+        $city = getSetting('city');
+        $countryCode = getSetting('countryCode');
+        $api = getSetting('openWeatherMapAPI');
+        $json = '{'
+            .'"city" :"'. $city .'",'
+            .'"countryCode" :"' . $countryCode. '",'
+            .'"owmAPI" :"' . $api
+            .'"}';
+        echo $json;
+    });
+    Route::post('updateOpenWeatherSettings', 'HomeController@updateOpenWeatherSettings');
+
+    Route::get('getSensors', function () {
+        getMyTriggers();
+    });
+    Route::get('updateSensors/{id}/{value}/{checkbox}', function ($id, $value, $checkbox){
+        updateSensors($id,$value,$checkbox);
+    });
+    
+    Route::get('removeUser/{email}', 'HomeController@removeUser');
+});
+
+
+
+
 use App\Http\Controllers\HomeController;
 Route::group(['middleware' => ['web']], function () {
 
@@ -58,55 +112,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('histories', function () {
 	return view('history');
     });
-    //Admin page
-    Route::get('removeSensor/{id}', 'HomeController@removeSensor');
-    Route::post('addSensor', 'HomeController@addSensor');
-    Route::get('admin', function () {
-	return view('admin');
-    });
-    Route::get('userManagement', function () {
-        userConfigList();
-    });
-    Route::get('getPendingTime', function () {
-	echo getSetting('pendingTime');
-    });
-    Route::get('setPendingTime/{value}', function ($value) {
-	setSetting('pendingTime', $value);
-    });
-    Route::get('getNotificationInterval', function () {
-	echo getSetting('notificationInterval');
-    });
-    Route::get('setNotificationInterval/{value}', function ($value){
-	setSetting('notificationInterval', $value);
-    });
-    Route::get('getThreadPool', function () {
-	echo getSetting('threadPool');
-    });
-    Route::get('setThreadPool/{value}', function ($value){
-	setSetting('threadPool', $value);
-    });
-    Route::get('getOpenWeatherSettings', function(){
-	$city = getSetting('city');
-	$countryCode = getSetting('countryCode');
-	$api = getSetting('openWeatherMapAPI');
-	$json = '{'
-	       .'"city" :"'. $city .'",'
-	       .'"countryCode" :"' . $countryCode. '",'
-	       .'"owmAPI" :"' . $api
-	       .'"}';
-	echo $json;
-    });
-    Route::post('updateOpenWeatherSettings', 'HomeController@updateOpenWeatherSettings');
-    
-    Route::get('getSensors', function () {
-	getMyTriggers();
-    });
-    Route::get('updateSensors/{id}/{value}/{checkbox}', function ($id, $value, $checkbox){
-	updateSensors($id,$value,$checkbox);	
-    });
-
-
-    Route::get('removeUser/{email}', 'HomeController@removeUser');
 
     //Lock screen
     Route::get('lock/{email}', function ($email) {

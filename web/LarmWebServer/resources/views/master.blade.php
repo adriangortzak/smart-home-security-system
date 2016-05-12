@@ -85,13 +85,17 @@
                           <span>History</span>
                       </a>
                    </li>
-
-                        <li class="sub-menu">
+                  @if(App\groups::where('id', App\User::where('email', Auth::user()->email)->first()->group)->first()->admin == 1)
+                  <li class="sub-menu">
                       <a class="@yield('admin_active')" href="admin" >
                           <i class="fa fa-tasks"></i>
                           <span>Admin</span>
-                      </a>                
-                   </li>
+                      </a>
+                  </li>
+                  @else
+
+                  @endif
+
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
