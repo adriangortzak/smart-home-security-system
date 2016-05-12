@@ -34,11 +34,11 @@
                       <form class="form-inline" role="form">
                           <div class="form-group">
                               <label class="sr-only" for="exampleInputEmail2">New Password</label>
-                              <input type="password" class="form-control" id="password1" placeholder="Password">
+                              <input type="password" class="form-control" id="password1" placeholder="New Password">
                           </div>
                           <div class="form-group">
                               <label class="sr-only" for="exampleInputPassword2">New Password again</label>
-                              <input type="password" class="form-control" id="password2" placeholder="Password">
+                              <input type="password" class="form-control" id="password2" placeholder="Repeat Password">
                           </div>
                           <button type="button" onclick="changePassword()" class="btn btn-theme">Change</button>
                       </form>

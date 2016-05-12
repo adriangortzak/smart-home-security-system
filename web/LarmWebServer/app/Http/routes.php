@@ -67,6 +67,37 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('userManagement', function () {
         userConfigList();
     });
+    Route::get('getPendingTime', function () {
+	echo getSetting('pendingTime');
+    });
+    Route::get('setPendingTime/{value}', function ($value) {
+	setSetting('pendingTime', $value);
+    });
+    Route::get('getNotificationInterval', function () {
+	echo getSetting('notificationInterval');
+    });
+    Route::get('setNotificationInterval/{value}', function ($value){
+	setSetting('notificationInterval', $value);
+    });
+    Route::get('getThreadPool', function () {
+	echo getSetting('threadPool');
+    });
+    Route::get('setThreadPool/{value}', function ($value){
+	setSetting('threadPool', $value);
+    });
+    Route::get('getOpenWeatherSettings', function(){
+	$city = getSetting('city');
+	$countryCode = getSetting('countryCode');
+	$api = getSetting('openWeatherMapAPI');
+	$json = '{'
+	       .'"city" :"'. $city .'",'
+	       .'"countryCode" :"' . $countryCode. '",'
+	       .'"owmAPI" :"' . $api
+	       .'"}';
+	echo $json;
+    });
+    Route::post('updateOpenWeatherSettings', 'HomeController@updateOpenWeatherSettings');
+    
     Route::get('getSensors', function () {
 	getMyTriggers();
     });

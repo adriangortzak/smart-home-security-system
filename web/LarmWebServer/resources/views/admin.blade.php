@@ -108,6 +108,53 @@ $.ajax({
     </section>
 </div>
 
+<script>
+    function updateUserManagement(){
+	
+$.get( "userManagement", function( data ) {  
+document.getElementById('userManagement').innerHTML= data;
+
+});
+}
+
+updateUserManagement();
+
+    function removeUser(email) {
+        $.get("removeUser/"+email,function(){
+       updateUserManagement();
+});
+    }
+</script>
+
+<div class="col-lg-12">
+    <section class="task-panel tasks-widget">
+        <div class="panel-heading">
+            <div class="pull-left"><h4>Thread Pool (number of threads)</h4></div>
+            <br>
+        </div>
+        <div class="panel-body">
+            <div class="task-content">
+                <input id="threadPoolValue" type="text" value=""><button style="float:right;"  class="btn btn-success btn-xs" onclick="updateThreadPool()">Update</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+ function updateThreadPool(){
+     var value = document.getElementById('threadPoolValue').value;
+     $.get( "setThreadPool/" +value, function(){
+	 //Add some validators.
+     });
+ }
+ function getThreadPool(){
+     $.get( "getThreadPool", function( data ) {
+	 document.getElementById('threadPoolValue').value = data;
+     });
+ }
+ getThreadPool();
+</script>
+
 
 <div class="col-lg-12">
     <section class="task-panel tasks-widget">
@@ -126,7 +173,11 @@ $.ajax({
 
 <script>
  function getPendingTime(){
-     document.getElementById('pendingTimeValue').value = "testing";
+     
+     $.get( "getPendingTime", function( data ) {
+	 document.getElementById('pendingTimeValue').value = data;
+     })
+     
  }
  getPendingTime();
 </script>
@@ -139,12 +190,27 @@ $.ajax({
         </div>
         <div class="panel-body">
             <div class="task-content">
-                <input type="text"><button style="float:right;" class="btn btn-success btn-xs">Update</button>
+                <input id="notificationIntervalValue" value="" type="text"><button style="float:right;" class="btn btn-success btn-xs" onclick="updateNotificationInterval()">Update</button>
             </div>
-
         </div>
     </section>
 </div>
+
+<script>
+ function getNotificationInterval(){
+     $.get( "getNotificationInterval", function( data ) {
+	 document.getElementById('notificationIntervalValue').value = data;
+     });
+ }
+ getNotificationInterval();
+ 
+ function updateNotificationInterval(){
+     var value = document.getElementById('notificationIntervalValue').value;
+     $.get( "setNotificationInterval/" +value, function(){
+	 //Add some validators.
+     });
+ }
+</script>
 
 
 <div class="col-lg-12">
@@ -155,39 +221,61 @@ $.ajax({
         </div>
         <div class="panel-body">
             <div class="task-content">
-                <p><b>City: </b></p><input type="text">
+                <p><b>City: </b></p><input id="city" type="text" value="">
             </div>
             <div class="task-content">
-                <p><b>Country Code:</b></p><input type="text">
+                <p><b>Country Code:</b></p><input id="countryCode" type="text" value="">
             </div>
             <div class="task-content">
-                <p><b>openWeatherMap Api-key</b></p><input type="text">
+                <p><b>openWeatherMap Api-key</b></p><input id="OWMAPI" type="text" value="">
             </div>
             <div class="task-content">
-                <button class="btn btn-success btn-xs">Update</button>
+                <button class="btn btn-success btn-xs" onclick="updateOpenWeatherSettings()">Update</button>
             </div>
         </div>
     </section>
 </div>
 
-
 <script>
-    function updateUserManagement(){
-	
-$.get( "userManagement", function( data ) {  
-document.getElementById('userManagement').innerHTML= data;
+ function getOpenWeatherSettings(){
+     $.get( "getOpenWeatherSettings", function( data ){
+	 var obj = JSON.parse(data);
+	 document.getElementById('city').value=obj.city;
+	 document.getElementById('countryCode').value=obj.countryCode;
+	 document.getElementById('OWMAPI').value=obj.owmAPI;
+     });
+ }
+ getOpenWeatherSettings();
+ 
+ function updateOpenWeatherSettings(){
+     var city = document.getElementById('city').value;
+     var countryCode = document.getElementById('countryCode').value;
+     var owmAPI = document.getElementById('OWMAPI').value;
+     $.ajax({
+                url: "updateOpenWeatherSettings",
+                type: 'POST',
+                data:  {city:city, countryCode:countryCode, owmAPI:owmAPI, _token:$('meta[name=csrf-token]').attr('content')},
+                success: function(data){
+                    // Success...
+                    getOpenWeatherSettings();
+                },
+                error: function(data){
+                    // Error...
+                    var errors = $.parseJSON(data.responseText);
 
-});
-}
+                    console.log(errors);
 
-updateUserManagement();
-
-    function removeUser(email) {
-        $.get("removeUser/"+email,function(){
-       updateUserManagement();
-});
-    }
+                    $.each(errors, function(index, value) {
+                        $.gritter.add({
+                            title: 'Error',
+                            text: value
+                        });
+                    });
+                }
+            });
+ }
 </script>
+
 
 <div class="col-lg-12">
 
@@ -220,7 +308,10 @@ updateUserManagement();
 </div>
 <script>
  function updatePendingTime(){
-     
+     var value = document.getElementById('pendingTimeValue').value;
+     $.get( "setPendingTime/" +value, function(){
+	 //Add some validators.
+     })
  }
  
     function cancelSensorEdit(id) {

@@ -174,4 +174,12 @@ function updateNotifications($id, $value, $checkbox){
    App\notifications::where('id',$id)->update(array('active' => $checkbox));
 }
 
+function getSetting($setting){
+    return App\ServerSetting::where('setting', $setting)->first()->Value;
+}
+
+function setSetting($setting, $value){
+    App\ServerSetting::where('setting', $setting)->update(['Value' => $value]);
+}
+
 ?>
