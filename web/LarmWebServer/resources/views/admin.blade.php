@@ -117,13 +117,19 @@ $.ajax({
         </div>
         <div class="panel-body">
             <div class="task-content">
-                <input type="text"><button style="float:right;"  class="btn btn-success btn-xs">Update</button>
+                <input id="pendingTimeValue" type="text" value=""><button style="float:right;"  class="btn btn-success btn-xs" onclick="updatePendingTime()">Update</button>
             </div>
 
         </div>
     </section>
 </div>
 
+<script>
+ function getPendingTime(){
+     document.getElementById('PendingTimeValue').value = "testing";
+ }
+ getPendingTime();
+</script>
 
 <div class="col-lg-12">
     <section class="task-panel tasks-widget">
@@ -213,6 +219,10 @@ updateUserManagement();
                       </section>
 </div>
 <script>
+ function updatePendingTime(){
+     
+ }
+ 
     function cancelSensorEdit(id) {
         document.getElementById( id + '-check').style.display = "none";
 	document.getElementById( id + '-cancel').style.display = "none";
