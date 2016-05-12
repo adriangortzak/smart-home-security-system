@@ -62,6 +62,43 @@
 		}
 	}
 
+ function cancelNotificationEdit(id) {
+        document.getElementById( id + '-notificationCheck').style.display = "none";
+	document.getElementById( id + '-notificationCancel').style.display = "none";
+	document.getElementById( id + '-notificationEdit').style.display = "inline";
+	document.getElementById( id + '-notificationThrash').style.display = "inline";
+//	getSensors();
+	
+	//Probably do some stuff to reload values from database or restore them from local copy while editing.
+	// Get only the values for this row.
+    }
+
+    function editNotification(id) {
+        document.getElementById( id + '-notificationCheck').style.display = "inline";
+	document.getElementById( id + '-notificationCancel').style.display = "inline";
+	document.getElementById( id + '-notificationEdit').style.display = "none";
+	document.getElementById( id + '-notificationThrash').style.display = "none";
+	$('#'+id+'-notificationToken').prop('readonly', false);
+	$('#'+id+'-notificationCheckbox').prop('disabled', false);
+    }
+
+    function confirmNotificationEdit(id) {
+        document.getElementById( id + '-notificationCheck').style.display = "none";
+	document.getElementById( id + '-notificationCancel').style.display = "none";
+	document.getElementById( id + '-notificationEdit').style.display = "inline";
+	document.getElementById( id + '-notificationThrash').style.display = "inline";
+	$('#'+id+'-notificationToken').prop('readonly', true);
+	$('#'+id+'-notificationCheckbox').prop('disabled', true);
+	var value = document.getElementById(id + '-notificationToken').value;
+	var checked = document.getElementById( id + '-notificationCheckbox').checked;
+	var checkbox = checked ? 1 : 0;
+
+	$.get( "updateNotifications/"+id+"/"+value+"/"+checkbox, function() {
+		
+	})
+
+    }
+
 </script>
 
 <!-- Notification -->

@@ -67,29 +67,31 @@ echo App\User::all()->count();
 }
 
 function getMyNotifications(){
-$notifications = App\notifications::all();
-foreach($notifications  as $notification){
+    $notifications = App\notifications::all();
+    foreach($notifications  as $notification){
 
-echo '<li>';
-            echo  '<div class="task-checkbox">';
-              echo '<input type="checkbox" class="list-child" ';
-              if ($notification->active == 1){
-              echo "checked";
-              }
-              echo '>';
-		echo '</div>';
-                echo '<div class="task-title">';
-                echo '<span class="task-title-sp">' . $notification->name . '</span>';
-                echo '<span class="badge bg-info">' . $notification->type . '</span>';
-		echo '<span><a style="padding-left:20px;">Token: </a></span>';
-		echo '<span><input style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $notification->token . '">';
-                echo '<div class="pull-right hidden-phone">';
-                echo '<button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
-                echo '<button class="btn btn-danger btn-xs" onclick="removeNotification(' . $notification->id . ')"><i class="fa fa-trash-o "></i></button>';
-		echo '</div>';
-                echo '</div>';
-                echo '</li>';
-}
+	echo '<li>';
+        echo  '<div class="task-checkbox">';
+        echo '<input id="' . $notification->id . '-notificationCheckbox" disabled type="checkbox" class="list-child" ';
+        if ($notification->active == 1){
+            echo "checked";
+        }
+        echo '>';
+	echo '</div>';
+        echo '<div class="task-title">';
+        echo '<span class="task-title-sp">' . $notification->name . '</span>';
+        echo '<span class="badge bg-info">' . $notification->type . '</span>';
+	echo '<span><a style="padding-left:20px;">Token: </a></span>';
+	echo '<span><input id="' . $notification->id . '-notificationToken" style="width:40%; padding:10px; border-radius:5px;" readonly="readonly" type="text" value="'. $notification->token . '">';
+        echo '<div class="pull-right hidden-phone">';
+	echo '<button id="' . $notification->id . '-notificationCheck" style="display:none;" class="btn btn-success btn-xs" onclick="confirmNotificationEdit(' . $notification->id . ')"><i class="fa fa-check"></i></button>';
+	echo '<button id="' . $notification->id . '-notificationCancel" style="display:none;" class="btn btn-danger btn-xs" onclick="cancelNotificationEdit(' . $notification->id . ')"><i class="fa fa-times"></i></button>';
+	echo '<button id="' . $notification->id . '-notificationEdit" style="display:inline;" class="btn btn-primary btn-xs" onclick="editNotification(' . $notification->id . ')"><i class="fa fa-pencil"></i></button>';
+        echo '<button id="' . $notification->id . '-notificationThrash" style="display:inline;" class="btn btn-danger btn-xs" onclick="removeNotification(' . $notification->id . ')"><i class="fa fa-trash-o "></i></button>';
+	echo '</div>';
+        echo '</div>';
+        echo '</li>';
+    }
 }
 
 function getMyTriggers(){
@@ -165,6 +167,11 @@ function getTriggerCount()
 function updateSensors($id, $value, $checkbox){
    App\triggers::where('id',$id)->update(array('sensor' => $value)); 
    App\triggers::where('id',$id)->update(array('active' => $checkbox));
+}
+
+function updateNotifications($id, $value, $checkbox){
+   App\notifications::where('id',$id)->update(array('token' => $value)); 
+   App\notifications::where('id',$id)->update(array('active' => $checkbox));
 }
 
 ?>
