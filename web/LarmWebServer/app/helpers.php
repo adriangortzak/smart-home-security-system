@@ -141,22 +141,41 @@ function getMyTriggers(){
 
 
 function userConfigList(){
-    $groups = App\groups::lists('name','id'); // Must be a model called Groups with name and id fields
-    $userGroup = App\User::where('email', Auth::user()->email)->first()->group;
-    $users = App\User::all();
+//    $groups = App\groups::lists('name','id'); // Must be a model called Groups with name and id fields
+//    $userGroup = App\User::where('email', Auth::user()->email)->first()->group;
+    $users = App\User::all();    
     foreach ($users as $user) {
 	echo '<li>';
 	echo '<div class="task-title" >';
 	echo '<span class="task-title-sp">' . $user->name . '</span>';
-	echo '<span class="badge bg-info">User</span>';
-	echo '<span> {{Form::open}}{{ Form::select("group", '. $groups .','. $userGroup .')}} {{Form::submit('update')}}</span>';
-	//	echo '<span> {!! Form::select("group",'. $groups .','. $userGroup .')!!}</span>'; // Could also work perhaps
+	echo '<span class="badge bg-info">'. App\groups::where('id',$user->group)->first()->name .'</span>';
+	echo '<select style="display:inline" id="'. $user->id.'-userGroup">';
+	echo getGroupOptions($user->group);
+	echo '</select>';
 	echo '<div class="pull-right hidden-phone">';
-	echo '<button onclick="removeUser(' . "'" .$user->email . "'" . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>';
+	echo '<button style="display:none" onclick="updateGroup(' . $user->id . ')" class="btn btn-success btn-xs"><i class="fa fa-check "></i></button>';
+	echo '<button style="display:none" onclick="cancelGroupEdit(' . "'" .$user->id . "'" . ')" class="btn btn-danger btn-xs"><i class="fa fa-times "></i></button>';
+	echo '<button style="display:inline" onclick="changeGroup(' . "'" .$user->id . "'" . ')" class="btn btn-primary btn-xs"><i class="fa fa-pencil "></i></button>';
+	echo '<button style="display:inline" onclick="removeUser(' . "'" .$user->email . "'" . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>';
         echo '</div>';
         echo '</div>';
 	echo '</li>';
     }
+}
+
+function getGroupOptions($groupID){
+    $groups = App\groups::all();
+    $optionGroups = "";
+    foreach ($groups as $group){
+	
+	if($groupID == $group->id ){
+	    $optionGroups = $optionGroups . '<option selected="selected" value="'. $group->id .'">'. $group->name .'</option>';
+	}
+	else{
+	    $optionGroups = $optionGroups . '<option value="'. $group->id .'">'. $group->name .'</option>';
+	}
+    }
+    return $optionGroups;
 }
 
 function getUsers()
