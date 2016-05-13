@@ -125,23 +125,55 @@
 	 });
      }
      
-     function updateGroup(){
-	 
+     function updateGroup(id){
+	 document.getElementById( id + '-userGroup').style.display = "none";
+	 document.getElementById( id + '-groupTag').style.display = "inline";
+	 document.getElementById( id + '-groupUpdateButton').style.display = "none";
+	 document.getElementById( id + '-groupCancelButton').style.display = "none";
+	 document.getElementById( id + '-groupEditButton').style.display = "inline";
+	 document.getElementById( id + '-removeUserButton').style.display = "inline";
+	 var group = document.getElementById(id + '-userGroup').value;
+
+	 $.ajax({
+             url: "updateGroupMembership",
+             type: 'POST',
+             data:  {group:group, user:id, _token:$('meta[name=csrf-token]').attr('content')},
+             success: function(data){
+                 // Success...
+                 updateUserManagement();
+             },
+             error: function(data){
+                 // Error...
+                 var errors = $.parseJSON(data.responseText);
+
+                 console.log(errors);
+
+                 $.each(errors, function(index, value) {
+                     $.gritter.add({
+                         title: 'Error',
+                         text: value
+                     });
+                 });
+             }
+         });
      }
 
-     function cancelGroupEdit(){
-	 
+     function cancelGroupEdit(id){
+	 document.getElementById( id + '-userGroup').style.display = "none";
+	 document.getElementById( id + '-groupTag').style.display = "inline";
+	 document.getElementById( id + '-groupUpdateButton').style.display = "none";
+	 document.getElementById( id + '-groupCancelButton').style.display = "none";
+	 document.getElementById( id + '-groupEditButton').style.display = "inline";
+	 document.getElementById( id + '-removeUserButton').style.display = "inline";	 
      }
      
      function changeGroup(id){
-	 document.getElementById( id + '-check').style.display = "inline";
-	 document.getElementById( id + '-cancel').style.display = "inline";
-	 document.getElementById( id + '-edit').style.display = "none";
-	 document.getElementById( id + '-thrash').style.display = "none";
-	 $('#'+id+'-sensorID').prop('readonly', false);
-	 $('#'+id+'-sensorCheckbox').prop('disabled', false);
-
-	 //     var group = document.getElementById('
+	 document.getElementById( id + '-userGroup').style.display = "inline";
+	 document.getElementById( id + '-groupTag').style.display = "none";
+	 document.getElementById( id + '-groupUpdateButton').style.display = "inline";
+	 document.getElementById( id + '-groupCancelButton').style.display = "inline";
+	 document.getElementById( id + '-groupEditButton').style.display = "none";
+	 document.getElementById( id + '-removeUserButton').style.display = "none";
      }
     </script>
 

@@ -219,6 +219,14 @@ class HomeController extends Controller
 	setSetting('openWeatherMapAPI',$request->input('owmAPI'));
     }
 
+    public function updateGroupMembership(Request $request){
+	$this->validate($request, [
+	    'group' => 'required|numeric|max:32',
+	    'user' => 'required|numeric|max:32',
+	]);
+	User::where('id',$request->user)->update(['group' => $request->group]);
+    }
+    
     public  function createUser(Request $request){
         $this->validate($request, [
 	    'name' => 'required|max:255',

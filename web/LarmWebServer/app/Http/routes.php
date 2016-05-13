@@ -14,8 +14,8 @@ Route::get('/',['middleware' => 'auth', function () {
     return view('home');
 }]);
 
-  //--------------------------------------//
- //Admin User                            //
+//--------------------------------------//
+//Admin User                            //
 //--------------------------------------//
 Route::group(['middleware' => ['web','admin']], function () {
     //Admin page
@@ -52,16 +52,15 @@ Route::group(['middleware' => ['web','admin']], function () {
         setSetting('threadPool', $value);
     });
 
-    //TODO jimmy, varför är det två ?
     Route::get('getOpenWeatherSettings', function(){
         $city = getSetting('city');
         $countryCode = getSetting('countryCode');
         $api = getSetting('openWeatherMapAPI');
         $json = '{'
-            .'"city" :"'. $city .'",'
-            .'"countryCode" :"' . $countryCode. '",'
-            .'"owmAPI" :"' . $api
-            .'"}';
+               .'"city" :"'. $city .'",'
+               .'"countryCode" :"' . $countryCode. '",'
+               .'"owmAPI" :"' . $api
+               .'"}';
         echo $json;
     });
 
@@ -82,10 +81,12 @@ Route::group(['middleware' => ['web','admin']], function () {
     Route::get('removeUser/{email}', 'HomeController@removeUser');
     // Create new user
     Route::post('newUser', 'HomeController@createUser');
+
+    Route::post('updateGroupMembership', 'HomeController@updateGroupMembership'); 
 });
 
-  //---------------------------------------//
- //History                                //
+//---------------------------------------//
+//History                                //
 //---------------------------------------//
 Route::group(['middleware' => ['web','history']], function () {
     //History page
@@ -93,8 +94,8 @@ Route::group(['middleware' => ['web','history']], function () {
         return view('history');
     });
 });
-  //---------------------------------------//
- //Control                                //
+//---------------------------------------//
+//Control                                //
 //---------------------------------------//
 Route::group(['middleware' => ['web','control']], function () {
     //Change alarm status
@@ -106,8 +107,8 @@ Route::group(['middleware' => ['web','control']], function () {
     });
 });
 
-  //---------------------------------------//
- //All user                               //
+//---------------------------------------//
+//All user                               //
 //---------------------------------------//
 use App\Http\Controllers\HomeController;
 Route::group(['middleware' => ['web']], function () {
