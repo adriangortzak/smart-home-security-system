@@ -9,10 +9,14 @@
    | and give it the controller to call when that URI is requested.
    |
  */
+//Start
 Route::get('/',['middleware' => 'auth', function () {
     return view('home');
 }]);
 
+  //--------------------------------------//
+ //Admin User                            //
+//--------------------------------------//
 Route::group(['middleware' => ['web','admin']], function () {
     //Admin page
     Route::get('removeSensor/{id}', 'HomeController@removeSensor');
@@ -23,24 +27,32 @@ Route::group(['middleware' => ['web','admin']], function () {
     Route::get('userManagement', function () {
         userConfigList();
     });
+
+    //Pending time get/set methods
     Route::get('getPendingTime', function () {
         echo getSetting('pendingTime');
     });
     Route::get('setPendingTime/{value}', function ($value) {
         setSetting('pendingTime', $value);
     });
+
+    //Notification interval get/set methods
     Route::get('getNotificationInterval', function () {
         echo getSetting('notificationInterval');
     });
     Route::get('setNotificationInterval/{value}', function ($value){
         setSetting('notificationInterval', $value);
     });
+
+    //Thread get/set methods
     Route::get('getThreadPool', function () {
         echo getSetting('threadPool');
     });
     Route::get('setThreadPool/{value}', function ($value){
         setSetting('threadPool', $value);
     });
+
+    //TODO jimmy, varför är det två ?
     Route::get('getOpenWeatherSettings', function(){
         $city = getSetting('city');
         $countryCode = getSetting('countryCode');
@@ -52,34 +64,57 @@ Route::group(['middleware' => ['web','admin']], function () {
             .'"}';
         echo $json;
     });
+
+    //Get weather information
     Route::post('updateOpenWeatherSettings', 'HomeController@updateOpenWeatherSettings');
 
+    //Get sensors
     Route::get('getSensors', function () {
         getMyTriggers();
     });
+
+    //Change sensor settings in database
     Route::get('updateSensors/{id}/{value}/{checkbox}', function ($id, $value, $checkbox){
         updateSensors($id,$value,$checkbox);
     });
 
+    //Remove user
     Route::get('removeUser/{email}', 'HomeController@removeUser');
+    // Create new user
+    Route::post('newUser', 'HomeController@createUser');
 });
 
+  //---------------------------------------//
+ //History                                //
+//---------------------------------------//
+Route::group(['middleware' => ['web','history']], function () {
+    //History page
+    Route::get('histories', function () {
+        return view('history');
+    });
+});
+  //---------------------------------------//
+ //Control                                //
+//---------------------------------------//
+Route::group(['middleware' => ['web','control']], function () {
+    //Change alarm status
+    Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
+    //Trigger alarm on server
+    Route::get('trigger', function () {
+        $controller = new HomeController();
+        $controller->trigger();
+    });
+});
 
-
-
+  //---------------------------------------//
+ //All user                               //
+//---------------------------------------//
 use App\Http\Controllers\HomeController;
 Route::group(['middleware' => ['web']], function () {
-
     //Dashboard page
     Route::get('home', 'HomeController@viewHome'); 
-    //Dashboard settings
+    //Get alarm status
     Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
-    Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
-    Route::get('trigger', function () {
-	$controller = new HomeController();
-	$controller->trigger();
-    });
-    Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
 
     //Dasboard Update
     Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
@@ -88,9 +123,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('ServerCheck', 'HomeController@ServerCheck');
     Route::get('triggerCount', 'HomeController@triggerCount');
     Route::get('getWeather', 'HomeController@getWeather');
-
-
-    Route::post('newUser', 'HomeController@createUser');
 
     //Settings page
     Route::get('settings', function () {
@@ -105,12 +137,6 @@ Route::group(['middleware' => ['web']], function () {
 	updateNotifications($id,$value,$checkbox);	
     });
 
-
-    //History page
-    Route::get('histories', function () {
-	return view('history');
-    });
-
     //Lock screen
     Route::get('lock/{email}', function ($email) {
 	Auth::logout();
@@ -122,9 +148,6 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('login', 'Auth\AuthController@showLoginForm');
 Route::post('login', 'Auth\AuthController@login');
 Route::get('logout', 'Auth\AuthController@logout');
-
-// Registration Routes...
-//	Route::post('register', 'Auth\AuthController@register');
 
 // Password Reset Routes...
 Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
