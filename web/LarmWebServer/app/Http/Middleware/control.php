@@ -2,13 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\groups;
-use App\User;
-use Auth;
 use Closure;
-use Illuminate\Support\Facades\App;
 
-class admin
+class control
 {
     /**
      * Handle an incoming request.
@@ -19,7 +15,7 @@ class admin
      */
     public function handle($request, Closure $next)
     {
-        if(checkAdmin() == 1){
+        if(checkControlGroup()  == 1) {
             return $next($request);
         }
     }
