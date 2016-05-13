@@ -124,6 +124,9 @@ updateUserManagement();
        updateUserManagement();
 });
     }
+ function changeGroup(){
+     var group = document.getElementById('
+ }
 </script>
 
 <div class="col-lg-12">
