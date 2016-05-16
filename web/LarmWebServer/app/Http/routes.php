@@ -101,10 +101,11 @@ Route::group(['middleware' => ['web','control']], function () {
     //Change alarm status
     Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
     //Trigger alarm on server
-    Route::get('trigger', function () {
+    Route::get('trigger', 'HomeController@trigger');
+/*    Route::get('trigger', function () {
         $controller = new HomeController();
         $controller->trigger();
-    });
+    }); */
 });
 
 //---------------------------------------//
