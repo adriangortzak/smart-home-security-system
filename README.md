@@ -76,7 +76,7 @@ Sweden receives modern ICT­engineers that cater to the future competence need a
 increase the country's competitiveness, internal market and export.
 
 
-## Credits
+## Credits 
 
 - [Laravel](https://github.com/laravel/laravel)
 - [Tellstick api - jstick](https://github.com/juppinet)
