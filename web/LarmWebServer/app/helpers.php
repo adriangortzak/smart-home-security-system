@@ -67,7 +67,7 @@ function getUserCount(){
 }
 
 function getMyNotifications(){
-    $notifications = App\notifications::all();
+    $notifications = App\notifications::where('user',Auth::user()->id)->get();
     foreach($notifications  as $notification){
 
 	echo '<li>';
@@ -206,8 +206,14 @@ function updateSensors($id, $value, $checkbox){
 }
 
 function updateNotifications($id, $value, $checkbox){
-    App\notifications::where('id',$id)->update(array('token' => $value)); 
-    App\notifications::where('id',$id)->update(array('active' => $checkbox));
+    if(App\notifications::where('id', $id)->first()->user == Auth::user()->id){
+	App\notifications::where('id',$id)->update(array('token' => $value)); 
+	App\notifications::where('id',$id)->update(array('active' => $checkbox));
+    }
+    else {
+	echo "You can't change someone elses notification settings!";
+    }
+    
 }
 
 function getSetting($setting){
