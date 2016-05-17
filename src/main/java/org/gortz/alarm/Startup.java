@@ -5,7 +5,7 @@ import org.gortz.alarm.View.View;
 public class Startup {
 
     public static void main(String[] args) {
-        new View();
+        new View(args);
     }
 }
 

@@ -20,21 +20,39 @@ public class View {
     Logger myLogger;
     protected Socket clientSocket;
     //Constructor
-    public View(){
-        start();
+    public View(String[] args){
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                myLogger.write("server", "Shutting down view.", 3);
+                try{
+                    clientSocket = new Socket("localhost", 1967);
+                    DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+                    outToServer.writeBytes("server:stop\n");
+                    clientSocket.close();
+                }catch(Exception e){e.printStackTrace();}
+            }
+        });
+
+        start(args);
     }
 
     //Called by the constructor to start View
-    void start() {
+    void start(String[] args) {
+        myLogger = Logger.getInstance();
 
-            myLogger = Logger.getInstance();
+        if(args.length == 0){
+            myLogger.write("Server", "No argument supplied", 3);
+            return;
+        }
 
-            String input;
-            Scanner in = new Scanner(System.in);
-            while (true){
 
-                input = in.next();
-                input.toLowerCase();
+            String input = "";
+
+            for( int i = 0; i< args.length; i++){
+                input = args[i].toLowerCase();
                 switch(input){
                     case "start":
                         if(!started) {
@@ -47,29 +65,11 @@ public class View {
 
                         }else myLogger.write("server","System is already running",3);
                         break;
-                    case "exit" :
-                        myLogger.write("server", "Shutting down view.", 3);
-                        try{
-                            clientSocket = new Socket("localhost", 1967);
-                            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                            outToServer.writeBytes("server:stop\n");
-                            clientSocket.close();
-                        }catch(Exception e){e.printStackTrace();}
-
-                        return;
-                    case "trigger" :
-                        myController.triggerAlarm("Terminal");
-                        break;
                     default:
                         print("Invalid input");
                 }
-
-        }
-
-
+            }
     }
-
-
 
     // An Easier way to print
     void print(String message) {
