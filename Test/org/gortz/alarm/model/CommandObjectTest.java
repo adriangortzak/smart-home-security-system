@@ -1,5 +1,6 @@
 package org.gortz.alarm.model;
 
+import org.gortz.alarm.model.Sensors.CommandObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

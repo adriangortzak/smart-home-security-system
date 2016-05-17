@@ -1,12 +1,12 @@
 package org.gortz.alarm.model.Setting;
 
 
-import org.gortz.alarm.model.CommandObject;
+import org.gortz.alarm.model.SensorData;
 import org.gortz.alarm.model.Database;
 import org.gortz.alarm.model.Databases.Mysql;
 import org.gortz.alarm.model.Notification;
 import org.gortz.alarm.model.Sensors.TellstickDuo;
-import java.util.concurrent.atomic.AtomicBoolean;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -25,7 +25,7 @@ public class Settings {
     static String dbPassword ="APJ4A5M6sXTPBH74";
     static String dbUsername ="shss";
     static boolean debuggingStatus = false;
-    CommandObject[] triggers;
+    SensorData[] triggers;
     AtomicInteger threadPoolCount = new AtomicInteger();
     TellstickDuo ts = TellstickDuo.getInstance();
 
@@ -88,7 +88,7 @@ private Settings(){
         return notifications;
     }
 
-    public CommandObject[] getTriggerObject() {
+    public SensorData[] getTriggerObject() {
         return triggers;
     }
 
