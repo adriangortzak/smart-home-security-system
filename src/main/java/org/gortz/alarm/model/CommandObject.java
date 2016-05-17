@@ -105,7 +105,7 @@ public class CommandObject {
     /**
      * Check if this CommandObject is registered for protocol archtech or sartano and compares that with another CommandOBject
      * to see if it is a valid
-     * @param 
+     * @param
      * @return
      */
     public boolean compareTo(CommandObject co){
