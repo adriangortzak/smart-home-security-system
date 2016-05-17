@@ -17,7 +17,7 @@ system via the web interface.
 
 -  Java >= v.8
 -  PHP >= 5.5.9
-- OpenSSL PHP Extension
+- OpenSSL PHP Extension 
 -  PDO PHP Extension
 -  Mbstring PHP Extension
 -  Tokenizer PHP Extension
