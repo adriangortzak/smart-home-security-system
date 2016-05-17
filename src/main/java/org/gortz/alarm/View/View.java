@@ -26,7 +26,7 @@ public class View {
             @Override
             public void run()
             {
-                myLogger.write("server", "Shutting down view.", 3);
+                myLogger.write("server", "Shutting down java server", 5);
                 try{
                     clientSocket = new Socket("localhost", 1967);
                     DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
@@ -56,7 +56,7 @@ public class View {
                 switch(input){
                     case "start":
                         if(!started) {
-                            myLogger.write("server","Booting up system",3);
+                            myLogger.write("server","Booting up system",5);
                             started = true;
                             myController = new Controller();
                             //Create socket thread to read input from website
