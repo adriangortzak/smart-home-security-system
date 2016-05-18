@@ -57,7 +57,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     }
 
     @Override
-    public org.gortz.alarm.model.SensorData[] getConfiguredDevices(int[] list) {
+    public SensorData[] getConfiguredDevices(int[] list) {
         CommandObject co[] = new CommandObject[list.length];
         Device device;
         int j = 0;
@@ -225,6 +225,9 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             this.ts = ts;
             myLogger = Logger.getInstance();
             sett = Settings.getInstance();
+            CommandObject c1 = new CommandObject("arctech", "selflearning", "A", "1", "0", "Null", "1");
+            CommandObject c2 = new CommandObject("arctech", "selflearning", "A", "1", "0", "Null", "1");
+            myLogger.write("test", ""+c1.equals(c2),2);
         }
 
         public void terminate(){
