@@ -9,6 +9,7 @@ import org.gortz.alarm.model.SensorData;
 import org.gortz.alarm.model.Setting.Settings;
 
 import java.lang.invoke.WrongMethodTypeException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -203,9 +204,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                     return false;
                 }
             }
-            else{
-                System.out.println("Matched on protocol and model!");
-            }
+
             switch (this.getProtocol()){
                 case "arctech":
                     if(!this.getHouse().equals(co.getHouse())){
@@ -214,7 +213,6 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                     else if(!this.getUnit().equals(co.getUnit())){
                         return false;
                     }
-                    System.out.println("Matched also on house and unit");
                     return true;
                 case "sartano":
                     if(!this.getCode().equals(co.getCode())){
@@ -225,6 +223,47 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                     return false;
 
             }
+        }
+
+        @Override
+        public Object get(String attribute) {
+            Object o = null;
+            switch (attribute.toLowerCase()){
+                case "protocol":
+                    o = getProtocol();
+                    break;
+                case "model":
+                    o = getModel();
+                    break;
+                case "house":
+                    o = getHouse();
+                    break;
+                case "unit":
+                    o = getUnit();
+                    break;
+                case "group":
+                    o = getGroup();
+                    break;
+                case "code":
+                    o = getCode();
+                    break;
+                case "method":
+                    o = getMethod();
+                    break;
+            }
+            return o;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            try{
+                boolean res = isSame((CommandObject) o);
+                return res? 0:-1;
+            }
+            catch(Exception e){
+                throw new WrongMethodTypeException("Wrong version of isSame is being called");
+            }
+
         }
     }
 
@@ -263,13 +302,11 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                         if(matcher.group(1).equals("command")){
                             SensorData c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                             for(SensorData curr : sett.getTriggerObject()){
-                                //System.out.println(c.toString());
-                                //System.out.println("----------------From Settings:-----------------");
-                                //curr.toString();
-                                //System.out.println("----------------From Settings end:-------------");
-                                if(c.isSame(curr)){
-                                    myLogger.write("test", "Objects were equal!", 2);
-                                    //myLogger.write("server",c.getMethod(),3);
+                                myLogger.write("Server",c.toString(),1);
+                                myLogger.write("Server","----------------From Settings:-----------------",1);
+                                myLogger.write("Server",curr.toString(),1);
+                                myLogger.write("Server","--------------From Settings end:-----------------",1);
+                                if(c.compareTo(curr) == 0){
                                     Alarm alarm = Alarm.getInstance();
                                     alarm.trigger("sensor");
                                     break;
