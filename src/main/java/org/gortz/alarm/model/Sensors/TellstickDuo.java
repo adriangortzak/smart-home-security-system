@@ -173,7 +173,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             if(!this.getHouse().equals("Null")) System.out.println("House: " + this.getHouse());
             if(!this.getUnit().equals("Null")) System.out.println("Unit: " + this.getUnit());
             if(!this.getGroup().equals("Null")) System.out.println("Group: " + this.getGroup());
-            if(!this.getCode().equals("Null")) System.out.println("Code: " + this.getCode());
+            //if(!this.getCode().equals("Null")) System.out.println("Code: " + this.getCode());
             System.out.println("-----------------------------------------------------------");
             return "";
         }
