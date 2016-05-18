@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     Tellstick ts;
     Listen l;
+    Logger myLogger = Logger.getInstance();
     static TellstickDuo tsD = null;
 
     private TellstickDuo(){
@@ -51,7 +52,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
 
     public void stopListener() {
         l.terminate();
-        System.out.println("Stopped listener\n");
+        myLogger.write("Server","Stopped listener\n", 3);
     }
 
     public void close(){
@@ -168,16 +169,17 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         /**
          * Outprints information relevant to SHSS for sniffing incoming data.
          */
-        public String toString(){ //TODO Return this outprint in string format
-            System.out.println("------------------Printed CommandObject--------------------");
-            System.out.println("Protocol: " + this.getProtocol());
-            System.out.println("Model: " + this.getModel());
-            if(!(getHouse() == null)) System.out.println("House: " + this.getHouse());
-            if(!(getUnit() == null)) System.out.println("Unit: " + this.getUnit());
-            if(!(getGroup() == null)) System.out.println("Group: " + this.getGroup());
-            if(!(getCode() == null)) System.out.println("Code: " + this.getCode());
-            System.out.println("-----------------------------------------------------------");
-            return "";
+        public String toString(){
+            StringBuilder sb = new StringBuilder();
+            sb.append("------------------Printed CommandObject--------------------\n");
+            sb.append("Protocol: " + this.getProtocol() + "\n");
+            sb.append("Model: " + this.getModel() + "\n");
+            if(!(getHouse() == null)) sb.append("House: " + this.getHouse() + "\n");
+            if(!(getUnit() == null)) sb.append("Unit: " + this.getUnit() + "\n");
+            if(!(getGroup() == null)) sb.append("Group: " + this.getGroup() + "\n");
+            if(!(getCode() == null)) sb.append("Code: " + this.getCode() + "\n");
+            sb.append("-----------------------------------------------------------\n");
+            return sb.toString();
         }
 
         /**
