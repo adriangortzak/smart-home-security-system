@@ -166,7 +166,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         /**
          * Outprints information relevant to SHSS for sniffing incoming data.
          */
-        public void print(){
+        public String toString(){ //TODO Return this outprint in string format
             System.out.println("------------------Printed CommandObject--------------------");
             System.out.println("Protocol: " + this.getProtocol());
             System.out.println("Model: " + this.getModel());
@@ -175,6 +175,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             if(!this.getGroup().equals("Null")) System.out.println("Group: " + this.getGroup());
             if(!this.getCode().equals("Null")) System.out.println("Code: " + this.getCode());
             System.out.println("-----------------------------------------------------------");
+            return "";
         }
 
         /**
@@ -225,11 +226,6 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             this.ts = ts;
             myLogger = Logger.getInstance();
             sett = Settings.getInstance();
-            CommandObject c1 = new CommandObject("arctech", "selflearning", "A", "1", "0", "Null", "1");
-            CommandObject c2 = new CommandObject("arctech", "selflearning", "A", "1", "0", "Null", "2");
-            CommandObject c3 = new CommandObject("arctech", "selflearning", "A", "2", "0", "Null", "1");
-            myLogger.write("test", ""+c1.equals(c2),2);
-            myLogger.write("test", ""+c1.equals(c3),2);
         }
 
         public void terminate(){
@@ -254,6 +250,8 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                         if(matcher.group(1).equals("command")){
                             SensorData c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                             for(SensorData curr : sett.getTriggerObject()){
+                                curr.toString();
+                                c.toString();
                                 if(c.equals(curr)){
                                     //myLogger.write("server",c.getMethod(),3);
                                     Alarm alarm = Alarm.getInstance();

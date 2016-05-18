@@ -71,7 +71,7 @@ public class View {
             }
     }
 
-    // An Easier way to print
+    // An Easier way to toString
     void print(String message) {
         System.out.println(message);
     }
@@ -122,7 +122,7 @@ public class View {
                     String commandPart[] = command.split(":");
                     user = commandPart[0];
                     command = commandPart[1];
-                    // print message
+                    // toString message
                     socketLogger.write(user,"Command: " + command ,3);
                     responseString = InterpretMessage(command, user);
 
