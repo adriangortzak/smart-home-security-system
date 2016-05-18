@@ -8,6 +8,7 @@ import org.gortz.alarm.model.Loggers.Logger;
 import org.gortz.alarm.model.SensorData;
 import org.gortz.alarm.model.Setting.Settings;
 
+import java.lang.invoke.WrongMethodTypeException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -184,7 +185,10 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
          * @param
          * @return
          */
-        public boolean equals(CommandObject co){
+        public boolean isSame(Object o){
+            throw new WrongMethodTypeException("Wrong version of isSame is being called");
+        }
+        public boolean isSame(CommandObject co){
             if(!this.getProtocol().equals(co.getProtocol())) {
                 return false;
             }
@@ -271,7 +275,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                             }
 
                         }
-                        /**else if(matcher.group(1).equals("sensor")){
+                        /**else if(matcher.group(1).isSame("sensor")){
                          SensorData s = new SensorData(matcher.group(2),matcher.group(3),matcher.group(4),matcher.group(10), matcher.group(11));
                          myLogger.write("server","Current temp: " + s.getTemp() + " degrees Celsius and current humidity: " + s.getHumidity() + "%",3);
                          }
