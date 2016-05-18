@@ -73,6 +73,7 @@ public class Logger {
                 break;
             case 5:
                 if(user != "Test") db.writeHistory(user, message);
+                System.out.println("[" + timeAndDate() + "] - ("+user+")" + message);
                 break;
             default:
                 break;
