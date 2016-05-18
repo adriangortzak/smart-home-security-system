@@ -119,7 +119,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
 
     //Dasboard Update
-    Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
+    Route::get('sirenStatus', 'HomeController@checkSiren');
     Route::get('internetStatus', 'HomeController@internetStatus');
     Route::get('userCount', 'HomeController@userCount');
     Route::get('ServerCheck', 'HomeController@ServerCheck');
