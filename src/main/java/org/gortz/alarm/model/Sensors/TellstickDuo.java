@@ -194,6 +194,9 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                     return false;
                 }
             }
+            else{
+                System.out.println("Matched on protocol and model!");
+            }
             switch (this.getProtocol()){
                 case "arctech":
                     if(!this.getHouse().equals(co.getHouse())){
@@ -202,6 +205,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                     else if(!this.getUnit().equals(co.getUnit())){
                         return false;
                     }
+                    System.out.println("Matched also on house and unit");
                     return true;
                 case "sartano":
                     if(!this.getCode().equals(co.getCode())){
