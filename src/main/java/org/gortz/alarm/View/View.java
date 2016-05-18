@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 /**
@@ -65,6 +66,12 @@ public class View {
             outToServer.writeBytes("server:stop\n");
             clientSocket.close();
         }catch(Exception e){e.printStackTrace();}
+        started = false;
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     private void startup(){
         if(!started) {
@@ -89,11 +96,12 @@ public class View {
         Logger socketLogger = Logger.getInstance();
         volatile boolean running;
 
-        protected java.net.ServerSocket socket;
+
         protected final int port = 1967;
         protected java.net.Socket connection;
         protected String command = new String();
         protected String responseString = new String();
+        protected java.net.ServerSocket socket;
 
         @Override
         public void run() {
@@ -107,8 +115,9 @@ public class View {
         }
 
         public void waitForMessage() throws IOException {
-            socket = new java.net.ServerSocket(port,0, InetAddress.getByName(null));
-
+           socket= new java.net.ServerSocket();
+            socket.setReuseAddress(true);
+           socket.bind(new InetSocketAddress(InetAddress.getByName(null),port),0);
             while(running)
             {
                 // open socket
@@ -168,7 +177,21 @@ public class View {
                     msg = myController.serverAliveCheck();
                     break;
                 case "stop":
+                    try {
+                        socket.close();
+                        while (!socket.isClosed()){}
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     running = false;
+                   /**
+                    try {
+                        //socket.close();
+                        //socket = null;
+                    } catch (IOException e) {
+                        myLogger.write("server","Couldn't close socket",3);
+                    }
+                    **/
                     msg = "stopping thread.";
                     break;
                 default:
