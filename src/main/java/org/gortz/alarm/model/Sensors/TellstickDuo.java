@@ -258,11 +258,11 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                         if(matcher.group(1).equals("command")){
                             SensorData c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                             for(SensorData curr : sett.getTriggerObject()){
-                                System.out.println(c.toString());
-                                System.out.println("----------------From Settings:-----------------");
-                                curr.toString();
-                                System.out.println("----------------From Settings end:-------------");
-                                if(c.equals(curr)){
+                                //System.out.println(c.toString());
+                                //System.out.println("----------------From Settings:-----------------");
+                                //curr.toString();
+                                //System.out.println("----------------From Settings end:-------------");
+                                if(c.isSame(curr)){
                                     myLogger.write("test", "Objects were equal!", 2);
                                     //myLogger.write("server",c.getMethod(),3);
                                     Alarm alarm = Alarm.getInstance();
