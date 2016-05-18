@@ -1,11 +1,14 @@
 package org.gortz.alarm.Controller;
 import org.gortz.alarm.model.Alarms.Alarm;
+import org.gortz.alarm.model.Setting.Settings;
+
 /**
  * Created by adrian on 02/04/16.
  */
 public class Controller {
     Alarm alarm;
     Thread Sensor;
+    Settings settings = Settings.getInstance();
     public Controller() {
         startSensor();
         alarm =  Alarm.getInstance();
@@ -36,5 +39,9 @@ public class Controller {
     }
     public String sirenStatus(){
     return alarm.getSirenStatus();
+    }
+
+    public void updateSettings() {
+        settings.update();
     }
 }

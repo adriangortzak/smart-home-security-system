@@ -113,6 +113,10 @@ public class View {
                 e.printStackTrace();
             }
         }
+        private void updateSettings(){
+            myController.updateSettings();
+
+        }
 
         public void waitForMessage() throws IOException {
            socket= new java.net.ServerSocket();
