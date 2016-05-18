@@ -226,8 +226,10 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             myLogger = Logger.getInstance();
             sett = Settings.getInstance();
             CommandObject c1 = new CommandObject("arctech", "selflearning", "A", "1", "0", "Null", "1");
-            CommandObject c2 = new CommandObject("arctech", "selflearning", "A", "1", "0", "Null", "1");
+            CommandObject c2 = new CommandObject("arctech", "selflearning", "A", "1", "0", "Null", "2");
+            CommandObject c3 = new CommandObject("arctech", "selflearning", "A", "2", "0", "Null", "1");
             myLogger.write("test", ""+c1.equals(c2),2);
+            myLogger.write("test", ""+c1.equals(c3),2);
         }
 
         public void terminate(){
