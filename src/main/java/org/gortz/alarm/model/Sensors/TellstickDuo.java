@@ -186,7 +186,12 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
          * @return
          */
         public boolean isSame(Object o){
-            throw new WrongMethodTypeException("Wrong version of isSame is being called");
+            try{
+                return isSame((CommandObject) o);
+            }
+            catch(Exception e){
+                throw new WrongMethodTypeException("Wrong version of isSame is being called");
+            }
         }
         public boolean isSame(CommandObject co){
             if(!this.getProtocol().equals(co.getProtocol())) {
