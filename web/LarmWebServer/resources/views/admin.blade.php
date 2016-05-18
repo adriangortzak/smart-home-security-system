@@ -177,6 +177,27 @@
      }
     </script>
 
+<div class="col-lg-12">
+    <section class="task-panel tasks-widget">
+        <div class="panel-heading">
+            <div class="pull-left"><h4>Server management</h4></div>
+            <br>
+        </div>
+        <div class="panel-body">
+            <div class="task-content">
+                <button class="btn btn-success btn-xs" onclick="restart()">Restart</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    function restart(){
+        $.get("restart");
+    }
+</script>
+
+
     <div class="col-lg-12">
 	<section class="task-panel tasks-widget">
             <div class="panel-heading">

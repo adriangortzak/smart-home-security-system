@@ -82,7 +82,11 @@ Route::group(['middleware' => ['web','admin']], function () {
     // Create new user
     Route::post('newUser', 'HomeController@createUser');
 
-    Route::post('updateGroupMembership', 'HomeController@updateGroupMembership'); 
+    Route::post('updateGroupMembership', 'HomeController@updateGroupMembership');
+
+    //Restart server
+    Route::get('restart', 'HomeController@restart');
+
 });
 
 //---------------------------------------//
@@ -102,10 +106,6 @@ Route::group(['middleware' => ['web','control']], function () {
     Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
     //Trigger alarm on server
     Route::get('trigger', 'HomeController@trigger');
-/*    Route::get('trigger', function () {
-        $controller = new HomeController();
-        $controller->trigger();
-    }); */
 });
 
 //---------------------------------------//

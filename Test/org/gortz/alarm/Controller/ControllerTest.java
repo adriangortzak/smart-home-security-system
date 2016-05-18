@@ -1,6 +1,5 @@
 package org.gortz.alarm.Controller;
 
-import org.gortz.alarm.Controller.Controller;
 import org.gortz.alarm.model.Alarms.Alarm;
 
 import static junit.framework.TestCase.fail;
@@ -47,14 +46,14 @@ public class ControllerTest {
     @org.junit.Test
     public void sirenStatus(){
         try {
-            String resp = myController.SirenStatus();
+            String resp = myController.sirenStatus();
             switch (resp){
                 case "ON": break;
                 case "OFF":break;
-                    default: fail("Not allowed response from function SirenStatus from Controller");
+                    default: fail("Not allowed response from function sirenStatus from Controller");
             }
         }catch (Exception e){
-            fail("Could'nt call SirenStatus from Controller");
+            fail("Could'nt call sirenStatus from Controller");
         }
     }
 

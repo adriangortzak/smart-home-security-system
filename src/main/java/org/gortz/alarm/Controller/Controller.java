@@ -34,7 +34,7 @@ public class Controller {
     public String serverAliveCheck(){
         return "OK!";
     }
-    public String SirenStatus(){
+    public String sirenStatus(){
     return alarm.getSirenStatus();
     }
 }

@@ -98,6 +98,11 @@ class HomeController extends Controller
 	$this->socketSend($message);
     }
 
+	public function restart(){
+		$message = "restart\n";
+		$this->socketSend($message);
+	}
+
     function socketSend($message)
     {
 	if (!($sock = socket_create(AF_INET, SOCK_STREAM, 0))) {

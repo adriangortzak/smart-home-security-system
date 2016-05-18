@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Scanner;
+
 /**
  * Created by adrian on 01/04/16.
  */
@@ -26,13 +26,7 @@ public class View {
             @Override
             public void run()
             {
-                myLogger.write("server", "Shutting down java server", 5);
-                try{
-                    clientSocket = new Socket("localhost", 1967);
-                    DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-                    outToServer.writeBytes("server:stop\n");
-                    clientSocket.close();
-                }catch(Exception e){e.printStackTrace();}
+                shutdown();
             }
         });
 
@@ -55,28 +49,38 @@ public class View {
                 input = args[i].toLowerCase();
                 switch(input){
                     case "start":
-                        if(!started) {
-                            myLogger.write("server","Booting up system",5);
-                            started = true;
-                            myController = new Controller();
-                            //Create socket thread to read input from website
-                            socket = new Thread(new JavaSocket());
-                            socket.start();
-
-                        }else myLogger.write("server","System is already running",3);
+                        startup();
                         break;
                     default:
-                        print("Invalid input");
+                        myLogger.write("Server", "Invalid input", 2);
                 }
             }
     }
 
-    // An Easier way to toString
-    void print(String message) {
-        System.out.println(message);
+    private void shutdown(){
+        myLogger.write("server", "Shutting down java server", 5);
+        try{
+            clientSocket = new Socket("localhost", 1967);
+            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            outToServer.writeBytes("server:stop\n");
+            clientSocket.close();
+        }catch(Exception e){e.printStackTrace();}
     }
+    private void startup(){
+        if(!started) {
+            myLogger.write("server","Booting up system",5);
+            started = true;
+            myController = new Controller();
+            //Create socket thread to read input from website
+            socket = new Thread(new JavaSocket());
+            socket.start();
 
-
+        }else myLogger.write("server","System is already running",3);
+    }
+    private void restart(){
+        shutdown();
+        startup();
+    }
 
     /**
      * Created by adrian on 04/04/16.
@@ -137,28 +141,40 @@ public class View {
             myLogger.write("server", "Stopping thread waitForMessage.", 3);
         }
         private String InterpretMessage(String input, String user){
+            String msg ="";
             switch(input) {
+                case "restart":
+                    restart();
+                    break;
                 case "trigger":
                     myController.triggerAlarm(user);
-                    return "triggered";
+                    msg = "triggered";
+                    break;
                 case "turn on alarm":
-                    if(myController.changeAlarmStatus(Alarm.Status.ON, user) == true) return "succeeded";
-                    else return "failed";
+                    if(myController.changeAlarmStatus(Alarm.Status.ON, user) == true) msg = "succeeded";
+                    else msg = "failed";
+                    break;
                 case "turn off alarm":
-                    if(myController.changeAlarmStatus(Alarm.Status.OFF, user) == true) return "succeeded";
-                    else return "failed";
+                    if(myController.changeAlarmStatus(Alarm.Status.OFF, user) == true) msg = "succeeded";
+                    else msg = "failed";
+                    break;
                 case "check alarm status":
-                    return myController.checkAlarmStatus();
-                case "SirenStatus":
-                    return myController.SirenStatus();
+                    msg = myController.checkAlarmStatus();
+                    break;
+                case "sirenStatus":
+                    msg = myController.sirenStatus();
+                    break;
                 case "ServerStatus":
-                    return myController.serverAliveCheck();
+                    msg = myController.serverAliveCheck();
+                    break;
                 case "stop":
                     running = false;
-                    return "stopping thread.";
+                    msg = "stopping thread.";
+                    break;
                 default:
-                    return "Error invalid input" + input;
+                    msg = "Error invalid input" + input;
             }
+            return msg;
         }
     }
 
