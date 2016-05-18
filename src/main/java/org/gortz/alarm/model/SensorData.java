@@ -5,5 +5,4 @@ package org.gortz.alarm.model;
  */
 public interface SensorData extends Comparable{
     Object get(String attribute);
-    //boolean isSame(Object o);
 }

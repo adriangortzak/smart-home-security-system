@@ -302,6 +302,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                     Matcher matcher = pattern.matcher(temp);
                     if(matcher.matches()){
                         if(matcher.group(1).equals("command")){
+                            //TODO change to match name instead of number of group.
                             SensorData c = new CommandObject(matcher.group(2),matcher.group(4),matcher.group(5),matcher.group(6),matcher.group(7),matcher.group(8), matcher.group(9));
                             for(SensorData curr : sett.getTriggerObject()){
                                 myLogger.write("Server",c.toString(),1);
