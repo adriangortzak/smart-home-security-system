@@ -80,13 +80,13 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     }
 
     public class CommandObject implements SensorData {
-        private String protocol = "Null";
-        private String model = "Null";
-        private String house = "Null";
-        private String unit = "Null";
-        private String group = "Null";
-        private String code = "Null";
-        private String method = "Null";
+        private String protocol;
+        private String model;
+        private String house;
+        private String unit;
+        private String group;
+        private String code;
+        private String method;
         /**
          * Encapsulates Tellstick command.
          * @param protocol Device protocol e.g. arctech, mandolyn, RisingSun etc.
@@ -170,10 +170,10 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             System.out.println("------------------Printed CommandObject--------------------");
             System.out.println("Protocol: " + this.getProtocol());
             System.out.println("Model: " + this.getModel());
-            if(!this.getHouse().equals(null)) System.out.println("House: " + this.getHouse());
-            if(!this.getUnit().equals(null)) System.out.println("Unit: " + this.getUnit());
-            if(!this.getGroup().equals(null)) System.out.println("Group: " + this.getGroup());
-            //if(!this.getCode().equals("Null")) System.out.println("Code: " + this.getCode());
+            if(!(getHouse() == null)) System.out.println("House: " + this.getHouse());
+            if(!(getUnit() == null)) System.out.println("Unit: " + this.getUnit());
+            if(!(getGroup() == null)) System.out.println("Group: " + this.getGroup());
+            if(!(getCode() == null)) System.out.println("Code: " + this.getCode());
             System.out.println("-----------------------------------------------------------");
             return "";
         }
