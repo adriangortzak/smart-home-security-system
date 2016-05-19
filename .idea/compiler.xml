@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="SmartHomeSecuritySystem" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SmartHomeAlarm" target="1.8" />
+      <module name="SmartHomeSecuritySystem" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
