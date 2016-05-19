@@ -7,9 +7,7 @@ import org.gortz.alarm.model.Alarms.Alarm;
 import org.gortz.alarm.model.Loggers.Logger;
 import org.gortz.alarm.model.SensorData;
 import org.gortz.alarm.model.Setting.Settings;
-
 import java.lang.invoke.WrongMethodTypeException;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,10 +20,17 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
     Logger myLogger = Logger.getInstance();
     static TellstickDuo tsD = null;
 
+    /**
+     * Wrapper class for jstick tellstick class.
+     */
     private TellstickDuo(){
         ts = new Tellstick(false);
     }
 
+    /**
+     * Method to retrieve an instance of the TellstickDuo class.
+     * @return Reference to TellstickDuo instance
+     */
     public static TellstickDuo getInstance(){
         if(tsD == null) {
             tsD = new TellstickDuo();
@@ -33,32 +38,56 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         return tsD;
     }
 
+    /**
+     * Send command turnOn to device specified in tellstick.conf
+     * @param deviceID id in tellstick.conf
+     * @return boolean for success or failure.
+     */
     public boolean turnOn(int deviceID) {
         int status = ts.sendCmd(deviceID, "ON");
         if (status == 0) return true;
         else return false;
     }
 
+    /**
+     * Send command turnOff to device specified in tellstick.conf
+     * @param deviceID id in tellstick.conf
+     * @return boolean for success or failure.
+     */
     public boolean turnOff(int deviceID) {
         int status = ts.sendCmd(deviceID, "OFF");
         if (status == 0) return true;
         else return false;
     }
 
+    /**
+     * Method to start a new listener for tellstick messages.
+     */
     public void startListener() {
         l = new Listen(ts);
         l.listen();
     }
 
+    /**
+     * Method to stop the listener.
+     */
     public void stopListener() {
         l.terminate();
         myLogger.write("Server","Stopped listener\n", 3);
     }
 
+    /**
+     * Method to securely close Tellstick object.
+     */
     public void close(){
         ts.close();
     }
 
+    /**
+     * Method to retrieve device parameters from tellstick.conf.
+     * @param list - IDs to retrieve from tellstick.conf.
+     * @return Array of CommandObjects from tellstick.conf.
+     */
     @Override
     public SensorData[] getConfiguredDevices(int[] list) {
         CommandObject co[] = new CommandObject[list.length];
@@ -77,6 +106,12 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         }
         return co;
     }
+
+    /**
+     * Method to send a tellstick command.
+     * @param id - reference Id for tellstick.conf.
+     * @param state - command to send e.g. ON, OFF.
+     */
     public void sendCommand(int id,String state){
         ts.sendCmd(id,state);
         //ts.sendRawCommand("S$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$kk$$kk$$kk$$}+");
@@ -94,11 +129,11 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
          * Encapsulates Tellstick command.
          * @param protocol Device protocol e.g. arctech, mandolyn, RisingSun etc.
          * @param model Equipment model e.g. codeswitch, selflearning, dimmer etc.
-         * @param house Identification of device together with Unit.
-         * @param unit Identification of command together with House.
+         * @param house Identification code of device used together with Unit.
+         * @param unit Identification of command used together with House.
          * @param group Group ID either 0 or 1. Default is 0.
-         * @param code Identification of device.
-         * @param method Command method 1, 2 or 3 for turnOn, turnOff and Dim
+         * @param code Identification number of device.
+         * @param method Command 1, 2 or 3.
          */
         public CommandObject(String protocol, String model, String house, String unit, String group, String code, String method){
             this.protocol = protocol;
@@ -167,7 +202,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         }
 
         /**
-         * Outprints information relevant to SHSS for sniffing incoming data.
+         * Serialize Tellstick command to a string.
          */
         public String toString(){
             StringBuilder sb = new StringBuilder();
@@ -178,17 +213,13 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             if(!(getUnit() == null)) sb.append("Unit: " + this.getUnit() + "\n");
             if(!(getGroup() == null)) sb.append("Group: " + this.getGroup() + "\n");
             if(!(getCode() == null)) sb.append("Code: " + this.getCode() + "\n");
+            if(!(getMethod() == null)) sb.append("Method: " + this.getMethod() + "\n");
             sb.append("-----------------------------------------------------------\n");
             return sb.toString();
         }
 
-        /**
-         * Check if this CommandObject is registered for protocol archtech or sartano and compares that with another CommandOBject
-         * to see if it is a valid
-         * @param
-         * @return
-         */
-        public boolean isSame(Object o){
+
+        private boolean isSame(Object o){
             try{
                 return isSame((CommandObject) o);
             }
@@ -196,7 +227,12 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                 throw new WrongMethodTypeException("Wrong version of isSame is being called");
             }
         }
-        public boolean isSame(CommandObject co){
+        /**
+         * Compare two CommandObjects of protocol arctech or sartano.
+         * @param
+         * @return
+         */
+        private boolean isSame(CommandObject co){
             if(!this.getProtocol().equals(co.getProtocol())) {
                 return false;
             }
@@ -223,10 +259,14 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
                     return true;
                 default:
                     return false;
-
             }
         }
 
+        /**
+         * Retrieve CommandObject internal data.
+         * @param attribute name of attribute
+         * @return selected attribute as an Object.
+         */
         @Override
         public Object get(String attribute) {
             Object o = null;
@@ -256,6 +296,11 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             return o;
         }
 
+        /**
+         * Compare two Command object to see if they match.
+         * @param o, CommandObject
+         * @return 0 for match otherwise -1.
+         */
         @Override
         public int compareTo(Object o) {
             try{
@@ -269,19 +314,25 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         }
     }
 
-
     private class Listen {
         Tellstick ts;
         Logger myLogger;
         RawEventListener rel;
         Settings sett;
 
+        /**
+         * Class to listen for messages with tellstick.
+         * @param ts - tellstick object.
+         */
         public Listen(Tellstick ts) {
             this.ts = ts;
             myLogger = Logger.getInstance();
             sett = Settings.getInstance();
         }
 
+        /**
+         * Method to stop listening.
+         */
         public void terminate(){
             try{
                 ts.removeRawEventListener(rel);
@@ -291,9 +342,16 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
             }
         }
 
+        /**
+         * Method to add a new listener.
+         */
         public void listen(){
 
             rel = new RawEventListener() {
+                /**
+                 * Callback function defined for when a message is received.
+                 * @param rawEvent
+                 */
                 @Override
                 public void eventReceived(RawEvent rawEvent) {
                     String temp = rawEvent.getData();
