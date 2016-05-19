@@ -263,7 +263,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         }
 
         /**
-         * Retrieve CommandObject internal data.
+         * Retrieve CommandObject internal data specified by string.
          * @param attribute name of attribute
          * @return selected attribute as an Object.
          */
@@ -349,7 +349,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
 
             rel = new RawEventListener() {
                 /**
-                 * Callback function defined for when a message is received.
+                 * Callback function defined for when a message is received. Separates the message into multiple parts and encapsulates it into an Object.
                  * @param rawEvent
                  */
                 @Override
