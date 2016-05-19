@@ -63,12 +63,17 @@
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
         </dependency>
+
         <dependency>
             <groupId>net.jstick.api</groupId>
             <artifactId>jstick</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/Server/jstick-api-1.7.jar</systemPath>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>jstick</id>
+            <url>file://${basedir}/jstick-repo</url>
+        </repository>
+    </repositories>
 </project>
