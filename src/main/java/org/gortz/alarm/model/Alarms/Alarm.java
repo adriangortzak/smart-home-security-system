@@ -182,9 +182,12 @@ public class Alarm {
              {
                  Executor executor = Executors.newFixedThreadPool(settings.getThreadPoolCount());
                  for(Notification notification : settings.getNotification()){
+                     Logger myLogger = Logger.getInstance();
+                     myLogger.write("Server", "Want to send message!", 2);
                      try{
                          notification.setMessage(topic, message);
                          executor.execute(notification);
+                         myLogger.write("Server", "Sent message!", 2);
                      }
                      catch(Exception e){
                          e.printStackTrace();
