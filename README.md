@@ -27,24 +27,24 @@ system via the web interface.
 ##### Installing requirements (If not allready installed)
 
 1. [Install Rasbian](https://www.raspberrypi.org/documentation/installation/installing-images/)
-2. [Set static IP-adress](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
+2. [Set static IP-adress](https://github.com/Adddrian/SmartHomeSecuritySystem/wiki/Set-static-IP-adress-on-your-Raspberry-Pi)
 3. [Install web server](https://github.com/Adddrian/SmartHomeSecuritySystem/wiki/Setting-up-an-Apache-web-server-on-a-Raspberry-Pi)
-4. [Set Mod-Rewrite](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/Mod-Rewrite)
-5. [Install database](https://github.com/Adddrian/SmartHomeLarmSystem/wiki/MySQL-setup)
+4. [Set Mod-Rewrite](https://github.com/Adddrian/SmartHomeSecuritySystem/wiki/Mod-Rewrite)
+5. [Install database](https://github.com/Adddrian/SmartHomeSecuritySystem/wiki/MySQL-setup)
 6. Install git -> sudo apt-get install git
 
 ###
 
 1. `cd /srv/`
-2. `git clone https://github.com/Adddrian/SmartHomeLarmSystem.git`
-3. `cd SmartHomeLarmSystem/web/LarmWebServer `
+2. `git clone https://github.com/Adddrian/SmartHomeSecuritySystem.git`
+3. `cd SmartHomeSecuritySystem/web/LarmWebServer `
 4. `composer install`
-5. `sudo php artisan key:generate`
-6. `uncomment ;extension=php_sockets.dll from php.ini`
+5. `php artisan key:generate`
+6. `uncomment ;extension=php_sockets.dll from php.ini (optional)`
 7. `Change from java 7 to java 8`
-8. `point webserber to /srv/SmartHomeLarm/web/LarmWebServer/public`
+8. `point webserber to /srv/SmartHomeSecuritySystem/web/LarmWebServer/public`
 9. `mv .env.example .env` 
-10. `nano /srv/SmartHomeLarm/web/LarmWebServer/.env `
+10. `nano /srv/SmartHomeSecuritySystem/web/LarmWebServer/.env `
 11. Add database login and email and password
  
 
