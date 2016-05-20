@@ -47,7 +47,6 @@ public class Mail implements Notification {
         this.title = title;
     }
 
-
     @Override
     public void run() {
         Properties props = new Properties();

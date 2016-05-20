@@ -43,5 +43,6 @@ public class Controller {
 
     public void updateSettings() {
         settings.update();
+        Alarm.getInstance().updateSettings();
     }
 }

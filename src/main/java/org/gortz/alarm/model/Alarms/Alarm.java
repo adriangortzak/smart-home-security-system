@@ -49,6 +49,10 @@ public class Alarm {
         else return instance;
     }
 
+    public void updateSettings(){
+        pendingTime = settings.getPendingTime();
+    }
+
     /**
      * Get the actual status from the server.
      * @return status
