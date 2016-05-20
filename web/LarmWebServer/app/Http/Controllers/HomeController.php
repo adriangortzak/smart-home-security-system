@@ -160,6 +160,7 @@ class HomeController extends Controller
 	]);
 
 	notifications::create([
+		'user' => Auth::User()->id,
 	    'name' => $request->input('name'),
 	    'type' => $request->input('type'),
 	    'token' => $request->input('token'),
