@@ -23,13 +23,13 @@ public class View {
     //Constructor
     public View(String[] args){
         Runtime.getRuntime().addShutdownHook(new Thread()
-        {
-            @Override
-            public void run()
-            {
-                shutdown();
-            }
-        });
+	    {
+		@Override
+		public void run()
+		{
+		    shutdown();
+		}
+	    });
 
         start(args);
     }
@@ -44,18 +44,18 @@ public class View {
         }
 
 
-            String input = "";
+	String input = "";
 
-            for( int i = 0; i< args.length; i++){
-                input = args[i].toLowerCase();
-                switch(input){
-                    case "start":
-                        startup();
-                        break;
-                    default:
-                        myLogger.write("Server", "Invalid input", 2);
-                }
-            }
+	for( int i = 0; i< args.length; i++){
+	    input = args[i].toLowerCase();
+	    switch(input){
+	    case "start":
+		startup();
+		break;
+	    default:
+		myLogger.write("Server", "Invalid input", 2);
+	    }
+	}
     }
 
     private void shutdown(){
@@ -115,91 +115,96 @@ public class View {
         }
         private void updateSettings(){
             myController.updateSettings();
+	    myLogger.write("Server", "Settings updated!", 3);
 
         }
 
         public void waitForMessage() throws IOException {
-           socket= new java.net.ServerSocket();
+	    socket= new java.net.ServerSocket();
             socket.setReuseAddress(true);
-           socket.bind(new InetSocketAddress(InetAddress.getByName(null),port),0);
+	    socket.bind(new InetSocketAddress(InetAddress.getByName(null),port),0);
             while(running)
-            {
-                // open socket
-                try {
-                    connection = socket.accept();
-                    String user = null;
-                    // get output handler
-                    DataOutputStream response = new DataOutputStream(connection.getOutputStream());
+		{
+		    // open socket
+		    try {
+			connection = socket.accept();
+			String user = null;
+			// get output handler
+			DataOutputStream response = new DataOutputStream(connection.getOutputStream());
 
-                    // get user reader
-                    InputStreamReader inputStream = new InputStreamReader(connection.getInputStream());
-                    BufferedReader input = new BufferedReader(inputStream);
-                    //Get user
-                    command = input.readLine();
-                    String commandPart[] = command.split(":");
-                    user = commandPart[0];
-                    command = commandPart[1];
-                    // toString message
-                    socketLogger.write(user,"Command: " + command ,3);
-                    responseString = InterpretMessage(command, user);
+			// get user reader
+			InputStreamReader inputStream = new InputStreamReader(connection.getInputStream());
+			BufferedReader input = new BufferedReader(inputStream);
+			//Get user
+			command = input.readLine();
+			String commandPart[] = command.split(":");
+			user = commandPart[0];
+			command = commandPart[1];
+			// toString message
+			socketLogger.write(user,"Command: " + command ,3);
+			responseString = InterpretMessage(command, user);
 
-                    response.writeBytes(responseString+"\n");
-                    response.flush();
-                    response.close();
-                } catch (IOException e) {
-                    //Loggers
-                    //e.printStackTrace();
-                }
-            }
+			response.writeBytes(responseString+"\n");
+			response.flush();
+			response.close();
+		    } catch (IOException e) {
+			//Loggers
+			//e.printStackTrace();
+		    }
+		}
             myLogger.write("server", "Stopping thread waitForMessage.", 3);
         }
         private String InterpretMessage(String input, String user){
             String msg ="";
             switch(input) {
-                case "restart":
-                    restart();
-                    break;
-                case "trigger":
-                    myController.triggerAlarm(user);
-                    msg = "triggered";
-                    break;
-                case "turn on alarm":
-                    if(myController.changeAlarmStatus(Alarm.Status.ON, user) == true) msg = "succeeded";
-                    else msg = "failed";
-                    break;
-                case "turn off alarm":
-                    if(myController.changeAlarmStatus(Alarm.Status.OFF, user) == true) msg = "succeeded";
-                    else msg = "failed";
-                    break;
-                case "check alarm status":
-                    msg = myController.checkAlarmStatus();
-                    break;
-                case "sirenStatus":
-                    msg = myController.sirenStatus();
-                    break;
-                case "ServerStatus":
-                    msg = myController.serverAliveCheck();
-                    break;
-                case "stop":
-                    try {
-                        socket.close();
-                        while (!socket.isClosed()){}
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    running = false;
-                   /**
-                    try {
-                        //socket.close();
-                        //socket = null;
-                    } catch (IOException e) {
-                        myLogger.write("server","Couldn't close socket",3);
-                    }
-                    **/
-                    msg = "stopping thread.";
-                    break;
-                default:
-                    msg = "Error invalid input" + input;
+	    case "restart":
+		restart();
+		break;
+	    case "trigger":
+		myController.triggerAlarm(user);
+		msg = "triggered";
+		break;
+	    case "turn on alarm":
+		if(myController.changeAlarmStatus(Alarm.Status.ON, user) == true) msg = "succeeded";
+		else msg = "failed";
+		break;
+	    case "turn off alarm":
+		if(myController.changeAlarmStatus(Alarm.Status.OFF, user) == true) msg = "succeeded";
+		else msg = "failed";
+		break;
+	    case "check alarm status":
+		msg = myController.checkAlarmStatus();
+		break;
+	    case "sirenStatus":
+		msg = myController.sirenStatus();
+		break;
+	    case "ServerStatus":
+		msg = myController.serverAliveCheck();
+		break;
+	    case "reloadSettings":
+		updateSettings();
+		msg = "Settings updated!";
+		break;
+	    case "stop":
+		try {
+		    socket.close();
+		    while (!socket.isClosed()){}
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		running = false;
+		/**
+		   try {
+		   //socket.close();
+		   //socket = null;
+		   } catch (IOException e) {
+		   myLogger.write("server","Couldn't close socket",3);
+		   }
+		**/
+		msg = "stopping thread.";
+		break;
+	    default:
+		msg = "Error invalid input" + input;
             }
             return msg;
         }

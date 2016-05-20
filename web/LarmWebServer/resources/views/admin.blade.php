@@ -186,17 +186,22 @@ active
         <div class="panel-body">
             <div class="task-content">
                 <button class="btn btn-success btn-xs" onclick="restart()">Restart</button>
+		<button class="btn btn-success btn-xs" onclick="reloadSettings()">Reload Settings</button> <p style="display:inline-block" id="settingsStatus"></p>
             </div>
         </div>
     </section>
 </div>
 
 <script>
-    function restart(){
-        $.get("restart");
-    }
+ function restart(){
+     $.get("restart");
+ }
+ function reloadSettings(){
+     $.get("reloadSettings", function( data ) {
+	 document.getElementById("settingsStatus").innerText=data;
+     });
+ }
 </script>
-
 
 <div class="col-lg-12">
     <section class="task-panel tasks-widget">
@@ -218,6 +223,7 @@ active
         $.get( "setThreadPool/" +value, function(){
             //Add some validators.
         });
+	$.get("reloadSettings");
     }
     function getThreadPool(){
         $.get( "getThreadPool", function( data ) {
@@ -248,8 +254,7 @@ active
 
         $.get( "getPendingTime", function( data ) {
             document.getElementById('pendingTimeValue').value = data;
-        })
-
+        });
     }
     getPendingTime();
 </script>
@@ -281,6 +286,7 @@ active
         $.get( "setNotificationInterval/" +value, function(){
             //Add some validators.
         });
+	$.get("reloadSettings");
     }
 </script>
 
@@ -383,7 +389,8 @@ active
         var value = document.getElementById('pendingTimeValue').value;
         $.get( "setPendingTime/" +value, function(){
             //Add some validators.
-        })
+        });
+	$.get("reloadSettings");
     }
 
     function cancelSensorEdit(id) {
@@ -426,7 +433,8 @@ active
         //	}
         $.get( "updateSensors/"+id+"/"+value+"/"+checkbox, function() {
 
-        })
+        });
+	$.get("reloadSettings");
 
         // Do some stuff to apply the changes...
         // update database with new values and remove hidden inputs?

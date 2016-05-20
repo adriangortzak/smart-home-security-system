@@ -98,10 +98,14 @@ class HomeController extends Controller
 	$this->socketSend($message);
     }
 
-	public function restart(){
-		$message = "restart\n";
-		$this->socketSend($message);
-	}
+    public function restart(){
+	$message = "restart\n";
+	$this->socketSend($message);
+    }
+
+    public function reloadSettings(){
+	echo $this->socketSendAndReceive("reloadSettings\n");
+    }
 
     function socketSend($message)
     {

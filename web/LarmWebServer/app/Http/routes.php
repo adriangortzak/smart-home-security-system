@@ -144,6 +144,8 @@ Route::group(['middleware' => ['web']], function () {
 	Auth::logout();
 	return View::make('lock',['email' => $email]);
     });
+    //Reload settings
+    Route::get('reloadSettings', 'HomeController@reloadSettings');
 });
 
 // Authentication Routes...

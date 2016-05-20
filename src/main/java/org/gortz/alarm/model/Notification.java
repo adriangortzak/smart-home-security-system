@@ -9,5 +9,5 @@ public interface Notification extends Runnable{
      * @param title subject of message
      * @param message content of message
      */
-     void setMessage(String title, String message);
+    void setMessage(String title, String message);
 }
