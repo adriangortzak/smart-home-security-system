@@ -27,9 +27,13 @@ public class TellstickAction implements Notification {
         switch (title){
             case "Safe":
                 tellstick.sendCommand(id,"OFF");
+		tellstick.sendCommand(id,"OFF");
+		tellstick.sendCommand(id,"OFF");
                 break;
             case "Alert":
                 tellstick.sendCommand(id, "ON");
+		tellstick.sendCommand(id, "ON");
+		tellstick.sendCommand(id, "ON");
                 break;
         }
     }

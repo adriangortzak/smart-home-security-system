@@ -185,6 +185,7 @@ public class Alarm {
                      Logger myLogger = Logger.getInstance();
                      myLogger.write("Server", "Want to send message!", 2);
                      try{
+			 Thread.sleep(100); //Delay for giving STM32 time to properly receive all messages. Seems like it is overwhelmed without it.
                          notification.setMessage(topic, message);
                          executor.execute(notification);
                          myLogger.write("Server", "Sent message!", 2);
