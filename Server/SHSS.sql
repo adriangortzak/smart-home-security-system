@@ -3,7 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
+<<<<<<< HEAD
 -- Generation Time: May 21, 2016 at 11:10 AM
+=======
+-- Generation Time: May 21, 2016 at 09:53 AM
+>>>>>>> 8257fd86d7e8c1ceb3064e862fc4f68a52ddfbf9
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.16
 
@@ -45,6 +49,19 @@ INSERT INTO `alarmStatus` (`id`, `activeAlarm`, `lastChange`) VALUES
 --
 -- Table structure for table `groups`
 --
+<<<<<<< HEAD
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `history` tinyint(1) NOT NULL,
+  `control` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+=======
+>>>>>>> 8257fd86d7e8c1ceb3064e862fc4f68a52ddfbf9
 
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -59,6 +76,11 @@ CREATE TABLE IF NOT EXISTS `groups` (
 --
 -- Dumping data for table `groups`
 --
+<<<<<<< HEAD
+-- Dumping data for table `groups`
+--
+=======
+>>>>>>> 8257fd86d7e8c1ceb3064e862fc4f68a52ddfbf9
 
 INSERT INTO `groups` (`id`, `name`, `admin`, `history`, `control`) VALUES
 (0, 'observer', 0, 0, 0),
@@ -67,6 +89,7 @@ INSERT INTO `groups` (`id`, `name`, `admin`, `history`, `control`) VALUES
 
 -- --------------------------------------------------------
 
+<<<<<<< HEAD
 --
 -- Table structure for table `history`
 --
@@ -82,6 +105,23 @@ CREATE TABLE IF NOT EXISTS `history` (
 -- --------------------------------------------------------
 
 --
+=======
+--
+-- Table structure for table `history`
+--
+
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user` varchar(32) NOT NULL,
+  `message` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+>>>>>>> 8257fd86d7e8c1ceb3064e862fc4f68a52ddfbf9
 -- Table structure for table `migrations`
 --
 
@@ -116,6 +156,17 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
+<<<<<<< HEAD
+=======
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `user`, `type`, `token`, `active`, `name`, `created_at`, `updated_at`) VALUES
+(4, 1, 'tellstickaction', '10', 1, 'STM32-LED', NULL, NULL),
+(5, 1, 'tellstickaction', '11', 1, 'STM32-BUZZER', NULL, NULL);
+
+>>>>>>> 8257fd86d7e8c1ceb3064e862fc4f68a52ddfbf9
 -- --------------------------------------------------------
 
 --
@@ -177,6 +228,16 @@ CREATE TABLE IF NOT EXISTS `triggers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+<<<<<<< HEAD
+=======
+--
+-- Dumping data for table `triggers`
+--
+
+INSERT INTO `triggers` (`id`, `sensor`, `active`, `type`, `name`, `created_at`, `updated_at`) VALUES
+(2, 20, 1, 'tellstick', 'PIR', NULL, '2016-05-10 10:25:41');
+
+>>>>>>> 8257fd86d7e8c1ceb3064e862fc4f68a52ddfbf9
 -- --------------------------------------------------------
 
 --
