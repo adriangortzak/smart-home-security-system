@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 20, 2016 at 08:11 PM
+-- Generation Time: May 21, 2016 at 09:53 AM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.16
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `history` (
   `user` varchar(32) NOT NULL,
   `message` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=351 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `notifications`
@@ -210,14 +210,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `profilePic` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `group`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `profilePic`) VALUES
-(5, 1, 'shss', 'shss@example.com', '$2y$10$.E48.XnttwasMxlyAhHtC.Y6TGXHhrPklQzdSDOpBB9I/zexe.6ZS', 'kxuYNirlL5cmQHQk62STiRKhwSwbECG1kGcM5KZB0mtmA8AdPnTb26vj2lWN', '2016-05-20 20:09:35', '2016-05-20 20:10:42', NULL);
+(6, 1, 'root', 'root@example.com', '$2y$10$qK2sxLQmRyaIJcvVnNp5ceB1DAa8.CQ9CERRGBs6NJpKfg47t12Xm', 'zTAyIy1xFDCPksPjfgYkPGuTAjzzl8QO2rOA7bmGNIlNefS1wuaNukNWXGZX', '2016-05-21 09:51:41', '2016-05-21 09:52:23', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
