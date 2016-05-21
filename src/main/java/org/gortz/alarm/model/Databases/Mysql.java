@@ -237,7 +237,6 @@ public class Mysql implements Database {
         } else throw new NoConnectionPendingException();
     }
 
-    @Override
     public int[] getTriggerDevices() {
         if(connect()) {
             int result[] = new int[0];
@@ -269,10 +268,4 @@ public class Mysql implements Database {
         }
         else throw new NoConnectionPendingException();
     }
-
-    @Override
-    public int getThreadPoolCount() {
-        return getServerSettingInt("threadPool");
-    }
-
 }

@@ -29,17 +29,17 @@ public interface Database {
 
     /**
      * Get setting value in int format
-     * @param Setting that is the wanted setting
+     * @param setting that is the wanted setting
      * @return int with value of setting
      */
-    int getServerSettingInt(String Setting);
+    int getServerSettingInt(String setting);
 
     /**
      * Get setting value in string format
-     * @param Setting that is the wanted setting
+     * @param setting that is the wanted setting
      * @return String with value of selected setting
      */
-    String getServerSettingString(String Setting);
+    String getServerSettingString(String setting);
 
     /**
      * Get all active notifications from database
@@ -47,14 +47,8 @@ public interface Database {
      */
     Notification[] getNotifications();
     /**
-     *  Get all trigger devicese from database
-     * @return trigger devicese
-     * /
+     *  Get all trigger devices from database
+     * @return trigger devices
+     */
     int[] getTriggerDevices();
-
-    /**
-     *  Get Threads that notification can use to send from database
-     * @return thread pool count
-     * /
-    int getThreadPoolCount();
 }
