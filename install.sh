@@ -48,6 +48,7 @@ expect eof
 ")
 echo "Updated mysql settings"
 echo "configuring phpMyAdmin"
+DEBIAN_FRONTEND=noninteractive apt-get install phpmyadmin -y
 /usr/sbin/pma-configure
 sed -i "s/\$dbuser='';/\$dbuser='phpmyadmin';/" /etc/phpmyadmin/config-db.php
 sed -i "s/\$dbpass='';/\$dbpass='$MYSQL_ROOT_PASSWORD';/" /etc/phpmyadmin/config-db.php
@@ -56,3 +57,6 @@ ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 ln -s /etc/apache2/conf-available/phpmyadmin.conf /etc/apache2/conf-enabled/phpmyadmin.conf
 /usr/sbin/pma-secure
 echo "Updated phpmyadmin settings"
+echo "Restarting apache"
+sv restart apache
+echo "Done"
