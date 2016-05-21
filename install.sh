@@ -20,6 +20,7 @@ echo -n "Enter password for shss mysql account and press [ENTER]: "
 read password
 mysql --user=root -e "GRANT ALL PRIVILEGES ON SHSS.* To 'shss'@'localhost' IDENTIFIED BY '$password';"
 mysql -u root SHSS < SHSS.sql
+sed -i "s/DB_PASSWORD=.*$/DB_PASSWORD=$password/" ../web/LarmWebServer/.env
 
 #Secure mysql installation
 echo -n "Enter password for root mysql account and press [ENTER]: "
