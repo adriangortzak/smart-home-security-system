@@ -51,7 +51,7 @@ system via the web interface.
 
 ## Usage
 
-Visit you ip/Domain and login with the standard username "root" and password "awq12ersdsa"
+Visit you ip/Domain and login with the standard username "root@example.com" and password "awq12ersdsa"
 
 ## Contributing
 
