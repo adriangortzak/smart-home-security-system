@@ -43,7 +43,7 @@ system via the web interface.
 6. `uncomment ;extension=php_sockets.dll from php.ini (optional)`
 7. `Change from java 7 to java 8`
 8. `point webserber to /srv/SmartHomeSecuritySystem/web/LarmWebServer/public`
-9. `mv .env.example .env` 
+9. `cp .env.example .env` 
 10. `nano /srv/SmartHomeSecuritySystem/web/LarmWebServer/.env `
 11. Add database login and email and password
  
