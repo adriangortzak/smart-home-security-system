@@ -21,7 +21,7 @@ public interface Database {
     void updateAlarmStatus(Alarm.Status newStatus);
 
     /**
-     * Writeing user and message history to database for website interface.
+     * Writing  user and message history to database for website interface.
      * @param user that did the action
      * @param message of what he/she did
      */
@@ -46,8 +46,15 @@ public interface Database {
      * @return active notifications
      */
     Notification[] getNotifications();
-
+    /**
+     *  Get all trigger devicese from database
+     * @return trigger devicese
+     * /
     int[] getTriggerDevices();
 
+    /**
+     *  Get Threads that notification can use to send from database
+     * @return thread pool count
+     * /
     int getThreadPoolCount();
 }
