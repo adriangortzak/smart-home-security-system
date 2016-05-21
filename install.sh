@@ -14,7 +14,7 @@ su -c 'php artisan key:generate' www-data
 sed -i 's/\/bin\/bash/\/usr\/sbin\/nologin' /etc/passwd
 
 #Install mysql database
-cd /src/SmartHomeSecuritySystem/Server
+cd /srv/SmartHomeSecuritySystem/Server
 mysql --user=root -e "CREATE DATABASE SHSS;"
 echo -n "Enter password for shss mysql account and press [ENTER]: "
 read password
