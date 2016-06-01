@@ -82,7 +82,11 @@ Route::group(['middleware' => ['web','admin']], function () {
     // Create new user
     Route::post('newUser', 'HomeController@createUser');
 
-    Route::post('updateGroupMembership', 'HomeController@updateGroupMembership'); 
+    Route::post('updateGroupMembership', 'HomeController@updateGroupMembership');
+
+    //Restart server
+    Route::get('restart', 'HomeController@restart');
+
 });
 
 //---------------------------------------//
@@ -102,10 +106,6 @@ Route::group(['middleware' => ['web','control']], function () {
     Route::get('alarm/{state}', 'HomeController@changeAlarmStatus');
     //Trigger alarm on server
     Route::get('trigger', 'HomeController@trigger');
-/*    Route::get('trigger', function () {
-        $controller = new HomeController();
-        $controller->trigger();
-    }); */
 });
 
 //---------------------------------------//
@@ -119,7 +119,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
 
     //Dasboard Update
-    Route::get('alarmStatus', 'HomeController@checkAlarmStatus');
+    Route::get('sirenStatus', 'HomeController@checkSiren');
     Route::get('internetStatus', 'HomeController@internetStatus');
     Route::get('userCount', 'HomeController@userCount');
     Route::get('ServerCheck', 'HomeController@ServerCheck');
@@ -144,6 +144,8 @@ Route::group(['middleware' => ['web']], function () {
 	Auth::logout();
 	return View::make('lock',['email' => $email]);
     });
+    //Reload settings
+    Route::get('reloadSettings', 'HomeController@reloadSettings');
 });
 
 // Authentication Routes...

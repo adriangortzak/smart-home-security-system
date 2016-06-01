@@ -55,7 +55,7 @@
 						$.get( "userCount", function( data ){
 							document.getElementById('userCount').innerText=data;
 						});
-						$.get( "alarmStatus", function( data ){
+						$.get( "sirenStatus", function( data ){
 							document.getElementById('megaphone').innerText=data;
 						});
 						$.get( "internetStatus", function( data ){

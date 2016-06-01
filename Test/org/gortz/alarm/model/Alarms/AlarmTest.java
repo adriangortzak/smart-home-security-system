@@ -71,7 +71,7 @@ public class AlarmTest {
     try {
         alarm.changeStatus(Alarm.Status.OFF, "Test");
         Thread.sleep(3000);// Requires a sleep because it tries to read the value before it is updated
-        //while(!alarm.getSirenStatus().equals("ON"))
+        //while(!alarm.getSirenStatus().isSame("ON"))
 
         if(alarm.getSirenStatus() == "ON") fail("Siren can't be on if alarm system is OFF");
         alarm.changeStatus(Alarm.Status.ON,"Test");
@@ -81,7 +81,7 @@ public class AlarmTest {
             alarm.trigger("Test");
             if(!alarm.getSirenStatus().equals("ON")) fail("Siren did'nt started after trigger");
             alarm.changeStatus(Alarm.Status.OFF, "Test");
-            //while(!alarm.getSirenStatus().equals("OFF")){}
+            //while(!alarm.getSirenStatus().isSame("OFF")){}
             Thread.sleep(3000);// Requires a sleep because it tries to read the value before it is updated
             if(alarm.getSirenStatus().equals("ON")) fail("Siren still on after turn off");
         }catch (Exception e){

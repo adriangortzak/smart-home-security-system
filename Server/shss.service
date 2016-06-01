@@ -1,0 +1,11 @@
+[Unit]
+Description=SmartHomeSecuritySystem Daemon
+After=mysql.service telldusd.service apache2.service
+
+[Service]
+ExecStart=/usr/bin/java -jar /srv/SmartHomeSecuritySystem/Server/SmartHomeSecuritySystem.jar start
+ExecStop=/bin/kill -15 $MAINPID
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

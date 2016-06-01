@@ -54,7 +54,7 @@ class HomeController extends Controller
 	echo $this->socketSendAndReceive("ServerStatus\n");
     }
     public function checkSiren(){
-	echo $this->socketSendAndReceive("SirenStatus\n");
+	echo $this->socketSendAndReceive("sirenStatus\n");
     }
 
 	public function viewHome(){
@@ -96,6 +96,15 @@ class HomeController extends Controller
     public function trigger(){
 	$message = "trigger\n";
 	$this->socketSend($message);
+    }
+
+    public function restart(){
+	$message = "restart\n";
+	$this->socketSend($message);
+    }
+
+    public function reloadSettings(){
+	echo $this->socketSendAndReceive("reloadSettings\n");
     }
 
     function socketSend($message)
@@ -151,6 +160,7 @@ class HomeController extends Controller
 	]);
 
 	notifications::create([
+		'user' => Auth::User()->id,
 	    'name' => $request->input('name'),
 	    'type' => $request->input('type'),
 	    'token' => $request->input('token'),
