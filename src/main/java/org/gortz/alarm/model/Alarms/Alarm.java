@@ -49,6 +49,10 @@ public class Alarm {
         else return instance;
     }
 
+    public void updateSettings(){
+        pendingTime = settings.getPendingTime();
+    }
+
     /**
      * Get the actual status from the server.
      * @return status
@@ -178,9 +182,13 @@ public class Alarm {
              {
                  Executor executor = Executors.newFixedThreadPool(settings.getThreadPoolCount());
                  for(Notification notification : settings.getNotification()){
+                     Logger myLogger = Logger.getInstance();
+                     myLogger.write("Server", "Want to send message!", 2);
                      try{
+			 Thread.sleep(100); //Delay for giving STM32 time to properly receive all messages. Seems like it is overwhelmed without it.
                          notification.setMessage(topic, message);
                          executor.execute(notification);
+                         myLogger.write("Server", "Sent message!", 2);
                      }
                      catch(Exception e){
                          e.printStackTrace();
