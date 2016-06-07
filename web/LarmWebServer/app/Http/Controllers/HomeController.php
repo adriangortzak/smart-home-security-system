@@ -103,6 +103,11 @@ class HomeController extends Controller
 	$this->socketSend($message);
     }
 
+	public function shutdown(){
+		$message = "shutdown\n";
+		$this->socketSend($message);
+	}
+
     public function reloadSettings(){
 	echo $this->socketSendAndReceive("reloadSettings\n");
     }

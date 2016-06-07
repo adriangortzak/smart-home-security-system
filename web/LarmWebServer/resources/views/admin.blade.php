@@ -185,14 +185,18 @@ active
         </div>
         <div class="panel-body">
             <div class="task-content">
+                <button class="btn btn-success btn-xs" onclick="shutdown()">Shutdown</button>
                 <button class="btn btn-success btn-xs" onclick="restart()">Restart</button>
-		<button class="btn btn-success btn-xs" onclick="reloadSettings()">Reload Settings</button> <p style="display:inline-block" id="settingsStatus"></p>
+                <button class="btn btn-success btn-xs" onclick="reloadSettings()">Reload Settings</button> <p style="display:inline-block" id="settingsStatus"></p>
             </div>
         </div>
     </section>
 </div>
 
 <script>
+    function shutdown(){
+        $.get("shutdown");
+    }  
  function restart(){
      $.get("restart");
  }
