@@ -17,7 +17,7 @@ system via the web interface.
 
 -  Java >= v.8
 -  PHP >= 5.5.9
-- OpenSSL PHP Extension
+- OpenSSL PHP Extension 
 -  PDO PHP Extension
 -  Mbstring PHP Extension
 -  Tokenizer PHP Extension
@@ -76,7 +76,7 @@ Sweden receives modern ICT­engineers that cater to the future competence need a
 increase the country's competitiveness, internal market and export.
 
 
-## Credits
+## Credits 
 
 - [Laravel](https://github.com/laravel/laravel)
 - [Tellstick api - jstick](https://github.com/juppinet)
