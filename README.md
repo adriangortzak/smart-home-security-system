@@ -40,7 +40,7 @@ system via the web interface.
 3. `cd SmartHomeSecuritySystem/web/LarmWebServer `
 4. `composer install`
 5. `php artisan key:generate`
-6. `uncomment ;extension=php_sockets.dll from php.ini (optional)`
+6. `uncomment ;extension=php_sockets.dll from php.ini (windows only)`
 7. `Change from java 7 to java 8`
 8. `point webserber to /srv/SmartHomeSecuritySystem/web/LarmWebServer/public`
 9. `cp .env.example .env` 
