@@ -117,7 +117,7 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         //ts.sendRawCommand("S$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$k$kk$$kk$$kk$$}+");
     }
 
-    public class CommandObject implements SensorData {
+    private class CommandObject implements SensorData {
         private String protocol;
         private String model;
         private String house;
@@ -229,8 +229,8 @@ public class TellstickDuo implements org.gortz.alarm.model.Sensor {
         }
         /**
          * Compare two CommandObjects of protocol arctech or sartano.
-         * @param
-         * @return
+         * @param co - CommandObject to be compared.
+         * @return true if equal and false if not.
          */
         private boolean isSame(CommandObject co){
             if(!this.getProtocol().equals(co.getProtocol())) {

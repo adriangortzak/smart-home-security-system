@@ -157,6 +157,8 @@ public class View {
         private String InterpretMessage(String input, String user){
             String msg ="";
             switch(input) {
+				case "shutdown":
+					shutdown();
 	    case "restart":
 		restart();
 		break;

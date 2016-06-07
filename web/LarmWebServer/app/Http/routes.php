@@ -84,6 +84,9 @@ Route::group(['middleware' => ['web','admin']], function () {
 
     Route::post('updateGroupMembership', 'HomeController@updateGroupMembership');
 
+    //Shutdown server
+    Route::get('shutdown', 'HomeController@shutdown');
+
     //Restart server
     Route::get('restart', 'HomeController@restart');
 
