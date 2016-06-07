@@ -22,8 +22,8 @@ public class Settings {
     //--------------------------------------//
     AtomicInteger pendingTime = new AtomicInteger();
     AtomicInteger notificationInterval = new AtomicInteger();
-    static String dbPassword ="APJ4A5M6sXTPBH74";
-    static String dbUsername ="shss";
+    static String dbPassword = ReadFromConfig.getSetting("databasePassword");
+    static String dbUsername = ReadFromConfig.getSetting("databaseUsername");
     static boolean debuggingStatus = false;
     SensorData[] triggers;
     AtomicInteger threadPoolCount = new AtomicInteger();
