@@ -121,7 +121,7 @@
 		    <td>Type:
 			<select id="notificationTyp">
 			    <option value="pushbullet">PushBullet</option>
-			    <option value="email">email</option>
+			    <option value="mail">email</option>
 			    <option value="tellstickaction">TellstickAction</option>
 			</select>
 		    </td>
