@@ -14,6 +14,12 @@ Route::get('/',['middleware' => 'auth', function () {
     return view('home');
 }]);
 
+Route::get('card',function () {
+    return view('card');
+});
+
+
+
 //--------------------------------------//
 //Admin User                            //
 //--------------------------------------//
