@@ -60,7 +60,7 @@ private Settings(){
         notificationInterval.set( db.getServerSettingInt("notificationInterval"));
         notifications = db.getNotifications();
         triggers = ts.getConfiguredDevices(db.getTriggerDevices());
-        threadPoolCount.set(db.getThreadPoolCount());
+        threadPoolCount.set(db.getServerSettingInt("threadPool"));
     }
 
 
